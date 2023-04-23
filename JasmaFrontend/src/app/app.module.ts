@@ -11,6 +11,8 @@ import { RegisterComponent } from './register/register.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { LoginComponent } from './login/login.component';
 import {AuthenticateService} from "./services/authenticate.service";
+import { ProfileComponent } from './profile/profile.component';
+import { PostFormComponent } from './post-form/post-form.component';
 
 @Injectable()
 export class WithCredentialsInterceptor implements HttpInterceptor {
@@ -30,7 +32,9 @@ export class WithCredentialsInterceptor implements HttpInterceptor {
     UserFormComponent,
     RegisterComponent,
     NavbarComponent,
-    LoginComponent
+    LoginComponent,
+    ProfileComponent,
+    PostFormComponent
   ],
     imports: [
         BrowserModule,

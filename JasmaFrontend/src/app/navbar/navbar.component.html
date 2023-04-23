@@ -18,6 +18,9 @@
         <li class="nav-item" [hidden]="!authenticated()" style="cursor: pointer">
           <a class="nav-link active" (click)="logout()">Logout</a>
         </li>
+        <li class="nav-item" [hidden]="!authenticated()">
+          <a class="nav-link active"  routerLinkActive="active" routerLink="/profile">Profile</a>
+        </li>
       </ul>
     </div>
   </div>

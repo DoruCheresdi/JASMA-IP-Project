@@ -1,17 +1,17 @@
 package com.example.jasmabackend.entities.user;
 
 import com.example.jasmabackend.entities.authority.Authority;
+import com.example.jasmabackend.entities.post.Post;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Data
 @Entity
 @Table(name = "users")
 public class User {
+
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
@@ -25,6 +25,9 @@ public class User {
 
     @ManyToMany(mappedBy = "users")
     private Set<Authority> authorities = new HashSet<>();
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    private List<Post> posts = new ArrayList<>();
 
     @Override
     public boolean equals(Object o) {
