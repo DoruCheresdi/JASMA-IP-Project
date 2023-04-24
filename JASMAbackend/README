@@ -1,15 +1,17 @@
 JASMA README
 
 # How to install:
-https://github.com/dsyer/spring-boot-angular
 
-tldr run the following:
+TLDR run the following:
 ./mvnw generate-resources
 if it returns errors, contact Doru
 
 ./npm install @angular/cli
-(again:)
+again:
 ./mvnw generate-resources
+
+for more info:
+https://github.com/dsyer/spring-boot-angular
 
 # How to run:
 1. run backend from intellij (should be configured, just press the green arror at the top right)
@@ -23,3 +25,12 @@ to diferentiate between the 2, the backend api URL start with "devapi"
 
 2. reloading the page in the angular app while on another URL other than "localhost:8080/"
 will not work because the request will go to the backend and not to the frontend app.
+
+
+# Folders for angular build output:
+
+"target/classes/static" - angular app will be
+updated while the spring app is running
+
+"src/main/resources/static" - angular will be updated
+once spring app is rerun
