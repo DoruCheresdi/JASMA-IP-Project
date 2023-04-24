@@ -1,0 +1,18 @@
+JASMA README
+
+# How to install:
+https://github.com/dsyer/spring-boot-angular
+
+tldr run the following:
+./mvnw generate-resources
+if it returns errors, contact Doru
+
+./npm install @angular/cli
+(again:)
+./mvnw generate-resources
+
+# How to run:
+1. run backend from intellij (should be configured, just press the green arror at the top right)
+2. then run:
+./ng build --watch
+that command will build the angular app continuously
