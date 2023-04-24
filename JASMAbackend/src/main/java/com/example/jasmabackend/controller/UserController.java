@@ -33,12 +33,12 @@ public class UserController {
         return userService.registerUser(user);
     }
 
-    @GetMapping("/users")
+    @GetMapping("/devapi/users")
     public List<User> getUsers() {
         return (List<User>) userRepository.findAll();
     }
 
-    @PostMapping("/users")
+    @PostMapping("/devapi/users")
     void addUser(@RequestBody User user) {
         userRepository.save(user);
     }

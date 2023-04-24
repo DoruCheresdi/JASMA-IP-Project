@@ -11,7 +11,7 @@ export class AuthenticateService {
   private authenticateUrl: string;
 
   constructor(private http: HttpClient) {
-    this.authenticateUrl = 'http://localhost:8080/devapi/authenticated';
+    this.authenticateUrl = 'devapi/authenticated';
   }
 
   authenticate(credentials: { email: any; password: any; } | undefined,

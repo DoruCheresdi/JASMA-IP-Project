@@ -42,7 +42,7 @@ export class RegisterComponent {
       this.app.authenticated = false;
     }
 
-    this.http.post("http://localhost:8080/devapi/register", this.user).pipe(
+    this.http.post("devapi/register", this.user).pipe(
       catchError(this.handleError.bind(this))
     )
       .subscribe((response) => {

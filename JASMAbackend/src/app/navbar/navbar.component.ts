@@ -15,7 +15,7 @@ export class NavbarComponent {
   }
 
   logout() {
-    this.http.post('http://localhost:8080/logout', {}).pipe(finalize(() => {
+    this.http.post('logout', {}).pipe(finalize(() => {
       this.app.authenticated = false;
       this.router.navigateByUrl('/login');
     })).subscribe();
