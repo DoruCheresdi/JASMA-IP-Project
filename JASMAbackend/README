@@ -34,3 +34,7 @@ updated while the spring app is running
 
 "src/main/resources/static" - angular will be updated
 once spring app is rerun
+
+# commands:
+generate new component:
+ ./ng generate component <servicename>
