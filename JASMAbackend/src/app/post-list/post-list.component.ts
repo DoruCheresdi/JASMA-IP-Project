@@ -24,6 +24,7 @@ export class PostListComponent {
     // if email is null:
     if (this.auth.email == undefined || this.auth.email == "") {
       this.router.navigateByUrl("/login");
+      return;
     }
 
     const params = new HttpParams()
@@ -34,5 +35,16 @@ export class PostListComponent {
         this.posts = posts;
       }
     )
+  }
+
+  deletePost(title: string) {
+      const params = new HttpParams()
+          .set('title', title);
+
+      this.http.delete("/devapi/post", {params: params}).subscribe(
+          (response: any) => {
+              this.router.navigateByUrl("/profile");
+          }
+      )
   }
 }

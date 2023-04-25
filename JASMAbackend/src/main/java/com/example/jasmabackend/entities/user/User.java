@@ -1,7 +1,9 @@
 package com.example.jasmabackend.entities.user;
 
 import com.example.jasmabackend.entities.authority.Authority;
+import com.example.jasmabackend.entities.like.Like;
 import com.example.jasmabackend.entities.post.Post;
+import com.example.jasmabackend.entities.share.Share;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.ToString;
@@ -33,6 +35,16 @@ public class User {
     @JsonIgnore
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private List<Post> posts = new ArrayList<>();
+
+    @ToString.Exclude
+    @JsonIgnore
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    private List<Like> likes = new ArrayList<>();
+
+    @ToString.Exclude
+    @JsonIgnore
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    private List<Share> shares = new ArrayList<>();
 
     @Override
     public boolean equals(Object o) {

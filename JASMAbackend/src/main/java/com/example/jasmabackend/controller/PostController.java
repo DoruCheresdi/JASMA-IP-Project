@@ -27,12 +27,19 @@ public class PostController {
     }
 
     @PostMapping("/devapi/post")
-    void addPost(@RequestBody Post post, Authentication authentication) {
+    public void addPost(@RequestBody Post post, Authentication authentication) {
         // get user that made the request:
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         User user = userRepository.findByEmail(userDetails.getUsername()).get();
 
         post.setUser(user);
         postRepository.save(post);
+    }
+
+    @DeleteMapping("/devapi/post")
+    public void deletePost(@RequestParam String title) {
+        Post post = postRepository.findByTitle(title).get();
+
+        postRepository.delete(post);
     }
 }

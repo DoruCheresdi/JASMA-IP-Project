@@ -35,14 +35,5 @@ public class Post {
     @ManyToOne(fetch = FetchType.EAGER)
     private User user;
 
-    public String getSinceCreatedString() {
-        // get time since course has been created in pretty format:
-        PrettyTime t = new PrettyTime(new Date(System.currentTimeMillis()));
-        return t.format(new Date(createdAt.getTime()));
-    }
 
-    public void updateCourseTimestamp() {
-        Timestamp reviewCreatedAt = new Timestamp(System.currentTimeMillis());
-        setCreatedAt(reviewCreatedAt);
-    }
 }
