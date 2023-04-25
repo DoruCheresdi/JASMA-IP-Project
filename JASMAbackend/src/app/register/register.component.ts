@@ -38,8 +38,10 @@ export class RegisterComponent {
   register() {
     if (this.app.authenticated) {
       // logout first:
-      this.http.post('logout', {}).subscribe();
-      this.app.authenticated = false;
+      // this.http.post('logout', {}).subscribe();
+      // this.app.authenticated = false;
+      this.userMessage = "Esti deja autentificat";
+      return;
     }
 
     this.http.post("devapi/register", this.user).pipe(
