@@ -5,8 +5,11 @@ import com.example.jasmabackend.entities.user.User;
 import com.example.jasmabackend.repositories.PostRepository;
 import com.example.jasmabackend.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -17,13 +20,19 @@ public class PostController {
 
     private final UserRepository userRepository;
 
-    @GetMapping("/posts_user")
+    @GetMapping("/devapi/posts_user")
     public List<Post> getPostsByUser(@RequestParam String userEmail) {
-        return (List<Post>) postRepository.findAll();
+        User user = userRepository.findByEmail(userEmail).get();
+        return (List<Post>) postRepository.findAllByUser(user);
     }
 
-    @PostMapping("/post")
-    void addPost(@RequestBody Post post) {
+    @PostMapping("/devapi/post")
+    void addPost(@RequestBody Post post, Authentication authentication) {
+        // get user that made the request:
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        User user = userRepository.findByEmail(userDetails.getUsername()).get();
+
+        post.setUser(user);
         postRepository.save(post);
     }
 }

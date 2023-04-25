@@ -8,6 +8,8 @@ export class AuthenticateService {
 
   authenticated = false;
 
+  email = ""
+
   private authenticateUrl: string;
 
   constructor(private http: HttpClient) {
@@ -24,6 +26,7 @@ export class AuthenticateService {
     this.http.get(this.authenticateUrl, {headers: headers}).subscribe((response: any) => {
       if (response['name']) {
         this.authenticated = true;
+        this.email = credentials?.email;
       } else {
         this.authenticated = false;
       }

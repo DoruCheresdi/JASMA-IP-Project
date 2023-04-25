@@ -1,6 +1,7 @@
 package com.example.jasmabackend.entities.post;
 
 import com.example.jasmabackend.entities.user.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -22,6 +23,7 @@ public class Post {
 
     private String videoUrl;
 
+    @JsonIgnore
     @ManyToOne
     private User user;
 }

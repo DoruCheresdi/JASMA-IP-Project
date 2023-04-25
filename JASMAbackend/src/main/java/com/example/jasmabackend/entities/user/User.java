@@ -2,6 +2,7 @@ package com.example.jasmabackend.entities.user;
 
 import com.example.jasmabackend.entities.authority.Authority;
 import com.example.jasmabackend.entities.post.Post;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -26,6 +27,7 @@ public class User {
     @ManyToMany(mappedBy = "users")
     private Set<Authority> authorities = new HashSet<>();
 
+    @JsonIgnore
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private List<Post> posts = new ArrayList<>();
 
