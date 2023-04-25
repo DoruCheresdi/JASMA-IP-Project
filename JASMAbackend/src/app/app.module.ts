@@ -14,6 +14,7 @@ import {AuthenticateService} from "./services/authenticate.service";
 import { ProfileComponent } from './profile/profile.component';
 import { PostFormComponent } from './post-form/post-form.component';
 import { PostListComponent } from './post-list/post-list.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 @Injectable()
 export class WithCredentialsInterceptor implements HttpInterceptor {
@@ -36,7 +37,8 @@ export class WithCredentialsInterceptor implements HttpInterceptor {
     LoginComponent,
     ProfileComponent,
     PostFormComponent,
-    PostListComponent
+    PostListComponent,
+    ChangePasswordComponent
   ],
     imports: [
         BrowserModule,

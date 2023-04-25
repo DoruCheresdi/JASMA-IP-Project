@@ -15,10 +15,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -48,6 +45,18 @@ public class UserController {
 
     @PostMapping("/devapi/users")
     public void addUser(@RequestBody User user) {
+        userRepository.save(user);
+    }
+
+    @PostMapping("/devapi/changepassword")
+    public void changePassword(@RequestBody Map<String, String> json) {
+        String newPassword = json.get("newPassword");
+        String userEmail = json.get("userEmail");
+
+        User user = userRepository.findByEmail(userEmail).get();
+        user.setPassword(newPassword);
+        userService.encodePassword(user);
+
         userRepository.save(user);
     }
 }

@@ -7,6 +7,8 @@ import com.example.jasmabackend.entities.share.Share;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.ToString;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.util.*;
@@ -39,11 +41,13 @@ public class User {
     @ToString.Exclude
     @JsonIgnore
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
     private List<Like> likes = new ArrayList<>();
 
     @ToString.Exclude
     @JsonIgnore
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
     private List<Share> shares = new ArrayList<>();
 
     @Override
