@@ -1,18 +1,26 @@
 package com.example.jasmabackend.controller;
 
+import com.example.jasmabackend.entities.friendRequest.FriendRequest;
+import com.example.jasmabackend.entities.friendship.Friendship;
 import com.example.jasmabackend.entities.user.User;
 import com.example.jasmabackend.exceptions.UserEmailNotUniqueException;
+import com.example.jasmabackend.repositories.FriendRequestRepository;
+import com.example.jasmabackend.repositories.FriendshipRepository;
 import com.example.jasmabackend.repositories.UserRepository;
 import com.example.jasmabackend.service.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @RestController
-//@CrossOrigin(origins = "*")
 @RequiredArgsConstructor
 public class UserController {
 
@@ -39,7 +47,7 @@ public class UserController {
     }
 
     @PostMapping("/devapi/users")
-    void addUser(@RequestBody User user) {
+    public void addUser(@RequestBody User user) {
         userRepository.save(user);
     }
 }
