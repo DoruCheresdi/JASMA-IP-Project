@@ -1,8 +1,14 @@
 package com.example.jasmabackend.entities.user;
 
 import com.example.jasmabackend.entities.authority.Authority;
+import com.example.jasmabackend.entities.like.Like;
 import com.example.jasmabackend.entities.post.Post;
+import com.example.jasmabackend.entities.share.Share;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import lombok.ToString;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.util.*;
@@ -23,11 +29,26 @@ public class User {
 
     private String name;
 
+    @ToString.Exclude
     @ManyToMany(mappedBy = "users")
     private Set<Authority> authorities = new HashSet<>();
 
+    @ToString.Exclude
+    @JsonIgnore
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private List<Post> posts = new ArrayList<>();
+
+    @ToString.Exclude
+    @JsonIgnore
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
+    private List<Like> likes = new ArrayList<>();
+
+    @ToString.Exclude
+    @JsonIgnore
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
+    private List<Share> shares = new ArrayList<>();
 
     @Override
     public boolean equals(Object o) {
