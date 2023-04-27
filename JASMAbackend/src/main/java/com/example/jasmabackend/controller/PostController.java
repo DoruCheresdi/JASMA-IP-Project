@@ -5,6 +5,8 @@ import com.example.jasmabackend.entities.user.User;
 import com.example.jasmabackend.repositories.PostRepository;
 import com.example.jasmabackend.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
@@ -37,9 +39,10 @@ public class PostController {
     }
 
     @DeleteMapping("/devapi/post")
-    public void deletePost(@RequestParam String title) {
+    public ResponseEntity deletePost(@RequestParam String title) {
         Post post = postRepository.findByTitle(title).get();
 
         postRepository.delete(post);
+        return ResponseEntity.ok(HttpStatus.OK);
     }
 }

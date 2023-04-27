@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Post} from "../post";
 import {UserService} from "../services/user-service.service";
 import {HttpClient, HttpParams} from "@angular/common/http";
@@ -10,7 +10,7 @@ import {Router} from "@angular/router";
   templateUrl: './post-list.component.html',
   styleUrls: ['./post-list.component.css']
 })
-export class PostListComponent {
+export class PostListComponent implements OnInit {
 
   posts: Post[];
   constructor(private http: HttpClient,
@@ -41,8 +41,14 @@ export class PostListComponent {
       const params = new HttpParams()
           .set('title', title);
 
+      console.log("before req" + this.auth.email);
       this.http.delete("/devapi/post", {params: params}).subscribe(
           (response: any) => {
+              console.log("after req" + this.auth.email);
+              // remove the post from this component's list so it is no longer shown:
+              this.posts = this.posts.filter(p => {
+                  return p.title !== title;
+              })
               this.router.navigateByUrl("/profile");
           }
       )

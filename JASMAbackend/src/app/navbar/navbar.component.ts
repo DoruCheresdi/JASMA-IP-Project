@@ -15,10 +15,16 @@ export class NavbarComponent {
   }
 
   logout() {
-    this.http.post('logout', {}).pipe(finalize(() => {
-      this.app.authenticated = false;
+      this.app.deauthenticate();
       this.router.navigateByUrl('/login');
-    })).subscribe();
+      // TODO server side logout seems to not be working(because of redirect to /login page because of webconfig)
+      // TODO fix it later:
+    // this.http.get('login?logout').pipe(finalize(() => {
+    // })).subscribe(() => {
+    //
+    //     this.app.deauthenticate();
+    //     this.router.navigateByUrl('/login');
+    // });
   }
 
   authenticated() { return this.app.authenticated; }

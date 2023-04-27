@@ -24,13 +24,20 @@ export class AuthenticateService {
     } : {});
 
     this.http.get(this.authenticateUrl, {headers: headers}).subscribe((response: any) => {
-      if (response['name']) {
+      if (response && Object.keys(response).find(key => key === "name")) {
         this.authenticated = true;
         this.email = credentials?.email;
       } else {
-        this.authenticated = false;
+          console.log("Authentication failed.")
+          this.deauthenticate();
       }
       return callback && callback();
     });
+  }
+
+  deauthenticate() {
+      console.log("User deauthenticated.")
+      this.authenticated = false;
+      this.email = "";
   }
 }
