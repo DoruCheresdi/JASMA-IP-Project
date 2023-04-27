@@ -14,7 +14,7 @@ for more info:
 https://github.com/dsyer/spring-boot-angular
 
 # How to run:
-1. run backend from intellij (should be configured, just press the green arror at the top right)
+1. run backend from intellij (should be configured, just press the green arrow at the top right)
 2. then run:
 ./ng build --watch
 that command will build the angular app continuously
