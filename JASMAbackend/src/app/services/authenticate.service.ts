@@ -16,6 +16,10 @@ export class AuthenticateService {
     this.authenticateUrl = 'devapi/authenticated';
   }
 
+  isAuthenticated() : boolean {
+      return this.authenticated && this.email !== "";
+  }
+
   authenticate(credentials: { email: any; password: any; } | undefined,
                callback: { (): void; (): any; } | undefined) {
 

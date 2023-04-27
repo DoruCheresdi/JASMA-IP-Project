@@ -51,11 +51,13 @@ public class SecurityConfiguration {
                 // permit those endpoints without authorization:
 //                .antMatchers("/devapi/authenticated").authenticated()
 //                .antMatchers("/users").authenticated()
-                .antMatchers("*").permitAll()
+            .antMatchers("*").permitAll()
 //                .anyRequest()
 //                .authenticated()
-                .and()
-                .httpBasic();
+            .and()
+            .logout()
+            .and()
+            .httpBasic();
         return http.build();
     }
 }
