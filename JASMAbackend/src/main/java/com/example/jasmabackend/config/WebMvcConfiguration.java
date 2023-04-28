@@ -15,6 +15,7 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
     List<String> urlPatterns = List.of(
       "/login",
       "/register",
+        "/feed",
       "/profile"
     );
 

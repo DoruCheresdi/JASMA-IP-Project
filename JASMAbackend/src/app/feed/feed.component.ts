@@ -1,0 +1,37 @@
+import {Component, OnInit} from '@angular/core';
+import {HttpClient, HttpParams} from "@angular/common/http";
+import {Post} from "../post";
+import {Router} from "@angular/router";
+import {AuthenticateService} from "../services/authenticate.service";
+import {FeedPost} from "../feed-post";
+
+@Component({
+  selector: 'app-feed',
+  templateUrl: './feed.component.html',
+  styleUrls: ['./feed.component.css']
+})
+export class FeedComponent implements OnInit {
+
+    feedPosts: FeedPost[];
+    constructor(private http: HttpClient,
+                private router: Router,
+                private auth: AuthenticateService) {
+        this.feedPosts = [];
+    }
+
+    ngOnInit() {
+
+        // if email is null:
+        if (this.auth.email == undefined || this.auth.email == "") {
+            this.router.navigateByUrl("/login");
+            return;
+        }
+
+        // get FeedPosts:
+        this.http.get<FeedPost[]>("/devapi/feed_posts").subscribe(
+            (feedPosts: FeedPost[]) => {
+                this.feedPosts = feedPosts;
+            }
+        )
+    }
+}

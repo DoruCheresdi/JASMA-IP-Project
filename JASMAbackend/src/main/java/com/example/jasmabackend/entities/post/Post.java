@@ -34,6 +34,4 @@ public class Post {
     @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
     private User user;
-
-
 }

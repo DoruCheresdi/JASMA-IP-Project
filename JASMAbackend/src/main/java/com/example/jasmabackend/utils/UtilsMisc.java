@@ -12,7 +12,7 @@ public class UtilsMisc {
         return t.format(new Date(createdAt.getTime()));
     }
 
-    public Timestamp getTimestamp() {
+    public static Timestamp getTimestamp() {
         Timestamp reviewCreatedAt = new Timestamp(System.currentTimeMillis());
         return reviewCreatedAt;
     }

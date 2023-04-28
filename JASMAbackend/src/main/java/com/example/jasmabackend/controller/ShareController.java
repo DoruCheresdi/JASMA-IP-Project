@@ -1,11 +1,10 @@
 package com.example.jasmabackend.controller;
 
-import com.example.jasmabackend.entities.friendRequest.FriendRequest;
-import com.example.jasmabackend.entities.like.Like;
 import com.example.jasmabackend.entities.post.Post;
+import com.example.jasmabackend.entities.share.Share;
 import com.example.jasmabackend.entities.user.User;
-import com.example.jasmabackend.repositories.LikeRepository;
 import com.example.jasmabackend.repositories.PostRepository;
+import com.example.jasmabackend.repositories.ShareRepository;
 import com.example.jasmabackend.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,16 +17,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-public class LikeController {
+public class ShareController {
 
     private final UserRepository userRepository;
 
-    private final LikeRepository likeRepository;
+    private final ShareRepository shareRepository;
 
     private final PostRepository postRepository;
 
-    @PostMapping("/devapi/like")
-    public ResponseEntity addLike(@RequestBody String postTitle, Authentication authentication) {
+    @PostMapping("/devapi/share")
+    public ResponseEntity addShare(@RequestBody String postTitle, Authentication authentication) {
         // IMPORTANT: pentru endpointurile care au doar un string, nu se mai trimite JSON, ci doar acel string
 
         // get user that made the request:
@@ -36,15 +35,15 @@ public class LikeController {
 
         Post post = postRepository.findByTitle(postTitle).get();
 
-        if (likeRepository.findByUserAndPost(user, post).isPresent()) {
+        if (shareRepository.findByUserAndPost(user, post).isPresent()) {
             // request is already sent, should return error, to implement later:
             return ResponseEntity.ok(HttpStatus.BAD_REQUEST);
         }
 
-        Like like = new Like();
-        like.setUser(user);
-        like.setPost(post);
-        likeRepository.save(like);
+        Share share = new Share();
+        share.setUser(user);
+        share.setPost(post);
+        shareRepository.save(share);
         return ResponseEntity.ok(HttpStatus.OK);
     }
 }
