@@ -25,6 +25,7 @@ public class PostService {
         dto.setImageUrl(post.getImageUrl());
         dto.setVideoUrl(post.getVideoUrl());
         dto.setSinceCreatedString(UtilsMisc.getSinceCreatedString(post.getCreatedAt()));
+        dto.setAuthorEmail(post.getUser().getEmail());
 
         dto.setNumberLikes(likeRepository.findAllByPost(post).size());
         // the post is liked by the current user:
@@ -40,8 +41,8 @@ public class PostService {
         dto.setNumberShares(shareRepository.findAllByPost(post).size());
         // the post is liked by the current user:
         if (shareRepository.findAllByUser(currentUser).stream()
-            .anyMatch(like -> {
-                return like.getPost().equals(post);
+            .anyMatch(share -> {
+                return share.getPost().equals(post);
             })) {
             dto.setIsSharedByCurrentUser("true");
         } else {

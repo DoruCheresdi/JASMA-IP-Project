@@ -1,8 +1,12 @@
 <div class="card" style="width: 18rem;">
     <div class="card-body">
         <h5 class="card-title">{{ feedPost.title }}</h5>
+        <p class="card-text">Author: {{ feedPost.authorEmail }}</p>
         <p class="card-text">{{ feedPost.description }}</p>
         <p class="card-text">{{ feedPost.sinceCreatedString }}</p>
-<!--        <a class="btn btn-primary" (click)="deletePost(post.title)">Delete</a>-->
+        <p class="card-text">Likes: {{ feedPost.numberLikes }}</p>
+        <p class="card-text">Shares: {{ feedPost.numberShares }}</p>
+        <a class="btn btn-primary" [hidden]="isLikedByCurrentUser()" (click)="addLike()">Like</a>
+        <a class="btn btn-primary" [hidden]="isSharedByCurrentUser()" (click)="addShare()">Share</a>
     </div>
 </div>

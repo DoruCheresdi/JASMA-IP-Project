@@ -25,5 +25,9 @@ export class NavbarComponent {
     });
   }
 
+  getUserEmail() {
+      return this.app.email;
+  }
+
   authenticated() { return this.app.isAuthenticated(); }
 }

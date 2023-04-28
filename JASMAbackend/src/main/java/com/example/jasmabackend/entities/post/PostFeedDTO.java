@@ -18,6 +18,8 @@ public class PostFeedDTO {
 
     private String videoUrl;
 
+    private String authorEmail;
+
     private String sinceCreatedString;
 
     private String isLikedByCurrentUser;
