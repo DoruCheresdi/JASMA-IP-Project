@@ -25,15 +25,15 @@ export class PostCardComponent implements OnInit {
     }
 
     isLikedByCurrentUser() {
-        console.log(typeof(this.feedPost.isLikedByCurrentUser));
-        console.log(this.feedPost.isLikedByCurrentUser);
+        // console.log(typeof(this.feedPost.isLikedByCurrentUser));
+        // console.log(this.feedPost.isLikedByCurrentUser);
         if (this.feedPost.isLikedByCurrentUser === "true") return true;
         else return false
     }
 
     isSharedByCurrentUser() {
-        console.log(typeof(this.feedPost.isSharedByCurrentUser));
-        console.log(this.feedPost.isSharedByCurrentUser);
+        // console.log(typeof(this.feedPost.isSharedByCurrentUser));
+        // console.log(this.feedPost.isSharedByCurrentUser);
         if (this.feedPost.isSharedByCurrentUser === "true") return true;
         else return false
     }

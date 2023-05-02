@@ -49,7 +49,7 @@ export class RegisterComponent {
     )
       .subscribe((response) => {
         this.app.authenticate({email: this.user.email, password: this.user.password}, () => {
-          this.router.navigateByUrl("/home");
+          this.router.navigateByUrl("/feed");
         });
       });
   }

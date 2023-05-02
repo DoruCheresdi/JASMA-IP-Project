@@ -10,19 +10,12 @@ import {Router} from "@angular/router";
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
-  constructor(private app: AuthenticateService, private http: HttpClient, private router: Router) {
+  constructor(private app: AuthenticateService, private http: HttpClient) {
     // this.app.authenticate(undefined, undefined);
   }
 
   logout() {
       this.app.deauthenticate();
-      this.router.navigateByUrl('/login');
-      // TODO server side logout seems to not be working(because of redirect to /login page because of webconfig)
-      // TODO fix it later:
-    this.http.post('logout', {}).subscribe(() => {
-        // this.app.deauthenticate();
-        this.router.navigateByUrl('/login');
-    });
   }
 
   getUserEmail() {
