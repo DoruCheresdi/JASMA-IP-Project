@@ -18,7 +18,7 @@ export class AuthenticateService {
     }
 
     isAuthenticated() : boolean {
-        if(this.authenticated && this.email !== "") return true;
+        if(this.authenticated && this.email !== undefined && this.email !== "") return true;
         // make sure user is not authenticated (garbage code ahead):
         // this.authenticate(undefined, undefined);
         console.log("not authenticated")
@@ -48,14 +48,12 @@ export class AuthenticateService {
     }
 
     deauthenticate() {
-        console.log("User deauthenticated.")
-        this.authenticated = false;
-        this.email = "";
-        this.router.navigateByUrl('/login');
         // TODO server side logout seems to not be working(because of redirect to /login page because of webconfig)
         // TODO fix it later:
         this.http.post('logout', {}).subscribe(() => {
-            // this.app.deauthenticate();
+            console.log("User deauthenticated.")
+            this.authenticated = false;
+            this.email = "";
             this.router.navigateByUrl('/login');
         });
     }

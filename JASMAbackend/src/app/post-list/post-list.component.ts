@@ -21,11 +21,11 @@ export class PostListComponent implements OnInit {
 
   ngOnInit() {
 
-    // if email is null:
-    if (this.auth.email == undefined || this.auth.email == "") {
-      this.router.navigateByUrl("/login");
-      return;
-    }
+    // // if email is null:
+    // if (!this.auth.isAuthenticated()) {
+    //   this.router.navigateByUrl("/login");
+    //   return;
+    // }
 
     const params = new HttpParams()
       .set('userEmail', this.auth.email);

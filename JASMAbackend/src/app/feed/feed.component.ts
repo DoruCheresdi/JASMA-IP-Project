@@ -21,12 +21,6 @@ export class FeedComponent implements OnInit {
 
     ngOnInit() {
 
-        // if email is null:
-        if (this.auth.email == undefined || this.auth.email == "") {
-            this.router.navigateByUrl("/login");
-            return;
-        }
-
         // get FeedPosts:
         this.http.get<FeedPost[]>("/devapi/feed_posts").subscribe(
             (feedPosts: FeedPost[]) => {
