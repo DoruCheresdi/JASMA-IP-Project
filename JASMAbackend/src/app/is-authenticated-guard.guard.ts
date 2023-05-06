@@ -9,12 +9,25 @@ import {AuthenticateService} from "./services/authenticate.service";
 })
 export class IsAuthenticatedGuardGuard implements CanActivate {
 
-    constructor(private auth: AuthenticateService) {
+    constructor(private auth: AuthenticateService, private router: Router) {
     }
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return this.auth.isAuthenticated();
+        console.log(this.auth.isAuthenticated());
+          if (!this.auth.isAuthenticated()) this.auth.authenticate(undefined, (isAuthenticated) => {
+              if (isAuthenticated) {
+                  // redirect here cuz the app didn't know before that
+                  // the user is authenticated on the server:
+                  // TODO: I don't know if this url[0] is right, read up on it:
+                  // https://angular.io/api/router/ActivatedRouteSnapshot
+                  // https://angular.io/api/router/UrlSegment
+                  this.router.navigateByUrl(route.url[0].path);
+              } else {
+                  // TODO: do nothing:
+              }
+          });
+        return this.auth.isAuthenticated();
   }
 
 }
