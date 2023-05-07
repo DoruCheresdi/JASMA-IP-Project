@@ -50,6 +50,7 @@ public class UserController {
 
     @PostMapping("/devapi/changepassword")
     public void changePassword(@RequestBody Map<String, String> json) {
+
         String newPassword = json.get("newPassword");
         String userEmail = json.get("userEmail");
 
@@ -58,5 +59,15 @@ public class UserController {
         userService.encodePassword(user);
 
         userRepository.save(user);
+    }
+
+    @PostMapping("/devapi/deleteuser")
+    public void deleteOwnAccount(Authentication authentication) {
+
+        // get user that made the request:
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        User user = userRepository.findByEmail(userDetails.getUsername()).get();
+
+        userRepository.delete(user);
     }
 }

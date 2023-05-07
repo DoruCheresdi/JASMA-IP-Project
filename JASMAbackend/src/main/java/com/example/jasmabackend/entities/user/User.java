@@ -35,18 +35,18 @@ public class User {
 
     @ToString.Exclude
     @JsonIgnore
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Post> posts = new ArrayList<>();
 
     @ToString.Exclude
     @JsonIgnore
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @Fetch(value = FetchMode.SUBSELECT)
     private List<Like> likes = new ArrayList<>();
 
     @ToString.Exclude
     @JsonIgnore
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @Fetch(value = FetchMode.SUBSELECT)
     private List<Share> shares = new ArrayList<>();
 
