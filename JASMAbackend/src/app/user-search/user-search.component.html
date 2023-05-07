@@ -1,0 +1,32 @@
+<form role="form" (submit)="getList()">
+    <div class="form-group">
+        <label for="userName">userName:</label> <input type="text"
+                                                    class="form-control" id="userName" name="userName" [(ngModel)]="userName"/>
+    </div>
+    <button type="submit" class="btn btn-primary">Find User by Name</button>
+</form>
+<p *ngIf="userDTOs.length === 0">No results</p>
+<div class="card my-5" *ngIf="userDTOs.length > 0">
+    <div class="card-body">
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">isFriend</th>
+                <th scope="col">hasSentFriendRequestToYou</th>
+                <th scope="col">hasReceivedFriendRequestToYou</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let user of userDTOs">
+                <td>{{ user.name }}</td>
+                <td><a href="mailto:{{ user.email }}">{{ user.email }}</a></td>
+                <td>{{ user.friend }}</td>
+                <td>{{ user.hasSentFriendRequest }}</td>
+                <td>{{ user.hasReceivedFriendRequest }}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

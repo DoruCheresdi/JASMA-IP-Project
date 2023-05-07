@@ -9,6 +9,7 @@ import {PostFormComponent} from "./post-form/post-form.component";
 import {ChangePasswordComponent} from "./change-password/change-password.component";
 import {FeedComponent} from "./feed/feed.component";
 import {IsAuthenticatedGuardGuard} from "./is-authenticated-guard.guard";
+import {UserSearchComponent} from "./user-search/user-search.component";
 
 const routes: Routes = [
     { path: 'users', component: UserListComponent },
@@ -19,6 +20,7 @@ const routes: Routes = [
     { path: 'newpost', component: PostFormComponent, canActivate: [IsAuthenticatedGuardGuard]},
     { path: 'feed', component: FeedComponent, canActivate: [IsAuthenticatedGuardGuard]},
     { path: 'changepassword', component: ChangePasswordComponent},
+    { path: 'usersearch', component: UserSearchComponent, canActivate: [IsAuthenticatedGuardGuard]},
 
     // redirects to feed for unknown link:
     { path: '**', component: FeedComponent}

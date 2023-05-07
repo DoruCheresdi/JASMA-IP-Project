@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
-import {Post} from "../post";
+import {Post} from "../entities/post";
 import {Router} from "@angular/router";
 import {AuthenticateService} from "../services/authenticate.service";
-import {FeedPost} from "../feed-post";
+import {FeedPost} from "../entities/feed-post";
 
 @Component({
   selector: 'app-feed',

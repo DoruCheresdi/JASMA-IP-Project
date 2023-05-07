@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Post} from "../post";
+import {Post} from "../entities/post";
 import {UserService} from "../services/user-service.service";
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {AuthenticateService} from "../services/authenticate.service";

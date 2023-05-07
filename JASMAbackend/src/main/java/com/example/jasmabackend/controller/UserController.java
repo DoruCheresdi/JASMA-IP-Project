@@ -3,10 +3,12 @@ package com.example.jasmabackend.controller;
 import com.example.jasmabackend.entities.friendRequest.FriendRequest;
 import com.example.jasmabackend.entities.friendship.Friendship;
 import com.example.jasmabackend.entities.user.User;
+import com.example.jasmabackend.entities.user.UserDTO;
 import com.example.jasmabackend.exceptions.UserEmailNotUniqueException;
 import com.example.jasmabackend.repositories.FriendRequestRepository;
 import com.example.jasmabackend.repositories.FriendshipRepository;
 import com.example.jasmabackend.repositories.UserRepository;
+import com.example.jasmabackend.service.friendship.FriendshipService;
 import com.example.jasmabackend.service.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -24,6 +26,12 @@ public class UserController {
     private final UserService userService;
 
     private final UserRepository userRepository;
+
+    private final FriendRequestRepository friendRequestRepository;
+
+    private final FriendshipRepository friendshipRepository;
+
+    private final FriendshipService friendshipService;
 
     @RequestMapping("/devapi/authenticated")
     public Principal user(Principal user) {
@@ -69,5 +77,28 @@ public class UserController {
         User user = userRepository.findByEmail(userDetails.getUsername()).get();
 
         userRepository.delete(user);
+    }
+
+    @GetMapping("/devapi/user/searchbyname")
+    public List<UserDTO> searchByName(@RequestParam String userName, Authentication authentication) {
+
+        // get user that made the request:
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        User loggedUser = userRepository.findByEmail(userDetails.getUsername()).get();
+
+        List<User> users = userRepository.findAllByNameContaining(userName);
+
+        List<UserDTO> userDTOS = users.stream().map(user -> {
+            UserDTO dto = new UserDTO();
+            dto.setName(user.getName());
+            dto.setEmail(user.getEmail());
+            dto.setFriend(friendshipService.areFriends(user, loggedUser));
+            dto.setHasSentFriendRequest(friendRequestRepository.findFriendRequestBySenderAndReceiver(user, loggedUser).isPresent());
+            dto.setHasSentFriendRequest(friendRequestRepository.findFriendRequestBySenderAndReceiver(loggedUser, user).isPresent());
+
+            return dto;
+        }).toList();
+
+        return userDTOS;
     }
 }

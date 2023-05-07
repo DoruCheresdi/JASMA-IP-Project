@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {Post} from "../post";
+import {Post} from "../entities/post";
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {AuthenticateService} from "../services/authenticate.service";

@@ -17,6 +17,7 @@ import { PostListComponent } from './post-list/post-list.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { FeedComponent } from './feed/feed.component';
 import { PostCardComponent } from './post-card/post-card.component';
+import { UserSearchComponent } from './user-search/user-search.component';
 
 @Injectable()
 export class WithCredentialsInterceptor implements HttpInterceptor {
@@ -53,7 +54,8 @@ export class XhrInterceptor implements HttpInterceptor {
     PostListComponent,
     ChangePasswordComponent,
     FeedComponent,
-    PostCardComponent
+    PostCardComponent,
+    UserSearchComponent
   ],
     imports: [
         BrowserModule,

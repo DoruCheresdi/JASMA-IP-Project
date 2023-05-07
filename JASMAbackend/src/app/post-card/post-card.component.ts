@@ -1,9 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {FeedPost} from "../feed-post";
+import {FeedPost} from "../entities/feed-post";
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {AuthenticateService} from "../services/authenticate.service";
-import {Post} from "../post";
+import {Post} from "../entities/post";
 
 @Component({
   selector: 'app-post-card',
