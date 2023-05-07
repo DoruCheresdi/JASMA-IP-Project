@@ -2,6 +2,7 @@ package com.example.jasmabackend.controller;
 
 import com.example.jasmabackend.entities.post.Post;
 import com.example.jasmabackend.entities.post.PostFeedDTO;
+import com.example.jasmabackend.entities.share.Share;
 import com.example.jasmabackend.entities.user.User;
 import com.example.jasmabackend.repositories.FriendshipRepository;
 import com.example.jasmabackend.repositories.PostRepository;
@@ -103,5 +104,35 @@ public class PostController {
         return postList.stream().map(post -> {
             return postService.createPostDTO(post, user);
         }).toList();
+    }
+
+    /**
+     * Get all this user's posts and what posts they shared in a PostFeedDTO format:
+     * @param email
+     * @return
+     */
+    @GetMapping("/devapi/posts_user_detailed")
+    public List<PostFeedDTO> getPostsByUserDetailed(@RequestParam String email, Authentication authentication) {
+        // get user that made the request:
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        User loggedUser = userRepository.findByEmail(userDetails.getUsername()).get();
+
+        User user = userRepository.findByEmail(email).get();
+
+        // get all their posts, and the posts shared by them:
+        Set<Post> postsSet = new HashSet<>();
+        // add users' own posts:
+        postsSet.addAll(postRepository.findAllByUser(user));
+        // add the shared posts too:
+        List<Post> sharedPosts = shareRepository.findAll().stream()
+            .filter(share -> {
+                return (share.getUser().equals(user));
+            }).map(Share::getPost).toList();
+        postsSet.addAll(sharedPosts);
+
+        List<Post> postList = new ArrayList<>();
+        postList.addAll(postsSet);
+
+        return postList.stream().map(post -> postService.createPostDTO(post, loggedUser)).toList();
     }
 }

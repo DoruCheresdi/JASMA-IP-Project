@@ -94,11 +94,30 @@ public class UserController {
             dto.setEmail(user.getEmail());
             dto.setFriend(friendshipService.areFriends(user, loggedUser));
             dto.setHasSentFriendRequest(friendRequestRepository.findFriendRequestBySenderAndReceiver(user, loggedUser).isPresent());
-            dto.setHasSentFriendRequest(friendRequestRepository.findFriendRequestBySenderAndReceiver(loggedUser, user).isPresent());
+            dto.setHasReceivedFriendRequest(friendRequestRepository.findFriendRequestBySenderAndReceiver(loggedUser, user).isPresent());
 
             return dto;
         }).toList();
 
         return userDTOS;
+    }
+
+    @GetMapping("devapi/user/details")
+    public UserDTO getUserDetails(@RequestParam String email, Authentication authentication) {
+
+        // get user that made the request:
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        User loggedUser = userRepository.findByEmail(userDetails.getUsername()).get();
+
+        User user = userRepository.findByEmail(email).get();
+
+        UserDTO dto = new UserDTO();
+        dto.setName(user.getName());
+        dto.setEmail(user.getEmail());
+        dto.setFriend(friendshipService.areFriends(user, loggedUser));
+        dto.setHasSentFriendRequest(friendRequestRepository.findFriendRequestBySenderAndReceiver(user, loggedUser).isPresent());
+        dto.setHasReceivedFriendRequest(friendRequestRepository.findFriendRequestBySenderAndReceiver(loggedUser, user).isPresent());
+
+        return dto;
     }
 }

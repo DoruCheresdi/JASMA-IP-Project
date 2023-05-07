@@ -1,0 +1,19 @@
+<p *ngIf="user">User Email: {{user.email}}</p>
+<p *ngIf="user">User Name: {{user.name}}</p>
+<p *ngIf="user.friend">You two are friends!</p>
+<p *ngIf="!user.friend">You two are NOT friends!</p>
+<p *ngIf="user.hasSentFriendRequest">This user has sent you a friend request!</p>
+<p *ngIf="user.hasReceivedFriendRequest">You have sent him a friend request!</p>
+<a *ngIf="!user.hasSentFriendRequest && !user.hasReceivedFriendRequest && !user.friend" class="btn btn-primary" (click)="sendFriendRequest()">
+    Send request for friendship
+</a>
+<a *ngIf="user.hasSentFriendRequest && !user.friend" class="btn btn-primary" (click)="acceptFriendRequest()">
+    Accept request for friendship
+</a>
+<a *ngIf="user.hasSentFriendRequest && !user.friend" class="btn btn-primary" (click)="refuseFriendRequest()">
+    Refuse request for friendship
+</a>
+<div class="py-2"*ngFor="let post of userPosts">
+    <app-post-card [feedPost] = post>
+    </app-post-card>
+</div>

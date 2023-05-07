@@ -21,7 +21,8 @@
             <tbody>
             <tr *ngFor="let user of userDTOs">
                 <td>{{ user.name }}</td>
-                <td><a href="mailto:{{ user.email }}">{{ user.email }}</a></td>
+                <td><a [routerLink]="['/userprofile']"
+                    [queryParams]="{ email: user.email}">{{ user.email }}</a></td>
                 <td>{{ user.friend }}</td>
                 <td>{{ user.hasSentFriendRequest }}</td>
                 <td>{{ user.hasReceivedFriendRequest }}</td>
