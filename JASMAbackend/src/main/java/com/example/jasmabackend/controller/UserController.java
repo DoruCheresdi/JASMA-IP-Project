@@ -120,4 +120,29 @@ public class UserController {
 
         return dto;
     }
+
+    @GetMapping("/devapi/user/friends")
+    public List<UserDTO> getFriendsOfUser(Authentication authentication) {
+
+        // get user that made the request:
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        User loggedUser = userRepository.findByEmail(userDetails.getUsername()).get();
+
+        List<User> users = userRepository.findAll().stream().filter(user -> {
+            return friendshipService.areFriends(user, loggedUser);
+        }).toList();
+
+        List<UserDTO> userDTOS = users.stream().map(user -> {
+            UserDTO dto = new UserDTO();
+            dto.setName(user.getName());
+            dto.setEmail(user.getEmail());
+            dto.setFriend(friendshipService.areFriends(user, loggedUser));
+            dto.setHasSentFriendRequest(friendRequestRepository.findFriendRequestBySenderAndReceiver(user, loggedUser).isPresent());
+            dto.setHasReceivedFriendRequest(friendRequestRepository.findFriendRequestBySenderAndReceiver(loggedUser, user).isPresent());
+
+            return dto;
+        }).toList();
+
+        return userDTOS;
+    }
 }
