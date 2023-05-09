@@ -13,10 +13,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -45,6 +44,12 @@ public class CommentController {
         commentDto.getComment().setPost(post);
         commentRepository.save(commentDto.getComment());
         return ResponseEntity.ok(HttpStatus.OK);
+    }
+
+    @GetMapping("/devapi/comments_post")
+    public List<Comment> getCommentsByUser(@RequestParam String postTitle) {
+        Post post = postRepository.findByTitle(postTitle).get();
+        return (List<Comment>) commentRepository.findAllByPost(post);
     }
 
 }

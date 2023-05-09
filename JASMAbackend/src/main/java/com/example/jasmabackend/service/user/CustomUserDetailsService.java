@@ -33,8 +33,4 @@ public class CustomUserDetailsService implements UserDetailsService {
         user.setAuthorities(new HashSet<>(authorityRepository.findAllByUserEmail(user.getEmail())));
         return new CustomUserDetails(user);
     }
-
-    public boolean isEnabled(String username) {
-        return userRepository.findByEmail(username).get().isEnabled();
-    }
 }

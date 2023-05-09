@@ -62,10 +62,4 @@ public class User {
     public int hashCode() {
         return Objects.hash(id, email, password);
     }
-
-    // pentru verificare mail
-    @Column(name = "verification_code", length = 64)
-    private String verificationCode;
-
-    private  boolean enabled;
 }
