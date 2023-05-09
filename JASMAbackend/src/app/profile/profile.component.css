@@ -81,3 +81,87 @@
     margin: 0 auto;
     display: block;
 }
+
+/* The modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 30%;
+    height: 30%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+    /*display: flex;*/
+    align-items: center;
+    animation: fade-in 0.5s ease-in-out;
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+.modal-content {
+    background-color: #F7EDED;
+    background-image: url('https://www.transparenttextures.com/patterns/45-degree-fabric-light.png');
+    margin: auto;
+    padding: 30px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    font-family: 'Open Sans', sans-serif;
+    transition: all 0.2s ease-in-out;
+}
+
+.modal-content:hover {
+    transform: translateY(-3px);
+}
+
+.modal-header {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    padding-top: 30px;
+    border-bottom: 1px solid #ccc;
+    font-size: 2.5rem;
+    font-weight: bold;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    background-image: linear-gradient(to right, #f2f2f2, #e6e6e6);
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+    color: #333;
+}
+
+.modal-close {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.close {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #FF9AA2;
+    cursor: pointer;
+    margin: 0 10px;
+    transition: color 0.2s ease-in-out;
+}
+
+.close:hover {
+    color: #FF6B6B;
+}
+
+.close:hover,
+.close:focus {
+    color: #FF3030;
+    text-decoration: none;
+    outline: none;
+}
