@@ -10,6 +10,7 @@ import {ChangePasswordComponent} from "./change-password/change-password.compone
 import {FeedComponent} from "./feed/feed.component";
 import {IsAuthenticatedGuardGuard} from "./is-authenticated-guard.guard";
 import {UserSearchComponent} from "./user-search/user-search.component";
+import { NotificationsComponent } from './notifications/notifications.component';
 import {OtherUserProfileComponent} from "./other-user-profile/other-user-profile.component";
 
 const routes: Routes = [
@@ -22,6 +23,7 @@ const routes: Routes = [
     { path: 'feed', component: FeedComponent, canActivate: [IsAuthenticatedGuardGuard]},
     { path: 'changepassword', component: ChangePasswordComponent},
     { path: 'usersearch', component: UserSearchComponent, canActivate: [IsAuthenticatedGuardGuard]},
+    {path:'notifications', component: NotificationsComponent, canActivate: [IsAuthenticatedGuardGuard]},
     { path: 'userprofile', component: OtherUserProfileComponent, canActivate: [IsAuthenticatedGuardGuard]},
 
     // redirects to feed for unknown link:
