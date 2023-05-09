@@ -1,13 +1,12 @@
 package com.example.jasmabackend.controller;
 
+import com.example.jasmabackend.entities.authority.Authority;
 import com.example.jasmabackend.entities.friendRequest.FriendRequest;
 import com.example.jasmabackend.entities.friendship.Friendship;
 import com.example.jasmabackend.entities.user.User;
 import com.example.jasmabackend.entities.user.UserDTO;
 import com.example.jasmabackend.exceptions.UserEmailNotUniqueException;
-import com.example.jasmabackend.repositories.FriendRequestRepository;
-import com.example.jasmabackend.repositories.FriendshipRepository;
-import com.example.jasmabackend.repositories.UserRepository;
+import com.example.jasmabackend.repositories.*;
 import com.example.jasmabackend.service.friendship.FriendshipService;
 import com.example.jasmabackend.service.user.UserService;
 import com.example.jasmabackend.utils.FileUploadUtil;
@@ -31,6 +30,14 @@ public class UserController {
     private final UserService userService;
 
     private final UserRepository userRepository;
+
+    private final AuthorityRepository authorityRepository;
+
+    private final LikeRepository likeRepository;
+
+    private final ShareRepository shareRepository;
+
+    private final PostRepository postRepository;
 
     private final FriendRequestRepository friendRequestRepository;
 
@@ -75,11 +82,29 @@ public class UserController {
     }
 
     @PostMapping("/devapi/deleteuser")
-    public void deleteOwnAccount(Authentication authentication) {
+    public void deleteAccount(@RequestBody String email) {
 
         // get user that made the request:
-        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        User user = userRepository.findByEmail(userDetails.getUsername()).get();
+        User user = userRepository.findByEmail(email).get();
+
+        user.getAuthorities().forEach(authority -> {
+            authority.getUsers().remove(user);
+            Set<Authority> authorities = user.getAuthorities();
+            authorities.remove(authority);
+            user.setAuthorities(authorities);
+        });
+
+        friendshipRepository.findAll().forEach(friendship -> {
+            if (friendship.getReceiver().equals(user) || friendship.getSender().equals(user)) {
+                friendshipRepository.delete(friendship);
+            }
+        });
+
+        friendRequestRepository.findAll().forEach(friendRequest -> {
+            if (friendRequest.getReceiver().equals(user) || friendRequest.getSender().equals(user)) {
+                friendRequestRepository.delete(friendRequest);
+            }
+        });
 
         userRepository.delete(user);
     }

@@ -8,5 +8,6 @@
         <p class="card-text">Shares: {{ feedPost.numberShares }}</p>
         <a class="btn btn-primary" [hidden]="isLikedByCurrentUser()" (click)="addLike()">Like</a>
         <a class="btn btn-primary" [hidden]="isSharedByCurrentUser()" (click)="addShare()">Share</a>
+        <a class="btn btn-primary" *ngIf="auth.isAdmin" (click)="deletePost(feedPost.title)">Delete(Admin)</a>
     </div>
 </div>

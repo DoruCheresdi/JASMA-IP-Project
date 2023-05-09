@@ -13,6 +13,11 @@
 <a *ngIf="user.hasSentFriendRequest && !user.friend" class="btn btn-primary" (click)="refuseFriendRequest()">
     Refuse request for friendship
 </a>
+<p *ngIf="isAdmin">User is admin</p>
+<a *ngIf="!isAdmin && auth.isAdmin" class="btn btn-primary" (click)="makeAdmin()">
+    Make admin
+</a>
+<a class="btn btn-primary" *ngIf="auth.isAdmin" (click)="deleteUser()">Delete user(Admin)</a>
 <div class="py-2"*ngFor="let post of userPosts">
     <app-post-card [feedPost] = post>
     </app-post-card>

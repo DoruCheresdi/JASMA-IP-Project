@@ -31,24 +31,31 @@ public class User {
 
     private String imageName;
 
+    /**
+     * Take care with the cascade attribute, it may bring entities back from the dead:
+     */
     @ToString.Exclude
-    @ManyToMany(mappedBy = "users")
+    @JsonIgnore
+    @ManyToMany(mappedBy = "users", fetch = FetchType.EAGER)
     private Set<Authority> authorities = new HashSet<>();
 
     @ToString.Exclude
     @JsonIgnore
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER,
+        orphanRemoval = true)
     private List<Post> posts = new ArrayList<>();
 
     @ToString.Exclude
     @JsonIgnore
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER,
+        orphanRemoval = true)
     @Fetch(value = FetchMode.SUBSELECT)
     private List<Like> likes = new ArrayList<>();
 
     @ToString.Exclude
     @JsonIgnore
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER,
+        orphanRemoval = true)
     @Fetch(value = FetchMode.SUBSELECT)
     private List<Share> shares = new ArrayList<>();
 
