@@ -10,12 +10,17 @@ import com.example.jasmabackend.repositories.FriendshipRepository;
 import com.example.jasmabackend.repositories.UserRepository;
 import com.example.jasmabackend.service.friendship.FriendshipService;
 import com.example.jasmabackend.service.user.UserService;
+import com.example.jasmabackend.utils.FileUploadUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.view.RedirectView;
 
+import java.io.IOException;
 import java.security.Principal;
 import java.util.*;
 
@@ -89,14 +94,7 @@ public class UserController {
         List<User> users = userRepository.findAllByNameContaining(userName);
 
         List<UserDTO> userDTOS = users.stream().map(user -> {
-            UserDTO dto = new UserDTO();
-            dto.setName(user.getName());
-            dto.setEmail(user.getEmail());
-            dto.setFriend(friendshipService.areFriends(user, loggedUser));
-            dto.setHasSentFriendRequest(friendRequestRepository.findFriendRequestBySenderAndReceiver(user, loggedUser).isPresent());
-            dto.setHasReceivedFriendRequest(friendRequestRepository.findFriendRequestBySenderAndReceiver(loggedUser, user).isPresent());
-
-            return dto;
+            return userService.getDTO(user, loggedUser);
         }).toList();
 
         return userDTOS;
@@ -111,14 +109,7 @@ public class UserController {
 
         User user = userRepository.findByEmail(email).get();
 
-        UserDTO dto = new UserDTO();
-        dto.setName(user.getName());
-        dto.setEmail(user.getEmail());
-        dto.setFriend(friendshipService.areFriends(user, loggedUser));
-        dto.setHasSentFriendRequest(friendRequestRepository.findFriendRequestBySenderAndReceiver(user, loggedUser).isPresent());
-        dto.setHasReceivedFriendRequest(friendRequestRepository.findFriendRequestBySenderAndReceiver(loggedUser, user).isPresent());
-
-        return dto;
+        return userService.getDTO(user, loggedUser);
     }
 
     @GetMapping("/devapi/user/friends")
@@ -133,14 +124,7 @@ public class UserController {
         }).toList();
 
         List<UserDTO> userDTOS = users.stream().map(user -> {
-            UserDTO dto = new UserDTO();
-            dto.setName(user.getName());
-            dto.setEmail(user.getEmail());
-            dto.setFriend(friendshipService.areFriends(user, loggedUser));
-            dto.setHasSentFriendRequest(friendRequestRepository.findFriendRequestBySenderAndReceiver(user, loggedUser).isPresent());
-            dto.setHasReceivedFriendRequest(friendRequestRepository.findFriendRequestBySenderAndReceiver(loggedUser, user).isPresent());
-
-            return dto;
+            return userService.getDTO(user, loggedUser);
         }).toList();
 
         return userDTOS;

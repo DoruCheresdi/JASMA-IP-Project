@@ -10,6 +10,8 @@ public class UserDTO {
 
     private boolean isFriend;
 
+    private String imageURL;
+
     // logged user has received a request from this user:
     // this user has sent a FR. to the logged in user:
     private boolean hasSentFriendRequest;
