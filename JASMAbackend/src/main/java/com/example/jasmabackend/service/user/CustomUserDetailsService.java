@@ -5,10 +5,10 @@ import com.example.jasmabackend.entities.user.User;
 import com.example.jasmabackend.repositories.AuthorityRepository;
 import com.example.jasmabackend.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
@@ -32,5 +32,9 @@ public class CustomUserDetailsService implements UserDetailsService {
         User user = optionalUser.get();
         user.setAuthorities(new HashSet<>(authorityRepository.findAllByUserEmail(user.getEmail())));
         return new CustomUserDetails(user);
+    }
+
+    public boolean isEnabled(String username) {
+        return userRepository.findByEmail(username).get().isEnabled();
     }
 }
