@@ -13,6 +13,8 @@ export class AuthenticateService {
 
     private authenticateUrl: string;
 
+    isAdmin = false;
+
     constructor(private http: HttpClient, private router: Router) {
         this.authenticateUrl = 'devapi/authenticated';
     }
@@ -39,6 +41,10 @@ export class AuthenticateService {
                 isAuthenticated = true;
                 this.authenticated = true;
                 this.email = response.principal.user.email;
+                if (response.authorities.length != 0) {
+                    console.log("User is admin");
+                    this.isAdmin = true;
+                }
             } else {
                 console.log("Authentication failed.")
                 this.deauthenticate();

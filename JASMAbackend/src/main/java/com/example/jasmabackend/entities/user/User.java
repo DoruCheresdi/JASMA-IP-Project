@@ -32,7 +32,8 @@ public class User {
     private String imageName;
 
     @ToString.Exclude
-    @ManyToMany(mappedBy = "users")
+    @JsonIgnore
+    @ManyToMany(mappedBy = "users", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Authority> authorities = new HashSet<>();
 
     @ToString.Exclude
