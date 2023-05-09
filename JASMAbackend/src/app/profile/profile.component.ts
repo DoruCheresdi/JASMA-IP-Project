@@ -7,11 +7,14 @@ import {UserDTO} from "../entities/user-dto";
 import {User} from "../entities/user";
 
 @Component({
-  selector: 'app-profile',
-  templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css']
+    selector: 'app-profile',
+    templateUrl: './profile.component.html',
+    styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
+
+    userDescription: string = "Buna buna."; // default description
+    isEditingDescription: boolean = false; // flag to indicate if user is editing the description
 
     // https://blog.angular-university.io/angular-file-upload/
     fileName = '';
@@ -61,5 +64,39 @@ export class ProfileComponent implements OnInit {
                 this.auth.deauthenticate();
             }
         )
+    }
+    startEditingDescription() {
+        this.isEditingDescription = true;
+    }
+
+    cancelEditingDescription() {
+        this.isEditingDescription = false;
+    }
+
+    saveDescription() {
+        // Code to save the user's updated description to the backend goes here.
+        // For now, we'll just update the userDescription variable with the new value.
+        this.isEditingDescription = false; // hide the edit form
+    }
+
+    viewFriends() {
+        const popup = window.open('/devapi/friends', 'Friends', 'width=500,height=500');
+        if (popup) {
+            popup.onload = function() {
+                const friendsList = popup.document.getElementById('friendsList');
+                fetch('/devapi/friends', { credentials: 'include' })
+                    .then(response => response.json())
+                    .then(friends => {
+                        const friendsHTML = friends.map((friend: { firstName: any; lastName: any; }) => `<li>${friend.firstName} ${friend.lastName}</li>`).join('');
+                        // @ts-ignore
+                        friendsList.innerHTML = friendsHTML;
+                    });
+            };
+        } else {
+            alert('Pop-ups are blocked in your browser. Please allow pop-ups for this website.');
+        }
+    }
+    getUserEmail() {
+        return this.auth.email;
     }
 }

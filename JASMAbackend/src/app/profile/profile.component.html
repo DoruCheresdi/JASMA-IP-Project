@@ -1,33 +1,47 @@
-<p>Your Profile</p>
-<div>
-  <a routerLink="/newpost" class="btn btn-info">New post</a>
-  <a routerLink="/" class="btn btn-info">Edit profile</a>
-    <a class="btn btn-info" (click)="deleteAccount()">Delete your account</a>
-
-<!--    <form (ngSubmit)="submitForm()"-->
-<!--          enctype="multipart/form-data">-->
-
-<!--        <div class="form-group">-->
-<!--            <label for="photo">Change User Photo:</label>-->
-<!--            <input type="file" id="photo" name="photo" (change)="onFileSelected($event)"-->
-<!--                   accept="image/png, image/jpeg">-->
-<!--        </div>-->
-
-<!--        <div>-->
-<!--            <button type="submit" class="btn btn-primary">Upload Photo</button>-->
-<!--        </div>-->
-<!--    </form>-->
-
-    <img *ngIf="imageURL !== ''" alt="img" src="{{imageURL}}" class="img-thumbnail"  style="width: 200px; height: 150px;" />
-
-    <input type="file" class="file-input" accept="image/png, image/jpeg"
-           (change)="onFileSelected($event)" #fileUpload [hidden]="true">
-    <div class="file-upload">
-        {{fileName || "No file uploaded yet."}}
-        <button class="btn upload-btn"
-                (click)="fileUpload.click()">
-            Choose and upload user image
-        </button>
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card border-0 shadow">
+                <div class="card-body p-5">
+                    <h2 class="card-title text-center mb-5">Your Profile</h2>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="mb-4">
+                                <input type="file" class="file-input d-none" accept="image/png, image/jpeg"
+                                       (change)="onFileSelected($event)" #fileUpload>
+                                <div class="file-upload">
+                                    <div class="file-upload">
+                                        <span class="file-upload-text">{{fileName || "No file uploaded yet."}}</span>
+                                        <br>
+                                        <button class="btn upload-btn" (click)="fileUpload.click()">
+                                            Choose and upload user image
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <h3 class="card-subtitle mb-3">{{getUserEmail()}}</h3>
+                            <div class="form-group mb-4" *ngIf="!isEditingDescription">
+                                <p class="card-text">{{ userDescription }}</p>
+                                <button class="btn btn-info" (click)="startEditingDescription()">Edit description</button>
+                            </div>
+                            <div *ngIf="isEditingDescription">
+                                <textarea class="form-control mb-4" rows="3" placeholder="Enter your description" [(ngModel)]="userDescription"></textarea>
+                                <button class="btn btn-info mr-2" (click)="saveDescription()">Save</button>
+                                <button class="btn btn-secondary" (click)="cancelEditingDescription()">Cancel</button>
+                            </div>
+                            <div class="d-flex justify-content-start mb-4">
+                                <a routerLink="/newpost" class="btn btn-info mr-2">New post</a>
+                                <a routerLink="/editprofile" class="btn btn-info mr-2">Edit profile</a>
+                                <button class="btn btn-danger" (click)="deleteAccount()">Delete your account</button>
+                            </div>
+                            <h3 class="card-subtitle mb-3">Your Posts</h3>
+                            <app-post-list></app-post-list>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-  <app-post-list></app-post-list>
 </div>
