@@ -1,92 +1,83 @@
-/* Style for the file upload input and button */
-.file-upload {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    /*background-color: #f7f7f7;*/
-    padding: 10px;
-    border-radius: 5px;
+.container-fluid {
+    padding: 20px;
 }
 
-.file-upload .upload-btn {
+.card {
+    border-radius: 10px;
+}
+
+.card-title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+.card-subtitle {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.file-upload-text {
+    font-size: 1rem;
+}
+
+.upload-btn {
     background-color: #007bff;
-    color: #fff;
     border: none;
     border-radius: 5px;
-    padding: 10px 15px;
+    color: #fff;
     cursor: pointer;
-    transition: all 0.3s ease;
-    margin-top: 10px;
+    font-size: 1rem;
+    padding: 8px 16px;
+    transition: background-color 0.3s ease;
 }
 
-.file-upload .upload-btn:hover {
+.upload-btn:hover {
     background-color: #0069d9;
-}
-
-/* Style for the user description editing form */
-.form-group textarea {
-    resize: none;
-}
-
-.form-group button {
-    margin-top: 10px;
-}
-
-/* Style for the buttons */
-.btn {
-    padding: 10px 20px;
-    margin-right: 10px;
-    border-radius: 5px;
-    font-size: 16px;
-    font-weight: bold;
-    text-decoration: none;
-    cursor: pointer;
-    transition: all 0.3s ease;
 }
 
 .btn-info {
-    background-color: #007bff;
+    background-color: #17a2b8;
+    border-color: #17a2b8;
     color: #fff;
-    border: none;
+    font-size: 1rem;
+    margin-right: 10px;
 }
 
 .btn-info:hover {
-    background-color: #0069d9;
+    background-color: #138496;
+    border-color: #138496;
 }
 
 .btn-secondary {
     background-color: #6c757d;
+    border-color: #6c757d;
     color: #fff;
-    border: none;
+    font-size: 1rem;
 }
 
 .btn-secondary:hover {
     background-color: #5a6268;
+    border-color: #5a6268;
 }
 
 .btn-danger {
     background-color: #dc3545;
+    border-color: #dc3545;
     color: #fff;
-    border: none;
+    font-size: 1rem;
 }
 
 .btn-danger:hover {
     background-color: #c82333;
+    border-color: #bd2130;
 }
-
-/* Style for the user image upload */
-.file-upload-wrapper {
-    position: relative;
-}
-
-.file-upload-wrapper .file-input {
-    position: absolute;
-    left: 0;
-    top: 0;
-    opacity: 0;
-}
-
-.file-upload-wrapper .upload-btn {
-    margin-top: 10px;
+.img-thumbnail {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    object-position: center;
+    margin: 0 auto;
+    display: block;
 }
