@@ -1,24 +1,36 @@
-<p *ngIf="user">User Email: {{user.email}}</p>
-<p *ngIf="user">User Name: {{user.name}}</p>
-<p *ngIf="user.friend">You two are friends!</p>
-<p *ngIf="!user.friend">You two are NOT friends!</p>
-<p *ngIf="user.hasSentFriendRequest">This user has sent you a friend request!</p>
-<p *ngIf="user.hasReceivedFriendRequest">You have sent him a friend request!</p>
-<a *ngIf="!user.hasSentFriendRequest && !user.hasReceivedFriendRequest && !user.friend" class="btn btn-primary" (click)="sendFriendRequest()">
-    Send request for friendship
-</a>
-<a *ngIf="user.hasSentFriendRequest && !user.friend" class="btn btn-primary" (click)="acceptFriendRequest()">
-    Accept request for friendship
-</a>
-<a *ngIf="user.hasSentFriendRequest && !user.friend" class="btn btn-primary" (click)="refuseFriendRequest()">
-    Refuse request for friendship
-</a>
-<p *ngIf="isAdmin">User is admin</p>
-<a *ngIf="!isAdmin && auth.isAdmin" class="btn btn-primary" (click)="makeAdmin()">
-    Make admin
-</a>
-<a class="btn btn-primary" *ngIf="auth.isAdmin" (click)="deleteUser()">Delete user(Admin)</a>
-<div class="py-2"*ngFor="let post of userPosts">
-    <app-post-card [feedPost] = post>
-    </app-post-card>
+<div class="container-fluid py-5 bg-light">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card border-0 shadow-lg">
+                <div class="card-body p-5">
+                    <h2 class="card-title text-center mb-5">{{ user.name }}'s Profile</h2>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="mb-4">
+                                <div class="text-center mb-4">
+                                    <img *ngIf="user.imageURL" alt="User Image" src="{{ user.imageURL }}" class="img-thumbnail shadow-sm rounded-circle" style="width: 200px; height: 200px;" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <p>User Email: {{ user.email }}</p>
+                            <p>User Name: {{ user.name }}</p>
+                            <p *ngIf="user.friend">You two are friends!</p>
+                            <p *ngIf="!user.friend">You two are NOT friends!</p>
+                            <p *ngIf="user.hasSentFriendRequest">This user has sent you a friend request!</p>
+                            <p *ngIf="user.hasReceivedFriendRequest">You have sent him a friend request!</p>
+                            <a *ngIf="!user.hasSentFriendRequest && !user.hasReceivedFriendRequest && !user.friend" class="btn btn-primary my-2" (click)="sendFriendRequest()">Send request for friendship</a>
+                            <a *ngIf="user.hasSentFriendRequest && !user.friend" class="btn btn-primary my-2" (click)="acceptFriendRequest()">Accept request for friendship</a>
+                            <a *ngIf="user.hasSentFriendRequest && !user.friend" class="btn btn-primary my-2" (click)="refuseFriendRequest()">Refuse request for friendship</a>
+                            <hr>
+                            <h3 class="card-subtitle mb-3">User Posts</h3>
+                            <div class="py-2" *ngFor="let post of userPosts">
+                                <app-post-card [feedPost]="post"></app-post-card>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

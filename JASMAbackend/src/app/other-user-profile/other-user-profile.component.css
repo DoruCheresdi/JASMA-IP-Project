@@ -1,0 +1,103 @@
+.container-fluid {
+    background-color: #f5f5f5;
+    padding: 50px 0;
+}
+
+.card {
+    border-radius: 20px;
+    box-shadow: 0px 10px 50px rgba(0, 0, 0, 0.1);
+}
+
+.card-body {
+    background-color: #fff;
+    border-radius: 20px;
+    padding: 40px;
+}
+
+.card-title {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #333;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.card-subtitle {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+    margin-top: 50px;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.img-thumbnail {
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0px 5px 25px rgba(0, 0, 0, 0.1);
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+}
+
+.img-thumbnail:hover {
+    transform: scale(1.05);
+    transition: all 0.3s ease-in-out;
+}
+
+.btn {
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 10px;
+    margin-right: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: all 0.3s ease-in-out;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background-color: #0069d9;
+    border-color: #0062cc;
+}
+
+.py-2 {
+    padding-top: 30px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #eee;
+}
+
+.py-2:last-child {
+    border: none;
+}
+
+@media only screen and (max-width: 768px) {
+    .col-md-4 {
+        text-align: center;
+    }
+    .img-thumbnail {
+        width: 150px;
+        height: 150px;
+    }
+    .card-subtitle {
+        margin-top: 20px;
+        font-size: 1.5rem;
+    }
+}
+
+@media only screen and (max-width: 576px) {
+    .card-title {
+        font-size: 2rem;
+    }
+    .card-subtitle {
+        font-size: 1.2rem;
+    }
+}
