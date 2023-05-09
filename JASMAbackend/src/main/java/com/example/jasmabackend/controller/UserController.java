@@ -1,21 +1,25 @@
 package com.example.jasmabackend.controller;
 
+import com.example.jasmabackend.entities.authority.Authority;
 import com.example.jasmabackend.entities.friendRequest.FriendRequest;
 import com.example.jasmabackend.entities.friendship.Friendship;
 import com.example.jasmabackend.entities.user.User;
 import com.example.jasmabackend.entities.user.UserDTO;
 import com.example.jasmabackend.exceptions.UserEmailNotUniqueException;
-import com.example.jasmabackend.repositories.FriendRequestRepository;
-import com.example.jasmabackend.repositories.FriendshipRepository;
-import com.example.jasmabackend.repositories.UserRepository;
+import com.example.jasmabackend.repositories.*;
 import com.example.jasmabackend.service.friendship.FriendshipService;
 import com.example.jasmabackend.service.user.UserService;
+import com.example.jasmabackend.utils.FileUploadUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.view.RedirectView;
 
+import java.io.IOException;
 import java.security.Principal;
 import java.util.*;
 
@@ -26,6 +30,14 @@ public class UserController {
     private final UserService userService;
 
     private final UserRepository userRepository;
+
+    private final AuthorityRepository authorityRepository;
+
+    private final LikeRepository likeRepository;
+
+    private final ShareRepository shareRepository;
+
+    private final PostRepository postRepository;
 
     private final FriendRequestRepository friendRequestRepository;
 
@@ -70,11 +82,29 @@ public class UserController {
     }
 
     @PostMapping("/devapi/deleteuser")
-    public void deleteOwnAccount(Authentication authentication) {
+    public void deleteAccount(@RequestBody String email) {
 
         // get user that made the request:
-        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        User user = userRepository.findByEmail(userDetails.getUsername()).get();
+        User user = userRepository.findByEmail(email).get();
+
+        user.getAuthorities().forEach(authority -> {
+            authority.getUsers().remove(user);
+            Set<Authority> authorities = user.getAuthorities();
+            authorities.remove(authority);
+            user.setAuthorities(authorities);
+        });
+
+        friendshipRepository.findAll().forEach(friendship -> {
+            if (friendship.getReceiver().equals(user) || friendship.getSender().equals(user)) {
+                friendshipRepository.delete(friendship);
+            }
+        });
+
+        friendRequestRepository.findAll().forEach(friendRequest -> {
+            if (friendRequest.getReceiver().equals(user) || friendRequest.getSender().equals(user)) {
+                friendRequestRepository.delete(friendRequest);
+            }
+        });
 
         userRepository.delete(user);
     }
@@ -89,14 +119,7 @@ public class UserController {
         List<User> users = userRepository.findAllByNameContaining(userName);
 
         List<UserDTO> userDTOS = users.stream().map(user -> {
-            UserDTO dto = new UserDTO();
-            dto.setName(user.getName());
-            dto.setEmail(user.getEmail());
-            dto.setFriend(friendshipService.areFriends(user, loggedUser));
-            dto.setHasSentFriendRequest(friendRequestRepository.findFriendRequestBySenderAndReceiver(user, loggedUser).isPresent());
-            dto.setHasReceivedFriendRequest(friendRequestRepository.findFriendRequestBySenderAndReceiver(loggedUser, user).isPresent());
-
-            return dto;
+            return userService.getDTO(user, loggedUser);
         }).toList();
 
         return userDTOS;
@@ -111,13 +134,24 @@ public class UserController {
 
         User user = userRepository.findByEmail(email).get();
 
-        UserDTO dto = new UserDTO();
-        dto.setName(user.getName());
-        dto.setEmail(user.getEmail());
-        dto.setFriend(friendshipService.areFriends(user, loggedUser));
-        dto.setHasSentFriendRequest(friendRequestRepository.findFriendRequestBySenderAndReceiver(user, loggedUser).isPresent());
-        dto.setHasReceivedFriendRequest(friendRequestRepository.findFriendRequestBySenderAndReceiver(loggedUser, user).isPresent());
+        return userService.getDTO(user, loggedUser);
+    }
 
-        return dto;
+    @GetMapping("/devapi/user/friends")
+    public List<UserDTO> getFriendsOfUser(Authentication authentication) {
+
+        // get user that made the request:
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        User loggedUser = userRepository.findByEmail(userDetails.getUsername()).get();
+
+        List<User> users = userRepository.findAll().stream().filter(user -> {
+            return friendshipService.areFriends(user, loggedUser);
+        }).toList();
+
+        List<UserDTO> userDTOS = users.stream().map(user -> {
+            return userService.getDTO(user, loggedUser);
+        }).toList();
+
+        return userDTOS;
     }
 }

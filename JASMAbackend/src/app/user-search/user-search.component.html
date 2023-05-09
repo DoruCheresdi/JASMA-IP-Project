@@ -1,33 +1,38 @@
 <form role="form" (submit)="getList()">
     <div class="form-group">
-        <label for="userName">userName:</label> <input type="text"
-                                                    class="form-control" id="userName" name="userName" [(ngModel)]="userName"/>
+        <label for="userName">User Name:</label>
+        <input type="text" class="form-control" id="userName" name="userName" [(ngModel)]="userName">
     </div>
     <button type="submit" class="btn btn-primary">Find User by Name</button>
 </form>
-<p *ngIf="userDTOs.length === 0">No results</p>
+
+<p class="my-4 text-center" *ngIf="userDTOs.length === 0">No results</p>
+
 <div class="card my-5" *ngIf="userDTOs.length > 0">
     <div class="card-body">
-        <table class="table table-bordered table-striped">
-            <thead class="thead-dark">
-            <tr>
-                <th scope="col">Name</th>
-                <th scope="col">Email</th>
-                <th scope="col">isFriend</th>
-                <th scope="col">hasSentFriendRequestToYou</th>
-                <th scope="col">hasReceivedFriendRequestToYou</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let user of userDTOs">
-                <td>{{ user.name }}</td>
-                <td><a [routerLink]="['/userprofile']"
-                    [queryParams]="{ email: user.email}">{{ user.email }}</a></td>
-                <td>{{ user.friend }}</td>
-                <td>{{ user.hasSentFriendRequest }}</td>
-                <td>{{ user.hasReceivedFriendRequest }}</td>
-            </tr>
-            </tbody>
-        </table>
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+                <thead class="thead-dark">
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Is Friend</th>
+                    <th>Has Sent Friend Request</th>
+                    <th>Has Received Friend Request</th>
+                    <th scope="col">User Image</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let user of userDTOs">
+                    <td>{{ user.name }}</td>
+                    <td><a [routerLink]="['/userprofile']" [queryParams]="{ email: user.email}">{{ user.email }}</a></td>
+                    <td>{{ user.friend }}</td>
+                    <td>{{ user.hasSentFriendRequest }}</td>
+                    <td>{{ user.hasReceivedFriendRequest }}</td>
+                    <td><img *ngIf="user.imageURL !== ''" alt="img" src="{{user.imageURL}}" class="img-thumbnail"  style="width: 200px; height: 150px;" /></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>

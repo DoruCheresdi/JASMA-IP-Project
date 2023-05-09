@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UserListComponent } from './user-list/user-list.component';
 import { UserFormComponent } from './user-form/user-form.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule } from "@angular/forms";
 import {HTTP_INTERCEPTORS, HttpClientModule, HttpHandler, HttpInterceptor, HttpRequest} from "@angular/common/http";
 import { RegisterComponent } from './register/register.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -65,7 +65,8 @@ export class XhrInterceptor implements HttpInterceptor {
         BrowserModule,
         AppRoutingModule,
         HttpClientModule,
-        FormsModule
+        FormsModule,
+        ReactiveFormsModule
     ],
     // exports: [
     //     NotificationsComponent

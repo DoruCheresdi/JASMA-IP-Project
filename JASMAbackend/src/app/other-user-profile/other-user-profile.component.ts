@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {switchMap} from "rxjs";
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {UserDTO} from "../entities/user-dto";
 import {FeedPost} from "../entities/feed-post";
+import {AuthenticateService} from "../services/authenticate.service";
 
 @Component({
     selector: 'app-other-user-profile',
@@ -12,7 +13,8 @@ import {FeedPost} from "../entities/feed-post";
 })
 export class OtherUserProfileComponent implements OnInit {
 
-    constructor(private route: ActivatedRoute, private http: HttpClient) {
+    constructor(private route: ActivatedRoute, private http: HttpClient,
+                public auth : AuthenticateService, private router: Router) {
 
     }
 
@@ -21,6 +23,8 @@ export class OtherUserProfileComponent implements OnInit {
     user: UserDTO = new UserDTO();
 
     userPosts: FeedPost[] = [];
+
+    isAdmin = false;
 
     ngOnInit() {
         this.route.queryParams.subscribe(params => {
@@ -38,8 +42,13 @@ export class OtherUserProfileComponent implements OnInit {
 
         this.http.get<UserDTO>("/devapi/user/details", {params: params}).subscribe(
             (userDTO: UserDTO) => {
-                // don't show the user themselves in the list, use a filter:
                 this.user = userDTO;
+            }
+        );
+
+        this.http.get<boolean>("/devapi/is_admin", {params: params}).subscribe(
+            (isAdmin: boolean) => {
+                this.isAdmin = isAdmin;
             }
         );
 
@@ -69,5 +78,20 @@ export class OtherUserProfileComponent implements OnInit {
             this.user.hasSentFriendRequest = false;
             this.user.friend = false;
         });
+    }
+
+    makeAdmin() {
+        this.http.post("devapi/make_admin", this.userEmail).subscribe((response) => {
+            this.isAdmin = true;
+        });
+    }
+
+    deleteUser() {
+
+        this.http.post("/devapi/deleteuser", this.userEmail).subscribe(
+            () => {
+                this.router.navigateByUrl('/feed');
+            }
+        )
     }
 }

@@ -1,7 +1,9 @@
 package com.example.jasmabackend.entities.authority;
 
 import com.example.jasmabackend.entities.user.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import lombok.ToString;
 import org.hibernate.annotations.NaturalId;
 import org.springframework.security.core.GrantedAuthority;
 
@@ -27,12 +29,12 @@ public class Authority implements GrantedAuthority {
     private Long id;
 
     @NaturalId
+    @Column(unique = true)
     private String name;
 
-    @ManyToMany(cascade = {
-            CascadeType.PERSIST,
-            CascadeType.MERGE
-    })
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JsonIgnore
+    @ToString.Exclude
     @JoinTable(
             name = "users_authorities",
             joinColumns = { @JoinColumn(name = "authorities_id") },
