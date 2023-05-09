@@ -32,8 +32,11 @@ public class RedirectDevapiFilter extends OncePerRequestFilter {
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
         String path = request.getRequestURI();
         System.out.println("Checking for redirect in filter: " + path);
-        return path.equals("/") || path.equals("/error")
+        boolean notFiltering =  path.equals("/") || path.equals("/error")
             || path.startsWith("/devapi")
-            || path.endsWith(".html") || path.endsWith(".js") || path.endsWith(".css") || path.endsWith(".ico");
+            || path.endsWith(".html") || path.endsWith(".js") || path.endsWith(".css") || path.endsWith(".ico")
+            || path.endsWith(".png") || path.endsWith(".jpeg");
+        System.out.println("Request Handled by backend: " + notFiltering);
+        return notFiltering;
     }
 }
