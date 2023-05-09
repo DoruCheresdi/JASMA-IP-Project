@@ -1,56 +1,68 @@
-.btn-outline-primary:not(:disabled):not(.disabled).active,
-.btn-outline-primary:not(:disabled):not(.disabled):active {
-    color: #fff;
-    background-color: #6c757d;
-    border-color: #6c757d;
-}
-
-.btn-outline-primary:not(:disabled):not(.disabled):active:focus,
-.btn-outline-primary:not(:disabled):not(.disabled).active:focus,
-.btn-outline-primary:focus {
-    box-shadow: none;
-}
-
-.card-body .fas {
-    font-size: 1.2rem;
-}
-
 .card {
-    margin-bottom: 1.5rem;
-}
-
-.card {
-    border: none;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.card-body {
-    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+    margin-bottom: 30px;
 }
 
 .card-title {
     font-weight: bold;
-    font-size: 1.5rem;
+    font-size: 20px;
+    margin-bottom: 10px;
 }
 
 .card-text {
-    font-size: 1.1rem;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #555555;
+    margin-bottom: 10px;
 }
 
 .card-text small {
-    font-size: 0.8rem;
+    font-size: 12px;
+}
+
+.card-footer form input[type="text"] {
+    flex: 1;
+    margin-right: 10px;
+    height: 38px;
+    border-radius: 19px;
+    border: 1px solid #ced4da;
+    padding: 0 20px;
+    font-size: 14px;
+}
+
+.card-footer form input[type="text"]:focus {
+    outline: none;
+    box-shadow: none;
+    border-color: #4dabf7;
+}
+
+.card-footer form button[type="submit"] {
+    background-color: #4dabf7;
+    border: none;
+    color: #fff;
+    border-radius: 19px;
+    padding: 6px 20px;
+    font-size: 14px;
+}
+
+.card-footer form button[type="submit"]:hover {
+    background-color: #389af1;
+    cursor: pointer;
 }
 
 .btn-group button {
-    border-radius: 20px;
+    margin-left: 10px;
 }
 
 .btn-group button i {
-    font-size: 1.2rem;
-    margin-right: 0.5rem;
+    margin-right: 5px;
 }
 
-.btn-group button:active,
-.btn-group button:focus {
-    box-shadow: none;
+.btn-group button:first-child {
+    margin-left: 0;
+}
+
+.btn-group button:last-child {
+    margin-right: 0;
 }

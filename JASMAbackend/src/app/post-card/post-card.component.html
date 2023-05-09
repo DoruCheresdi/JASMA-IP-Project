@@ -10,13 +10,26 @@
                     <div>
                         <i class="fas fa-thumbs-up mr-1"></i><span class="font-weight-bold">{{ feedPost.numberLikes }}</span> Likes
                         <i class="fas fa-share ml-3 mr-1"></i><span class="font-weight-bold">{{ feedPost.numberShares }}</span> Shares
+                        <i class="fas fa-comment ml-3 mr-1"></i><span class="font-weight-bold">{{ feedPost.numberComments }}</span> Comments
                     </div>
                     <div class="btn-group" role="group">
                         <button type="button" class="btn btn-outline-primary btn-sm px-3" [hidden]="isLikedByCurrentUser()" (click)="addLike()"><i class="fas fa-thumbs-up"></i> Like</button>
                         <button type="button" class="btn btn-outline-primary btn-sm px-3" [hidden]="isSharedByCurrentUser()" (click)="addShare()"><i class="fas fa-share"></i> Share</button>
-                        <button type="button" class="btn btn-outline-primary btn-sm px-3" *ngIf="auth.isAdmin" (click)="deletePost(feedPost.title)"">Delete(Admin)</button>
+                        <button type="button" class="btn btn-outline-primary btn-sm px-3" *ngIf="auth.isAdmin" (click)="deletePost(feedPost.title)">Delete(Admin)</button>
                     </div>
                 </div>
+                <hr>
+                <div *ngFor="let comment of feedPost.comments" class="mb-3">
+                    <p><strong>{{comment.authorEmail}}:</strong> {{comment.text}}</p>
+                </div>
+            </div>
+            <div class="card-footer">
+                <form (ngSubmit)="addComment(comment)" class="form-inline">
+                    <div class="form-group mr-2">
+                        <input type="text" class="form-control" placeholder="Add a comment" [(ngModel)]="comment" name="commentInput">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-sm">Post</button>
+                </form>
             </div>
         </div>
     </div>
