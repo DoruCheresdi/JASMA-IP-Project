@@ -1,10 +1,14 @@
+import {FeedComment} from "./feed-comment";
+
 export class FeedPost {
-    title: string = "";
-    description: string = "";
-    sinceCreatedString: string = "";
-    authorEmail: string = "";
+    title: string = '';
+    description: string = '';
+    sinceCreatedString: string = '';
+    authorEmail: string = '';
     numberLikes = 0;
-    isLikedByCurrentUser = "";
+    isLikedByCurrentUser = '';
     numberShares = 0;
-    isSharedByCurrentUser = "";
+    isSharedByCurrentUser = '';
+    comments: FeedComment[] = [];
+    numberComments = 0;
 }
