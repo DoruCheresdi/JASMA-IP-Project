@@ -1,38 +1,60 @@
-<form role="form" (submit)="getList()">
+<form role="form" (submit)="getList()" class="search-form">
     <div class="form-group">
-        <label for="userName">User Name:</label>
-        <input type="text" class="form-control" id="userName" name="userName" [(ngModel)]="userName">
+        <label for="userName" class="form-label">User Name:</label>
+        <div class="input-group">
+            <input type="text" class="form-control" id="userName" name="userName" [(ngModel)]="userName" placeholder="Search by name...">
+            <button type="submit" class="btn btn-primary">Find User</button>
+        </div>
     </div>
-    <button type="submit" class="btn btn-primary">Find User by Name</button>
 </form>
 
-<p class="my-4 text-center" *ngIf="userDTOs.length === 0">No results</p>
-
-<div class="card my-5" *ngIf="userDTOs.length > 0">
-    <div class="card-body">
-        <div class="table-responsive">
-            <table class="table table-bordered table-striped">
-                <thead class="thead-dark">
-                <tr>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Is Friend</th>
-                    <th>Has Sent Friend Request</th>
-                    <th>Has Received Friend Request</th>
-                    <th scope="col">User Image</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr *ngFor="let user of userDTOs">
-                    <td>{{ user.name }}</td>
-                    <td><a [routerLink]="['/userprofile']" [queryParams]="{ email: user.email}">{{ user.email }}</a></td>
-                    <td>{{ user.friend }}</td>
-                    <td>{{ user.hasSentFriendRequest }}</td>
-                    <td>{{ user.hasReceivedFriendRequest }}</td>
-                    <td><img *ngIf="user.imageURL !== ''" alt="img" src="{{user.imageURL}}" class="img-thumbnail"  style="width: 200px; height: 150px;" /></td>
-                </tr>
-                </tbody>
-            </table>
+<div class="container my-5">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card my-5">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped table-hover">
+                            <thead class="thead-dark">
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Is Friend</th>
+                                <th>Has Sent Friend Request</th>
+                                <th>Has Received Friend Request</th>
+                                <th>User Image</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr *ngFor="let user of userDTOs">
+                                <td>{{ user.name }}</td>
+                                <td>
+                                    <a [routerLink]="['/userprofile']" [queryParams]="{ email: user.email }" class="email-link">{{ user.email }}</a>
+                                </td>
+                                <td class="text-center">
+                                    <span *ngIf="user.friend" class="badge badge-success">Yes</span>
+                                    <span *ngIf="!user.friend" class="badge badge-danger">No</span>
+                                </td>
+                                <td class="text-center">
+                                    <span *ngIf="user.hasSentFriendRequest" class="badge badge-primary">Yes</span>
+                                    <span *ngIf="!user.hasSentFriendRequest" class="badge badge-secondary">No</span>
+                                </td>
+                                <td class="text-center">
+                                    <span *ngIf="user.hasReceivedFriendRequest" class="badge badge-warning">Yes</span>
+                                    <span *ngIf="!user.hasReceivedFriendRequest" class="badge badge-secondary">No</span>
+                                </td>
+                                <td class="text-center">
+                                    <div class="user-image-container">
+                                        <img *ngIf="user.imageURL !== ''" alt="img" ngSrc="{{user.imageURL}}" class="img-thumbnail user-image" />
+                                        <span *ngIf="user.imageURL === ''" class="no-image-text">No image available</span>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

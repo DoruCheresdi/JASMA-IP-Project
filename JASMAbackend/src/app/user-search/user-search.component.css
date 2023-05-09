@@ -1,0 +1,111 @@
+/* Apply Bootstrap styles to the form */
+form {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.input-group-append button {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+/* Apply Bootstrap styles to the table */
+.card {
+    border-radius: 1rem;
+}
+
+.table {
+    margin-bottom: 0;
+}
+
+.table th {
+    font-weight: bold;
+    background-color: #343a40;
+    color: #fff;
+}
+
+.table td, .table th {
+    vertical-align: middle;
+    padding: 0.75rem;
+    font-size: 0.875rem;
+}
+
+.table td:last-child {
+    text-align: center;
+}
+
+.table img {
+    display: block;
+    margin: 0 auto;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.table img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Add custom styles */
+.card-body {
+    background-color: #fff;
+    border-radius: 1rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    color: #343a40;
+}
+
+.form-control {
+    border-radius: 1rem;
+    border: 2px solid #ccc;
+    font-size: 1rem;
+    font-weight: 400;
+    padding: 0.75rem 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: #007bff;
+    box-shadow: none;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    border-radius: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #0069d9;
+    border-color: #0062cc;
+}
+
+.my-4 {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.text-center {
+    text-align: center;
+}
+
+@media (max-width: 575px) {
+    .card-title {
+        font-size: 1rem;
+    }
+}

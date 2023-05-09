@@ -20,6 +20,7 @@ import { PostCardComponent } from './post-card/post-card.component';
 import { UserSearchComponent } from './user-search/user-search.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { OtherUserProfileComponent } from './other-user-profile/other-user-profile.component';
+import {NgOptimizedImage} from "@angular/common";
 
 @Injectable()
 export class WithCredentialsInterceptor implements HttpInterceptor {
@@ -66,7 +67,8 @@ export class XhrInterceptor implements HttpInterceptor {
         AppRoutingModule,
         HttpClientModule,
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        NgOptimizedImage
     ],
     // exports: [
     //     NotificationsComponent
