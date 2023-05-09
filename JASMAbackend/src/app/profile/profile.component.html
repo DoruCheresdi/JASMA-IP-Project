@@ -1,3 +1,6 @@
+<head>
+    <link rel="stylesheet" type="text/css" href="./profile.component.css">
+</head>
 <div class="container-fluid py-5 bg-light">
     <div class="row justify-content-center">
         <div class="col-lg-8">
@@ -35,6 +38,7 @@
                                 <a routerLink="/newpost" class="btn btn-primary mr-2">New post</a>
                                 <a routerLink="/editprofile" class="btn btn-secondary mr-2">Edit profile</a>
                                 <button class="btn btn-danger" (click)="deleteAccount()">Delete your account</button>
+                                <button class="btn btn-primary mr-2" (click)="viewFriends()">View Friends</button>
                             </div>
                             <h3 class="card-subtitle mb-3">Your Posts</h3>
                             <app-post-list></app-post-list>

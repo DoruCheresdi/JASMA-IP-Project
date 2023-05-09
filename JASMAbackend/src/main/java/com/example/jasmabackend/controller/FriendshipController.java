@@ -126,4 +126,11 @@ public class FriendshipController {
 
         return friendsList;
     }
+
+    @GetMapping("/devapi/friends/view")
+    public void viewFriends() {
+        // Call the viewFriends() function to show the pop-up
+        // Note: This function doesn't return a response to the client, since it's a pop-up
+        viewFriends();
+    }
 }
