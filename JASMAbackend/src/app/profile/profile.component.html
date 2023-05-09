@@ -3,5 +3,30 @@
   <a routerLink="/newpost" class="btn btn-info">New post</a>
   <a routerLink="/" class="btn btn-info">Edit profile</a>
     <a class="btn btn-info" (click)="deleteAccount()">Delete your account</a>
+
+<!--    <form (ngSubmit)="submitForm()"-->
+<!--          enctype="multipart/form-data">-->
+
+<!--        <div class="form-group">-->
+<!--            <label for="photo">Change User Photo:</label>-->
+<!--            <input type="file" id="photo" name="photo" (change)="onFileSelected($event)"-->
+<!--                   accept="image/png, image/jpeg">-->
+<!--        </div>-->
+
+<!--        <div>-->
+<!--            <button type="submit" class="btn btn-primary">Upload Photo</button>-->
+<!--        </div>-->
+<!--    </form>-->
+
+
+    <input type="file" class="file-input" accept="image/png, image/jpeg"
+           (change)="onFileSelected($event)" #fileUpload [hidden]="true">
+    <div class="file-upload">
+        {{fileName || "No file uploaded yet."}}
+        <button class="btn upload-btn"
+                (click)="fileUpload.click()">
+            Choose and upload user image
+        </button>
+    </div>
   <app-post-list></app-post-list>
 </div>

@@ -10,12 +10,17 @@ import com.example.jasmabackend.repositories.FriendshipRepository;
 import com.example.jasmabackend.repositories.UserRepository;
 import com.example.jasmabackend.service.friendship.FriendshipService;
 import com.example.jasmabackend.service.user.UserService;
+import com.example.jasmabackend.utils.FileUploadUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.view.RedirectView;
 
+import java.io.IOException;
 import java.security.Principal;
 import java.util.*;
 

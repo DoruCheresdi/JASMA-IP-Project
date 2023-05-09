@@ -29,6 +29,8 @@ public class User {
 
     private String name;
 
+    private String imageName;
+
     @ToString.Exclude
     @ManyToMany(mappedBy = "users")
     private Set<Authority> authorities = new HashSet<>();
