@@ -1,29 +1,50 @@
-<p>{{userMessage}}</p>
-<div class="card my-5">
-  <div class="card-body">
-    <form (ngSubmit)="onSubmit()" #postForm="ngForm">
-      <div class="form-group">
-        <label for="title">Title</label>
-        <input type="text" [(ngModel)]="post.title"
-               class="form-control"
-               id="title"
-               name="title"
-               placeholder="Enter title"
-               required #title="ngModel">
-      </div>
-      <div [hidden]="!title.pristine" class="alert alert-danger">Title is required</div>
-      <div class="form-group">
-        <label for="description">Description</label>
-        <input type="text" [(ngModel)]="post.description"
-               class="form-control"
-               id="description"
-               name="description"
-               placeholder="Enter your description"
-               required #description="ngModel">
-        <div [hidden]="!description.pristine" class="alert alert-danger">Description is required</div>
-      </div>
-      <button type="submit" [disabled]="!postForm.form.valid"
-              class="btn btn-info">Submit</button>
-    </form>
-  </div>
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-7">
+            <div class="card shadow-lg">
+                <div class="card-header bg-dark text-white">
+                    <h4 class="mb-0">Create a New Post</h4>
+                </div>
+                <div class="card-body">
+                    <form (ngSubmit)="onSubmit()" #postForm="ngForm">
+                        <div class="form-group row">
+                            <label for="title" class="col-sm-2 col-form-label">Title</label>
+                            <div class="col-sm-10">
+                                <input type="text" [(ngModel)]="post.title"
+                                       class="form-control"
+                                       id="title"
+                                       name="title"
+                                       placeholder="Enter title"
+                                       required #title="ngModel">
+                                <div [hidden]="title.valid || title.pristine" class="invalid-feedback">
+                                    Title is required.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="description" class="col-sm-2 col-form-label">Description</label>
+                            <div class="col-sm-10">
+                <textarea [(ngModel)]="post.description"
+                          class="form-control"
+                          id="description"
+                          name="description"
+                          placeholder="Enter your description"
+                          rows="5"
+                          required #description="ngModel"></textarea>
+                                <div [hidden]="description.valid || description.pristine" class="invalid-feedback">
+                                    Description is required.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group text-center">
+                            <button type="submit" [disabled]="!postForm.form.valid"
+                                    class="btn btn-primary btn-lg">
+                                Create Post
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
