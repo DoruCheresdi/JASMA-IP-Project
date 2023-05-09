@@ -44,6 +44,8 @@ export class AuthenticateService {
                 if (response.authorities.length != 0) {
                     console.log("User is admin");
                     this.isAdmin = true;
+                } else {
+                    this.isAdmin = false;
                 }
             } else {
                 console.log("Authentication failed.")
