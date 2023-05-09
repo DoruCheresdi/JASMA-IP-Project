@@ -1,13 +1,23 @@
-<div class="card" style="width: 18rem;">
-    <div class="card-body">
-        <h5 class="card-title">{{ feedPost.title }}</h5>
-        <p class="card-text">Author: {{ feedPost.authorEmail }}</p>
-        <p class="card-text">{{ feedPost.description }}</p>
-        <p class="card-text">{{ feedPost.sinceCreatedString }}</p>
-        <p class="card-text">Likes: {{ feedPost.numberLikes }}</p>
-        <p class="card-text">Shares: {{ feedPost.numberShares }}</p>
-        <a class="btn btn-primary" [hidden]="isLikedByCurrentUser()" (click)="addLike()">Like</a>
-        <a class="btn btn-primary" [hidden]="isSharedByCurrentUser()" (click)="addShare()">Share</a>
-        <a class="btn btn-primary" *ngIf="auth.isAdmin" (click)="deletePost(feedPost.title)">Delete(Admin)</a>
+<div class="card border-0 shadow-sm mb-3">
+    <div class="row no-gutters">
+        <div class="col-md-8">
+            <div class="card-body">
+                <h5 class="card-title">{{ feedPost.title }}</h5>
+                <p class="card-text mb-1"><small class="text-muted">By {{ feedPost.authorEmail }}</small></p>
+                <p class="card-text">{{ feedPost.description }}</p>
+                <p class="card-text"><small class="text-muted">{{ feedPost.sinceCreatedString }}</small></p>
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <i class="fas fa-thumbs-up mr-1"></i><span class="font-weight-bold">{{ feedPost.numberLikes }}</span> Likes
+                        <i class="fas fa-share ml-3 mr-1"></i><span class="font-weight-bold">{{ feedPost.numberShares }}</span> Shares
+                    </div>
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-outline-primary btn-sm px-3" [hidden]="isLikedByCurrentUser()" (click)="addLike()"><i class="fas fa-thumbs-up"></i> Like</button>
+                        <button type="button" class="btn btn-outline-primary btn-sm px-3" [hidden]="isSharedByCurrentUser()" (click)="addShare()"><i class="fas fa-share"></i> Share</button>
+                        <button type="button" class="btn btn-outline-primary btn-sm px-3" *ngIf="auth.isAdmin" (click)="deletePost(feedPost.title)"">Delete(Admin)</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

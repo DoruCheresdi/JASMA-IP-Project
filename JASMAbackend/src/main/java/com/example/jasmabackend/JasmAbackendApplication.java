@@ -29,7 +29,7 @@ public class JasmAbackendApplication {
 //			Stream.of("John", "Julie", "Jennifer", "Helen", "Rachel").forEach(name -> {
 //				User user = new User(name, name.toLowerCase() + "@domain.com");
 //				try {
-//					userRepository.save(user);
+//					userRepository.save(user);ng build --watch
 //				} catch (Exception e) {
 //					System.out.println("Can't add users because of constraints");
 //				}

@@ -1,0 +1,72 @@
+<!-- A card for displaying notifications -->
+<div class="card my-5">
+
+    <!-- The card header -->
+    <div class="card-header bg-light">
+        <h3 class="text-primary">Notifications</h3>
+    </div>
+
+    <!-- The card body -->
+    <div class="card-body">
+
+        <!-- A list group to display the friend requests -->
+        <div class="list-group">
+
+            <!-- Display each friend request in a list item -->
+            <div class="list-group-item" *ngFor="let friendRequest of friendRequests">
+                <div class="row">
+
+                    <!-- Display the avatar of the user who sent the friend request -->
+                    <div class="col-md-2 col-lg-1">
+                        <div class="notification-avatar bg-primary">
+                            <i class="bi bi-person-fill"></i>
+                        </div>
+                    </div>
+
+                    <!-- Display the details of the friend request -->
+                    <div class="col-md-10 col-lg-11">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <h5 class="mb-0">{{friendRequest.email}} sent a friend request</h5>
+                            <div class="notification-time">
+                                {{friendRequest.timeStamp | date:'medium'}}
+                            </div>
+                        </div>
+                        <p class="mb-1">{{friendRequest.message}}</p>
+
+                        <!-- Display buttons to accept or reject the friend request -->
+                        <div class="d-flex align-items-center justify-content-end">
+                            <button class="btn btn-success me-2" (click)="acceptFriendRequest(friendRequest)">
+                                <i class="bi bi-check2"></i> Accept
+                            </button>
+                            <button class="btn btn-danger" (click)="rejectFriendRequest(friendRequest)">
+                                <i class="bi bi-x"></i> Reject
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Card footer -->
+    <div class="card-footer bg-light">
+        <!-- Notification buttons -->
+        <div class="d-flex justify-content-between align-items-center">
+            <button class="btn btn-primary">
+                <i class="bi bi-bell"></i> View All
+            </button>
+            <!-- Sort dropdown -->
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Sort By
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <!-- Sort options -->
+                    <a class="dropdown-item" href="#">Date</a>
+                    <a class="dropdown-item" href="#">User</a>
+                    <a class="dropdown-item" href="#">Type</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

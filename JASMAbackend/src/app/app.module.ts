@@ -18,6 +18,7 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
 import { FeedComponent } from './feed/feed.component';
 import { PostCardComponent } from './post-card/post-card.component';
 import { UserSearchComponent } from './user-search/user-search.component';
+import { NotificationsComponent } from './notifications/notifications.component';
 import { OtherUserProfileComponent } from './other-user-profile/other-user-profile.component';
 
 @Injectable()
@@ -57,6 +58,7 @@ export class XhrInterceptor implements HttpInterceptor {
     FeedComponent,
     PostCardComponent,
     UserSearchComponent,
+    NotificationsComponent,
     OtherUserProfileComponent
   ],
     imports: [
@@ -66,6 +68,9 @@ export class XhrInterceptor implements HttpInterceptor {
         FormsModule,
         ReactiveFormsModule
     ],
+    // exports: [
+    //     NotificationsComponent
+    // ],
   providers: [AuthenticateService, { provide: HTTP_INTERCEPTORS, useClass: XhrInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
