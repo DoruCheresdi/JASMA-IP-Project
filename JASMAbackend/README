@@ -38,3 +38,29 @@ once spring app is rerun
 # commands:
 generate new component:
  ./ng generate component <servicename>
+
+_________________________________
+JASMA README frontend
+_________________________________
+
+First make sure that the application is running.
+
+1. download bootstrap from https://getbootstrap.com/docs/4.0/getting-started/download/
+2. install bootstrap using the command "npm install bootstrap" in the terminal
+
+We will work in JASMAbackend/src/app. Each directory contains at least
+4 files (html, css, ts and spec).
+
+In order to be able to edit the appearance of a page, work will be done in the html file.
+The components are found in the file "[file].components.ts"
+
+To add a new component to the application navigate to: app.module.ts and app-routing.module.ts
+and add it there.
+
+We use the standard java coding style.
+
+After implementing something, create a new branch and make a pull request there, not via the main branch.
+
+Wait until you receive at least one review to merge.
+
+For questions and problems contact Hex. <3
