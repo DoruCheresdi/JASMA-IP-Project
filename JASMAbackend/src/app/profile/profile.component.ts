@@ -56,7 +56,7 @@ export class ProfileComponent implements OnInit {
 
     deleteAccount() {
 
-        this.http.post("/devapi/deleteuser", {}).subscribe(
+        this.http.post("/devapi/deleteuser", this.user.email).subscribe(
             () => {
                 this.auth.deauthenticate();
             }

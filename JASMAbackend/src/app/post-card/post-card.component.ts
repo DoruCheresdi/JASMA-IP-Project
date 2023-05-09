@@ -16,7 +16,7 @@ export class PostCardComponent implements OnInit {
 
     constructor(private http: HttpClient,
                 private router: Router,
-                private auth: AuthenticateService) {
+                public auth: AuthenticateService) {
     }
 
     ngOnInit() {
@@ -56,6 +56,18 @@ export class PostCardComponent implements OnInit {
                 // actualize frontend:
                 this.feedPost.isSharedByCurrentUser = "true";
                 this.feedPost.numberShares++;
+            }
+        )
+    }
+
+    deletePost(title: string) {
+        const params = new HttpParams()
+            .set('title', title);
+
+        this.http.delete("/devapi/post", {params: params}).subscribe(
+            (response: any) => {
+                // remove the post from this component's list so it is no longer shown:
+                this.feedPost = new FeedPost();
             }
         )
     }

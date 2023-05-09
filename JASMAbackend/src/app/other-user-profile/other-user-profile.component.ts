@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {switchMap} from "rxjs";
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {UserDTO} from "../entities/user-dto";
@@ -14,7 +14,7 @@ import {AuthenticateService} from "../services/authenticate.service";
 export class OtherUserProfileComponent implements OnInit {
 
     constructor(private route: ActivatedRoute, private http: HttpClient,
-                public auth : AuthenticateService) {
+                public auth : AuthenticateService, private router: Router) {
 
     }
 
@@ -84,5 +84,14 @@ export class OtherUserProfileComponent implements OnInit {
         this.http.post("devapi/make_admin", this.userEmail).subscribe((response) => {
             this.isAdmin = true;
         });
+    }
+
+    deleteUser() {
+
+        this.http.post("/devapi/deleteuser", this.userEmail).subscribe(
+            () => {
+                this.router.navigateByUrl('/feed');
+            }
+        )
     }
 }
