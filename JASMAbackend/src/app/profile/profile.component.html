@@ -36,6 +36,7 @@
                                 <a routerLink="/editprofile" class="btn btn-info mr-2">Edit profile</a>
                                 <button class="btn btn-danger" (click)="deleteAccount()">Delete your account</button>
                             </div>
+                            <img *ngIf="imageURL !== ''" alt="img" src="{{imageURL}}" class="img-thumbnail"  style="width: 200px; height: 150px;" />
                             <h3 class="card-subtitle mb-3">Your Posts</h3>
                             <app-post-list></app-post-list>
                         </div>
