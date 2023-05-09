@@ -94,14 +94,7 @@ public class UserController {
         List<User> users = userRepository.findAllByNameContaining(userName);
 
         List<UserDTO> userDTOS = users.stream().map(user -> {
-            UserDTO dto = new UserDTO();
-            dto.setName(user.getName());
-            dto.setEmail(user.getEmail());
-            dto.setFriend(friendshipService.areFriends(user, loggedUser));
-            dto.setHasSentFriendRequest(friendRequestRepository.findFriendRequestBySenderAndReceiver(user, loggedUser).isPresent());
-            dto.setHasReceivedFriendRequest(friendRequestRepository.findFriendRequestBySenderAndReceiver(loggedUser, user).isPresent());
-
-            return dto;
+            return userService.getDTO(user, loggedUser);
         }).toList();
 
         return userDTOS;
@@ -116,14 +109,7 @@ public class UserController {
 
         User user = userRepository.findByEmail(email).get();
 
-        UserDTO dto = new UserDTO();
-        dto.setName(user.getName());
-        dto.setEmail(user.getEmail());
-        dto.setFriend(friendshipService.areFriends(user, loggedUser));
-        dto.setHasSentFriendRequest(friendRequestRepository.findFriendRequestBySenderAndReceiver(user, loggedUser).isPresent());
-        dto.setHasReceivedFriendRequest(friendRequestRepository.findFriendRequestBySenderAndReceiver(loggedUser, user).isPresent());
-
-        return dto;
+        return userService.getDTO(user, loggedUser);
     }
 
     @GetMapping("/devapi/user/friends")
@@ -138,14 +124,7 @@ public class UserController {
         }).toList();
 
         List<UserDTO> userDTOS = users.stream().map(user -> {
-            UserDTO dto = new UserDTO();
-            dto.setName(user.getName());
-            dto.setEmail(user.getEmail());
-            dto.setFriend(friendshipService.areFriends(user, loggedUser));
-            dto.setHasSentFriendRequest(friendRequestRepository.findFriendRequestBySenderAndReceiver(user, loggedUser).isPresent());
-            dto.setHasReceivedFriendRequest(friendRequestRepository.findFriendRequestBySenderAndReceiver(loggedUser, user).isPresent());
-
-            return dto;
+            return userService.getDTO(user, loggedUser);
         }).toList();
 
         return userDTOS;

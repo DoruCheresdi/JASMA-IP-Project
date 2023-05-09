@@ -16,6 +16,7 @@
                 <th scope="col">isFriend</th>
                 <th scope="col">hasSentFriendRequestToYou</th>
                 <th scope="col">hasReceivedFriendRequestToYou</th>
+                <th scope="col">User Image</th>
             </tr>
             </thead>
             <tbody>
@@ -26,6 +27,7 @@
                 <td>{{ user.friend }}</td>
                 <td>{{ user.hasSentFriendRequest }}</td>
                 <td>{{ user.hasReceivedFriendRequest }}</td>
+                <td><img *ngIf="user.imageURL !== ''" alt="img" src="{{user.imageURL}}" class="img-thumbnail"  style="width: 200px; height: 150px;" /></td>
             </tr>
             </tbody>
         </table>

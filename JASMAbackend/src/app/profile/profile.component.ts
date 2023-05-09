@@ -1,20 +1,40 @@
-import { Component } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {Component, OnInit} from '@angular/core';
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {AuthenticateService} from "../services/authenticate.service";
 import {FormBuilder, FormGroup} from "@angular/forms";
+import {FeedPost} from "../entities/feed-post";
+import {UserDTO} from "../entities/user-dto";
+import {User} from "../entities/user";
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
-export class ProfileComponent {
+export class ProfileComponent implements OnInit {
 
     // https://blog.angular-university.io/angular-file-upload/
     fileName = '';
 
+    user: UserDTO = new UserDTO();
+
+    imageURL: string = ""
+
     constructor(private http: HttpClient, public fb: FormBuilder,
                 private auth: AuthenticateService) {
+    }
+
+    ngOnInit(): void {
+        const params = new HttpParams()
+            .set('email', this.auth.email);
+
+        this.http.get<UserDTO>("/devapi/user/details", {params: params}).subscribe(
+            (userDTO: UserDTO) => {
+                // don't show the user themselves in the list, use a filter:
+                this.user = userDTO;
+                this.imageURL = this.user.imageURL;
+            }
+        );
     }
 
     // event : Event
