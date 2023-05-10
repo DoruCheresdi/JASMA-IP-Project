@@ -7,10 +7,10 @@
 
 .navbar-nav > li {
     margin: 0 10px;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid #36454F;
 }
 
 .custom-navbar {
-    background-color: #E5E5FF;
-    border-bottom: 1px solid black;
+    background-color: #E5E4E2;
+    border-bottom: 1px solid #36454F;
 }

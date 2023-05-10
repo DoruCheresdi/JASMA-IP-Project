@@ -1,6 +1,3 @@
-<head>
-    <link rel="stylesheet" type="text/css" href="./profile.component.css">
-</head>
 <div class="container-fluid py-5 bg-light">
     <div class="row justify-content-center">
         <div class="col-lg-8">
@@ -11,34 +8,33 @@
                         <div class="col-md-4">
                             <div class="mb-4">
                                 <div class="text-center mb-4">
-                                    <img *ngIf="imageURL !== ''" alt="img" src="{{imageURL}}" class="img-thumbnail shadow-sm rounded-circle" style="width: 200px; height: 200px;" />
-                                </div>
-                                <div class="file-upload-wrapper">
-                                    <input type="file" class="file-input d-none" accept="image/png, image/jpeg" (change)="onFileSelected($event)" #fileUpload>
-                                    <div class="file-upload">
-                                        <span class="file-upload-text">{{fileName || "No file uploaded yet."}}</span>
-                                        <br>
-                                        <button class="btn upload-btn btn-secondary mt-2" (click)="fileUpload.click()">Choose and upload user image</button>
-                                    </div>
+                                    <label for="fileUpload">
+                                        <img *ngIf="imageURL !== ''" alt="img" src="{{imageURL}}" class="img-thumbnail shadow-sm rounded-circle" style="width: 200px; height: 200px; cursor: pointer;" />
+                                    </label>
+                                    <input type="file" id="fileUpload" class="file-input d-none" accept="image/png, image/jpeg" (change)="onFileSelected($event)" #fileUpload>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-md-8">
-                            <h3 class="card-subtitle mb-3">{{getUserEmail()}}</h3>
-                            <div class="form-group mb-4" *ngIf="!isEditingDescription">
+                            <div class="form-group mb-4">
+                                <h3 class="card-subtitle mb-3">{{getUserEmail()}}</h3>
                                 <p class="card-text">{{ userDescription }}</p>
                                 <button class="btn btn-info" (click)="startEditingDescription()">Edit description</button>
                             </div>
+                            <div class="form-group mb-4">
+                                <a routerLink="/editprofile" class="btn btn-secondary mr-2">Edit profile</a>
+                            </div>
+                            <div class="form-group mb-4">
+                                <button class="btn btn-danger" (click)="deleteAccount()">Delete your account</button>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
                             <div *ngIf="isEditingDescription">
                                 <textarea class="form-control mb-4" rows="3" placeholder="Enter your description" [(ngModel)]="userDescription"></textarea>
                                 <button class="btn btn-info mr-2" (click)="saveDescription()">Save</button>
                                 <button class="btn btn-secondary" (click)="cancelEditingDescription()">Cancel</button>
                             </div>
                             <div class="d-flex justify-content-start mb-4">
-                                <a routerLink="/newpost" class="btn btn-primary mr-2">New post</a>
-                                <a routerLink="/editprofile" class="btn btn-secondary mr-2">Edit profile</a>
-                                <button class="btn btn-secondary mr-2" (click)="viewFriends()">View Friends</button>
-                                <button class="btn btn-danger" (click)="deleteAccount()">Delete your account</button>
+                                <a routerLink="/newpost" class="btn btn-primary mr-3">New post</a>
+                                <button class="btn btn-secondary mr-3" (click)="viewFriends()">View Friends</button>
                             </div>
                             <h3 class="card-subtitle mb-3">Your Posts</h3>
                             <app-post-list></app-post-list>
