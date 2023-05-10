@@ -18,7 +18,7 @@
                                     <div class="file-upload">
                                         <span class="file-upload-text">{{fileName || "No file uploaded yet."}}</span>
                                         <br>
-                                        <button class="btn upload-btn btn-primary mt-2" (click)="fileUpload.click()">Choose and upload user image</button>
+                                        <button class="btn upload-btn btn-secondary mt-2" (click)="fileUpload.click()">Choose and upload user image</button>
                                     </div>
                                 </div>
                             </div>
@@ -37,8 +37,8 @@
                             <div class="d-flex justify-content-start mb-4">
                                 <a routerLink="/newpost" class="btn btn-primary mr-2">New post</a>
                                 <a routerLink="/editprofile" class="btn btn-secondary mr-2">Edit profile</a>
+                                <button class="btn btn-secondary mr-2" (click)="viewFriends()">View Friends</button>
                                 <button class="btn btn-danger" (click)="deleteAccount()">Delete your account</button>
-                                <button class="btn btn-primary mr-2" (click)="viewFriends()">View Friends</button>
                             </div>
                             <h3 class="card-subtitle mb-3">Your Posts</h3>
                             <app-post-list></app-post-list>

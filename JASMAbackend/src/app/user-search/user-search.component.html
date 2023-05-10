@@ -44,8 +44,8 @@
                                     <span *ngIf="!user.hasReceivedFriendRequest" class="badge badge-secondary">No</span>
                                 </td>
                                 <td class="text-center">
-                                    <div class="user-image-container">
-                                        <img *ngIf="user.imageURL !== ''" alt="img" ngSrc="{{user.imageURL}}" class="img-thumbnail user-image" />
+                                    <div class="user-image-container"  style="text-align: center;">
+                                        <img *ngIf="user.imageURL !== ''" alt="" src="{{user.imageURL}}" class="img-thumbnail"  style="width: 150px; height: 150px;" />
                                         <span *ngIf="user.imageURL === ''" class="no-image-text">No image available</span>
                                     </div>
                                 </td>

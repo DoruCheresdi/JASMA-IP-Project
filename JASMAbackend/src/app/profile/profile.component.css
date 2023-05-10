@@ -22,57 +22,56 @@
     font-size: 1rem;
 }
 
-.upload-btn {
-    background-color: #007bff;
-    border: none;
-    border-radius: 5px;
-    color: #fff;
-    cursor: pointer;
-    font-size: 1rem;
-    padding: 8px 16px;
-    transition: background-color 0.3s ease;
+.btn-primary {
+    background-color: #7569BD;
+    border-color: #302B54;
 }
 
-.upload-btn:hover {
-    background-color: #0069d9;
-}
-
-.btn-info {
-    background-color: #17a2b8;
-    border-color: #17a2b8;
-    color: #fff;
-    font-size: 1rem;
-    margin-right: 10px;
-}
-
-.btn-info:hover {
-    background-color: #138496;
-    border-color: #138496;
+.btn-primary:hover {
+    background-color: #483D8B;
+    border-color: #302B54;
 }
 
 .btn-secondary {
-    background-color: #6c757d;
-    border-color: #6c757d;
-    color: #fff;
-    font-size: 1rem;
+    background-color: #AAAAFF;
+    border-color: #8C8ACF;
 }
 
 .btn-secondary:hover {
-    background-color: #5a6268;
-    border-color: #5a6268;
+    background-color: #5B59BA;
+    border-color: #8C8ACF;
+}
+
+.btn-info {
+    background-color: #D4C3F7;
+    border-color: #BA9EF3;
+}
+
+.btn-info:hover {
+    background-color: #AB94DC;
+    border-color: #BA9EF3;
 }
 
 .btn-danger {
     background-color: #dc3545;
     border-color: #dc3545;
-    color: #fff;
-    font-size: 1rem;
 }
 
 .btn-danger:hover {
     background-color: #c82333;
     border-color: #bd2130;
 }
+
+.upload-btn {
+    background-color: #CCA6EE;
+    border-color: #D2A9F8;
+}
+
+.upload-btn:hover {
+    background-color: #A462E2;
+    border-color: #D2A9F8;
+}
+
 .img-thumbnail {
     width: 150px;
     height: 150px;
