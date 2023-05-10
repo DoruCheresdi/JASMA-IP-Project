@@ -2,33 +2,46 @@
     <div class="row no-gutters">
         <div class="col-md-8">
             <div class="card-body">
+                <!-- Post title -->
                 <h5 class="card-title">{{ feedPost.title }}</h5>
+                <!-- Author information -->
                 <p class="card-text mb-1"><small class="text-muted">By {{ feedPost.authorEmail }}</small></p>
+                <!-- Post description -->
                 <p class="card-text">{{ feedPost.description }}</p>
+                <!-- Time since post creation -->
                 <p class="card-text"><small class="text-muted">{{ feedPost.sinceCreatedString }}</small></p>
                 <div class="d-flex justify-content-between align-items-center">
                     <div>
+                        <!-- Like, Share, and Comment counts -->
                         <i class="fas fa-thumbs-up mr-1"></i><span class="font-weight-bold">{{ feedPost.numberLikes }}</span> Likes
                         <i class="fas fa-share ml-3 mr-1"></i><span class="font-weight-bold">{{ feedPost.numberShares }}</span> Shares
                         <i class="fas fa-comment ml-3 mr-1"></i><span class="font-weight-bold">{{ feedPost.numberComments }}</span> Comments
                     </div>
-                    <div class="btn-group" role="group">
+                    <div class="btn-group mr-2" role="group">
+                        <!-- Like button -->
                         <button type="button" class="btn btn-outline-primary btn-sm px-3" [hidden]="isLikedByCurrentUser()" (click)="addLike()"><i class="fas fa-thumbs-up"></i> Like</button>
+                        <!-- Share button -->
                         <button type="button" class="btn btn-outline-primary btn-sm px-3" [hidden]="isSharedByCurrentUser()" (click)="addShare()"><i class="fas fa-share"></i> Share</button>
+                        <!-- Delete button (visible to admin) -->
                         <button type="button" class="btn btn-outline-primary btn-sm px-3" *ngIf="auth.isAdmin" (click)="deletePost(feedPost.title)">Delete(Admin)</button>
+                        <!-- Delete button (visible to post author) -->
                         <button type="button" class="btn btn-outline-primary btn-sm px-3" *ngIf="auth.email === feedPost.authorEmail" (click)="deletePost(feedPost.title)">Delete</button>
                     </div>
                 </div>
                 <hr>
+                <!-- Display comments -->
                 <div *ngFor="let comment of feedPost.comments" class="mb-3">
                     <p><strong>{{comment.authorEmail}}:</strong> {{comment.text}}</p>
                 </div>
             </div>
             <div class="card-footer">
+                <!-- Add comment form -->
                 <form (ngSubmit)="addComment(comment)" class="form-inline">
-                    <div class="form-group mr-2">
+                    <div class="form-group mr-3">
+                        <!-- Comment input field -->
                         <input type="text" class="form-control" placeholder="Add a comment" [(ngModel)]="comment" name="commentInput">
                     </div>
+                    <!-- Post comment button -->
                     <button type="submit" class="btn btn-primary btn-sm">Post</button>
                 </form>
             </div>

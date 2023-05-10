@@ -29,4 +29,6 @@ public class PostFeedDTO {
     private String isSharedByCurrentUser;
 
     private Integer numberShares;
+
+    private Integer numberComments;
 }

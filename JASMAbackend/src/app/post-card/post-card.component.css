@@ -1,13 +1,19 @@
+/*card-bg-custom {*/
+/*    background-color: #28282B;*/
+/*}*/
+
 .card {
     border-radius: 10px;
     box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
     margin-bottom: 30px;
+    background-color: #E5E4E2;
 }
 
 .card-title {
     font-weight: bold;
     font-size: 20px;
     margin-bottom: 10px;
+    color: #28282B;
 }
 
 .card-text {
@@ -19,6 +25,16 @@
 
 .card-text small {
     font-size: 12px;
+    color: #71797E;
+}
+
+.card-footer {
+    width: 100%;
+    padding: 15px;
+    border-top: 1px solid #ced4da;
+    background-color: transparent;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
 }
 
 .card-footer form input[type="text"] {
@@ -29,6 +45,8 @@
     border: 1px solid #ced4da;
     padding: 0 20px;
     font-size: 14px;
+    background-color: #FFFFF4;
+    color: #28282B;
 }
 
 .card-footer form input[type="text"]:focus {
@@ -38,21 +56,46 @@
 }
 
 .card-footer form button[type="submit"] {
-    background-color: #4dabf7;
+    background-color: #B8860B;
     border: none;
-    color: #fff;
+    color: #FFFFF4;
     border-radius: 19px;
     padding: 6px 20px;
     font-size: 14px;
+    transition: background-color 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.card-footer form button[type="submit"]:before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, #D4AF37 0%, #B8860B 100%);
+    transform: rotate(45deg) scale(0);
+    transition: transform 0.3s ease;
 }
 
 .card-footer form button[type="submit"]:hover {
-    background-color: #389af1;
-    cursor: pointer;
+    background-color: transparent;
+}
+
+.card-footer form button[type="submit"]:hover:before {
+    transform: rotate(45deg) scale(1);
 }
 
 .btn-group button {
     margin-left: 10px;
+    background-color: #E5E4E2;
+    border: none;
+    color: #28282B;
+    font-size: 14px;
+    padding: 6px 12px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .btn-group button i {
@@ -65,4 +108,14 @@
 
 .btn-group button:last-child {
     margin-right: 0;
+}
+
+.btn-group button:hover {
+    background-color: #B8860B;
+    color: #FFFFF4;
+    cursor: pointer;
+}
+
+.btn-group button:hover i {
+    color: #FFFFF4;
 }
