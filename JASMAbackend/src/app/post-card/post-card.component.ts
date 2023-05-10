@@ -21,7 +21,18 @@ export class PostCardComponent implements OnInit {
         public auth: AuthenticateService
     ) {}
 
-    ngOnInit() {}
+    ngOnInit() {
+
+        const params = new HttpParams()
+            .set('postTitle', this.feedPost.title);
+
+        // get comments:
+        this.http.get<FeedComment[]>("/devapi/comments_post", {params: params}).subscribe(
+            (comments: FeedComment[]) => {
+                this.feedPost.comments = comments;
+            }
+        )
+    }
 
     isLikedByCurrentUser() {
         if (this.feedPost.isLikedByCurrentUser === 'true') return true;
@@ -52,7 +63,8 @@ export class PostCardComponent implements OnInit {
     addComment(comment: string) {
         const commentDto = {
             postTitle: this.feedPost.title,
-            comment: new FeedComment('', comment, '')
+            authorEmail: this.auth.email,
+            text : comment
         };
         this.http.post('/devapi/comment', commentDto).subscribe(
             (data: any) => {

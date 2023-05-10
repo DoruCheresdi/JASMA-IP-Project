@@ -16,6 +16,7 @@
                         <button type="button" class="btn btn-outline-primary btn-sm px-3" [hidden]="isLikedByCurrentUser()" (click)="addLike()"><i class="fas fa-thumbs-up"></i> Like</button>
                         <button type="button" class="btn btn-outline-primary btn-sm px-3" [hidden]="isSharedByCurrentUser()" (click)="addShare()"><i class="fas fa-share"></i> Share</button>
                         <button type="button" class="btn btn-outline-primary btn-sm px-3" *ngIf="auth.isAdmin" (click)="deletePost(feedPost.title)">Delete(Admin)</button>
+                        <button type="button" class="btn btn-outline-primary btn-sm px-3" *ngIf="auth.email === feedPost.authorEmail" (click)="deletePost(feedPost.title)">Delete</button>
                     </div>
                 </div>
                 <hr>

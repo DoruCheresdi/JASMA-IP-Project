@@ -40,16 +40,26 @@ public class CommentController {
 
         Post post = postRepository.findByTitle(commentDto.getPostTitle()).get();
 
-        commentDto.getComment().setUser(user);
-        commentDto.getComment().setPost(post);
-        commentRepository.save(commentDto.getComment());
+        Comment comment = new Comment();
+        comment.setContent(commentDto.getText());
+        comment.setUser(user);
+        comment.setPost(post);
+        commentRepository.save(comment);
+
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
     @GetMapping("/devapi/comments_post")
-    public List<Comment> getCommentsByUser(@RequestParam String postTitle) {
+    public List<CommentDTO> getCommentsForPost(@RequestParam String postTitle) {
+
         Post post = postRepository.findByTitle(postTitle).get();
-        return (List<Comment>) commentRepository.findAllByPost(post);
+        return commentRepository.findAllByPost(post).stream().map(comment -> {
+            CommentDTO dto = new CommentDTO();
+            dto.setText(comment.getContent());
+            dto.setPostTitle(comment.getPost().getTitle());
+            dto.setAuthorEmail(comment.getUser().getEmail());
+            return dto;
+        }).toList();
     }
 
 }

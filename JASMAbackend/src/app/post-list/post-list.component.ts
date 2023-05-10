@@ -4,6 +4,7 @@ import {UserService} from "../services/user-service.service";
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {AuthenticateService} from "../services/authenticate.service";
 import {Router} from "@angular/router";
+import {FeedPost} from "../entities/feed-post";
 
 @Component({
   selector: 'app-post-list',
@@ -12,45 +13,25 @@ import {Router} from "@angular/router";
 })
 export class PostListComponent implements OnInit {
 
-  posts: Post[];
+  feedPosts: FeedPost[] = [];
   constructor(private http: HttpClient,
               private router: Router,
               private auth: AuthenticateService) {
-    this.posts = [];
   }
 
   ngOnInit() {
 
-    // // if email is null:
-    // if (!this.auth.isAuthenticated()) {
-    //   this.router.navigateByUrl("/login");
-    //   return;
-    // }
-
     const params = new HttpParams()
-      .set('userEmail', this.auth.email);
+      .set('email', this.auth.email);
 
-    this.http.get<Post[]>("/devapi/posts_user", {params: params}).subscribe(
-      (posts: Post[]) => {
-        this.posts = posts;
+    this.http.get<FeedPost[]>("/devapi/posts_user_detailed", {params: params}).subscribe(
+      (posts: FeedPost[]) => {
+          // keep only this user's posts, throw out the shared ones:
+          // posts.filter(post => {
+          //     return post.authorEmail === this.auth.email;
+          // })
+        this.feedPosts = posts;
       }
     )
-  }
-
-  deletePost(title: string) {
-      const params = new HttpParams()
-          .set('title', title);
-
-      console.log("before req" + this.auth.email);
-      this.http.delete("/devapi/post", {params: params}).subscribe(
-          (response: any) => {
-              console.log("after req" + this.auth.email);
-              // remove the post from this component's list so it is no longer shown:
-              this.posts = this.posts.filter(p => {
-                  return p.title !== title;
-              })
-              this.router.navigateByUrl("/profile");
-          }
-      )
   }
 }
