@@ -84,11 +84,11 @@ export class ProfileComponent implements OnInit {
         fetch('/devapi/friends')
             .then(response => response.json())
             .then(friendsList => {
-                // Create an array of friend names
-                const friendNames = friendsList.map((friend: { name: any }) => friend.name);
+                // Create an array of friend objects with their names and image URLs
+                const friends = friendsList.map((friend: { name: string, imageURL: string }) => friend);
 
-                // Build a HTML list of friend names
-                const friendListItems = friendNames.map((name: any) => `<li>${name}</li>`).join('');
+                // Build a HTML list of friend names and images
+                const friendListItems = friends.map((friend: { name: string, imageURL: string }) => `<li><img alt="${friend.name}" src="${friend.imageURL}" class="img-thumbnail" style="width: 50px; height: 50px;"><br>${friend.name}</li>`).join('');
                 const friendListHtml = `<ul class="friend-list">${friendListItems}</ul>`;
 
                 // Create a modal element
@@ -129,14 +129,34 @@ export class ProfileComponent implements OnInit {
                 // Add the modal to the document body
                 document.body.appendChild(modal);
 
-                // Set a fixed width for the modal
-                modal.style.width = '60%';
+                // Set the width and height of the modal
+                modal.style.width = '600px';
+                modal.style.height = '500px';
 
-                // Center the modal horizontally
-                let modalWidth = modal.offsetWidth;
-                // modal.style.left = `calc(50% - ${modalWidth/2}px)`;
-                modal.style.left = '20%';
-                modal.style.top = '20%';
+                // Center the modal vertically and horizontally
+                modal.style.position = 'fixed';
+                modal.style.left = '50%';
+                modal.style.top = '50%';
+                modal.style.transform = 'translate(-50%, -50%)';
+
+                // Add a box shadow to the modal
+                modal.style.boxShadow = '0 1px 1px 0 rgba(0,0,0,0.2)';
+
+                // Add a background color to the modal header and close button
+                modalHeader.style.backgroundColor = '#284942';
+                modalHeader.style.color = 'white';
+                closeButton.style.color = 'black';
+
+                // Add some padding to the modal content
+                modalContent.style.padding = '16px';
+
+                // Style the close button
+                closeButton.style.position = 'absolute';
+                closeButton.style.top = '8px';
+                closeButton.style.right = '16px';
+                closeButton.style.fontSize = '24px';
+                closeButton.style.fontWeight = 'bold';
+                closeButton.style.cursor = 'pointer';
 
                 // Show the modal
                 modal.style.display = 'block';
@@ -146,6 +166,8 @@ export class ProfileComponent implements OnInit {
                 alert('Failed to retrieve friends list');
             });
     }
+
+
     getUserEmail() {
         return this.auth.email;
     }
