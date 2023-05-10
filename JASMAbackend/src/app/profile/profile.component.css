@@ -9,6 +9,7 @@
 }
 
 .card-title {
+    /* Styling for the card title */
     font-size: 2rem;
     font-weight: bold;
     margin-bottom: 30px;
@@ -22,6 +23,7 @@
 }
 
 .card-title::before {
+    /* Background effect behind the card title */
     content: "";
     position: absolute;
     top: -5px;
@@ -34,78 +36,92 @@
     filter: blur(8px);
 }
 
-
 .card-subtitle {
+    /* Styling for the card subtitle */
     font-size: 1.25rem;
     font-weight: bold;
     margin-bottom: 10px;
 }
 
 .file-upload-text {
+    /* Styling for file upload text */
     font-size: 1rem;
 }
 
+/* Button Styles */
+
 .btn-primary {
+    /* Primary button style */
     background-color: #B8860B;
     border-color: #D4AF37;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .btn-primary:hover {
+    /* Primary button style on hover */
     background-color: #D4AF37;
     border-color: #B8860B;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 }
 
 .btn-secondary {
+    /* Secondary button style */
     background-color: #71797E;
     border-color: #28282B;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .btn-secondary:hover {
+    /* Secondary button style on hover */
     background-color: #28282B;
     border-color: #71797E;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 }
 
 .btn-info {
+    /* Info button style */
     background-color: #FFFFF4;
     border-color: #E5E4E2;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .btn-info:hover {
+    /* Info button style on hover */
     background-color: #E5E4E2;
     border-color: #FFFFF4;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 }
 
 .btn-danger {
+    /* Danger button style */
     background-color: #28282B;
     border-color: #28282B;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .btn-danger:hover {
+    /* Danger button style on hover */
     background-color: #000000;
     border-color: #000000;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 }
 
 .upload-btn {
+    /* Upload button style */
     background-color: #D4AF37;
     border-color: #B8860B;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .upload-btn:hover {
+    /* Upload button style on hover */
     background-color: #B8860B;
     border-color: #D4AF37;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 }
 
 .img-thumbnail {
+    /* Styling for thumbnail images */
     width: 150px;
     height: 150px;
     object-fit: cover;
@@ -116,6 +132,6 @@
 }
 
 .img-thumbnail:hover {
+    /* Thumbnail image style on hover */
     transform: scale(1.1);
 }
-
