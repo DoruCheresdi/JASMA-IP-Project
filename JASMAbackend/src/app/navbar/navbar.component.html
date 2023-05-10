@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg bg-light">
+<nav class="navbar navbar-expand-lg custom-navbar">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">Navbar</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -6,9 +6,6 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" routerLinkActive="active" routerLink="/feed">Home</a>
-                </li>
                 <li class="nav-item" [hidden]="authenticated()">
                     <a class="nav-link active" routerLinkActive="active" routerLink="/login">Login</a>
                 </li>
@@ -18,22 +15,40 @@
                 <li class="nav-item" [hidden]="!authenticated()" style="cursor: pointer">
                     <a class="nav-link active" (click)="logout()">Logout</a>
                 </li>
+            </ul>
+            <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
                 <li class="nav-item" [hidden]="!authenticated()">
-                    <a class="nav-link active"  routerLinkActive="active" routerLink="/profile">Profile:{{getUserEmail()}}</a>
+                    <a class="nav-link active" routerLinkActive="active" routerLink="/feed">
+                        <img src="../../assets/homeicon.png" alt="Home" style="max-width: 30px;">
+                    </a>
                 </li>
                 <li class="nav-item" [hidden]="!authenticated()">
-                    <a class="nav-link active"  routerLinkActive="active" routerLink="/newpost">Newpost</a>
+                    <a class="nav-link active" routerLinkActive="active" routerLink="/profile">
+                        <img src="../../assets/profileicon.png" alt="Profile" style="max-width: 30px;">
+                    </a>
                 </li>
                 <li class="nav-item" [hidden]="!authenticated()">
-                    <a class="nav-link active"  routerLinkActive="active" routerLink="/feed">Feed</a>
+                   <a class="nav-link active" routerLinkActive="active" routerLink="/newpost">
+                      <img src="../../assets/new_posticon.png" alt="New Post" style="max-width: 30px;">
+                   </a>
                 </li>
                 <li class="nav-item" [hidden]="!authenticated()">
-                    <a class="nav-link active"  routerLinkActive="active" routerLink="/usersearch">Search For User</a>
+                    <a class="nav-link active" routerLinkActive="active" routerLink="/feed">
+                        <img src="../../assets/feedicon.png" alt="Feed" style="max-width: 30px;">
+                    </a>
+                </li>
+                <li class="nav-item" [hidden]="!authenticated()">
+                    <a class="nav-link active" routerLinkActive="active" routerLink="/usersearch">
+                        <img src="../../assets/searchicon.png" alt="Search For User" style="max-width: 30px;">
+                    </a>
                 </li>
             </ul>
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <li class="nav-item" [hidden]="!authenticated()">
-                    <a class="nav-link active"  routerLinkActive="active" routerLink="/notifications">Notifications</a>
+                    <a class="nav-link active" routerLinkActive="active" routerLink="/notifications">
+                        <i class="bi bi-bell-fill"></i>
+                        <img src="../../assets/notificationsicon.png" alt="Notifications" style="max-width: 30px;">
+                    </a>
                 </li>
             </ul>
         </div>
