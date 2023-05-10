@@ -1,22 +1,23 @@
 <app-navbar></app-navbar>
-
-<div class="container custom-app-feed">
-    <div class="row justify-content-center">
-        <div class="col-md-12">
-            <div class="card bg-dark my-5">
-                <div class="card-body">
-                    <h2 class="card-title text-center text-white py-3">{{ title }}</h2>
-<!--                    <div class="row justify-content-center">-->
-<!--                        <div class="col-md-4 mb-3">-->
-<!--                            <a routerLink="/users" class="btn btn-info btn-block">List Users</a>-->
-<!--                        </div>-->
-<!--                        <div class="col-md-4 mb-3">-->
-<!--                            <a routerLink="/adduser" class="btn btn-info btn-block">Add User</a>-->
-<!--                        </div>-->
-<!--                    </div>-->
+<div class="body">
+    <div class="container custom-app-feed my-4">
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                <div class="card bg-dark my-5">
+                    <div class="card-body">
+                        <h2 class="card-title text-center text-white py-3">{{ title }}</h2>
+    <!--                    <div class="row justify-content-center">-->
+    <!--                        <div class="col-md-4 mb-3">-->
+    <!--                            <a routerLink="/users" class="btn btn-info btn-block">List Users</a>-->
+    <!--                        </div>-->
+    <!--                        <div class="col-md-4 mb-3">-->
+    <!--                            <a routerLink="/adduser" class="btn btn-info btn-block">Add User</a>-->
+    <!--                        </div>-->
+    <!--                    </div>-->
+                    </div>
                 </div>
+                <router-outlet></router-outlet>
             </div>
-            <router-outlet></router-outlet>
         </div>
     </div>
 </div>
