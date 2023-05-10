@@ -1,6 +1,16 @@
-<div class="feed-container">
-    <h2 class="feed-header">Your Feed</h2>
-    <div class="feed-posts" *ngFor="let post of feedPosts">
-        <app-post-card [feedPost]="post"></app-post-card>
+<div class="container">
+    <h2 class="text-center mt-3 mb-4">Your Feed</h2>
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <div class="row">
+                <div class="col-lg-12" *ngFor="let post of feedPosts">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <app-post-card [feedPost]="post"></app-post-card>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

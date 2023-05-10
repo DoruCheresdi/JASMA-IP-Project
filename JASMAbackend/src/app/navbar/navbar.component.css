@@ -1,0 +1,16 @@
+.navbar-nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.navbar-nav > li {
+    margin: 0 10px;
+    border-bottom: 1px solid black;
+}
+
+.custom-navbar {
+    background-color: #E5E5FF;
+    border-bottom: 1px solid black;
+}
