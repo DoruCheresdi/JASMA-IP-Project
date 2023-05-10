@@ -1,5 +1,6 @@
 package com.example.jasmabackend.entities.post;
 
+import com.example.jasmabackend.entities.comment.Comment;
 import com.example.jasmabackend.entities.like.Like;
 import com.example.jasmabackend.entities.share.Share;
 import com.example.jasmabackend.entities.user.User;
@@ -52,4 +53,10 @@ public class Post {
     @OneToMany(mappedBy = "post", fetch = FetchType.EAGER)
     @Fetch(value = FetchMode.SUBSELECT)
     private List<Share> shares = new ArrayList<>();
+
+    @ToString.Exclude
+    @JsonIgnore
+    @OneToMany(mappedBy = "post", fetch = FetchType.LAZY)
+    @Fetch(value = FetchMode.SUBSELECT)
+    private List<Comment> comments = new ArrayList<>();
 }
