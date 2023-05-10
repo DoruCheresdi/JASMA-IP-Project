@@ -8,6 +8,7 @@ import com.example.jasmabackend.entities.user.UserDTO;
 import com.example.jasmabackend.exceptions.UserEmailNotUniqueException;
 import com.example.jasmabackend.repositories.*;
 import com.example.jasmabackend.service.friendship.FriendshipService;
+import com.example.jasmabackend.service.post.PostService;
 import com.example.jasmabackend.service.user.UserService;
 import com.example.jasmabackend.utils.FileUploadUtil;
 import lombok.RequiredArgsConstructor;
@@ -35,9 +36,9 @@ public class UserController {
 
     private final LikeRepository likeRepository;
 
-    private final ShareRepository shareRepository;
+    private final CommentRepository commentRepository;
 
-    private final PostRepository postRepository;
+    private final PostService postService;
 
     private final FriendRequestRepository friendRequestRepository;
 
@@ -104,6 +105,15 @@ public class UserController {
             if (friendRequest.getReceiver().equals(user) || friendRequest.getSender().equals(user)) {
                 friendRequestRepository.delete(friendRequest);
             }
+        });
+
+        user.getPosts().forEach(post -> {
+                postService.deletePost(post);
+            }
+        );
+
+        user.getComments().forEach(comment -> {
+            commentRepository.delete(comment);
         });
 
         userRepository.delete(user);

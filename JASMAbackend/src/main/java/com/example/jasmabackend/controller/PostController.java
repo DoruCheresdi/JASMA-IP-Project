@@ -4,10 +4,7 @@ import com.example.jasmabackend.entities.post.Post;
 import com.example.jasmabackend.entities.post.PostFeedDTO;
 import com.example.jasmabackend.entities.share.Share;
 import com.example.jasmabackend.entities.user.User;
-import com.example.jasmabackend.repositories.FriendshipRepository;
-import com.example.jasmabackend.repositories.PostRepository;
-import com.example.jasmabackend.repositories.ShareRepository;
-import com.example.jasmabackend.repositories.UserRepository;
+import com.example.jasmabackend.repositories.*;
 import com.example.jasmabackend.service.post.PostService;
 import com.example.jasmabackend.utils.UtilsMisc;
 import lombok.RequiredArgsConstructor;
@@ -38,6 +35,10 @@ public class PostController {
 
     private final PostService postService;
 
+    private final LikeRepository likeRepository;
+
+    private final CommentRepository commentRepository;
+
     @GetMapping("/devapi/posts_user")
     public List<Post> getPostsByUser(@RequestParam String userEmail) {
         User user = userRepository.findByEmail(userEmail).get();
@@ -59,7 +60,7 @@ public class PostController {
     public ResponseEntity deletePost(@RequestParam String title) {
         Post post = postRepository.findByTitle(title).get();
 
-        postRepository.delete(post);
+        postService.deletePost(post);
         return ResponseEntity.ok(HttpStatus.OK);
     }
 

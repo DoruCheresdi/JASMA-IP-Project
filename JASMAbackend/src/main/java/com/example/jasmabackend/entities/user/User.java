@@ -1,6 +1,7 @@
 package com.example.jasmabackend.entities.user;
 
 import com.example.jasmabackend.entities.authority.Authority;
+import com.example.jasmabackend.entities.comment.Comment;
 import com.example.jasmabackend.entities.like.Like;
 import com.example.jasmabackend.entities.post.Post;
 import com.example.jasmabackend.entities.share.Share;
@@ -58,6 +59,13 @@ public class User {
         orphanRemoval = true)
     @Fetch(value = FetchMode.SUBSELECT)
     private List<Share> shares = new ArrayList<>();
+
+
+    @ToString.Exclude
+    @JsonIgnore
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @Fetch(value = FetchMode.SUBSELECT)
+    private List<Comment> comments = new ArrayList<>();
 
     @Override
     public boolean equals(Object o) {

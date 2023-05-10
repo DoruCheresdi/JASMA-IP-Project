@@ -3,9 +3,7 @@ package com.example.jasmabackend.service.post;
 import com.example.jasmabackend.entities.post.Post;
 import com.example.jasmabackend.entities.post.PostFeedDTO;
 import com.example.jasmabackend.entities.user.User;
-import com.example.jasmabackend.repositories.FriendshipRepository;
-import com.example.jasmabackend.repositories.LikeRepository;
-import com.example.jasmabackend.repositories.ShareRepository;
+import com.example.jasmabackend.repositories.*;
 import com.example.jasmabackend.utils.UtilsMisc;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,6 +15,24 @@ public class PostService {
     private final LikeRepository likeRepository;
 
     private final ShareRepository shareRepository;
+
+    private final PostRepository postRepository;
+
+    private final CommentRepository commentRepository;
+
+    public void deletePost(Post post) {
+        post.getShares().forEach(share -> {
+            shareRepository.delete(share);
+        });
+        post.getLikes().forEach(like -> {
+            likeRepository.delete(like);
+        });
+        post.getComments().forEach(comment -> {
+            commentRepository.delete(comment);
+        });
+
+        postRepository.delete(post);
+    }
 
     public PostFeedDTO createPostDTO(Post post, User currentUser) {
         PostFeedDTO dto = new PostFeedDTO();
