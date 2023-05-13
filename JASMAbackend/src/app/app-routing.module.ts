@@ -12,6 +12,7 @@ import {IsAuthenticatedGuardGuard} from "./is-authenticated-guard.guard";
 import {UserSearchComponent} from "./user-search/user-search.component";
 import { NotificationsComponent } from './notifications/notifications.component';
 import {OtherUserProfileComponent} from "./other-user-profile/other-user-profile.component";
+import {MessagesComponent} from "./messages/messages.component";
 
 const routes: Routes = [
     { path: 'users', component: UserListComponent },
@@ -24,6 +25,7 @@ const routes: Routes = [
     { path: 'changepassword', component: ChangePasswordComponent},
     { path: 'usersearch', component: UserSearchComponent, canActivate: [IsAuthenticatedGuardGuard]},
     {path:'notifications', component: NotificationsComponent, canActivate: [IsAuthenticatedGuardGuard]},
+    {path:'messages', component: MessagesComponent, canActivate: [IsAuthenticatedGuardGuard]},
     { path: 'userprofile', component: OtherUserProfileComponent, canActivate: [IsAuthenticatedGuardGuard]},
 
     // redirects to feed for unknown link:
