@@ -7,8 +7,11 @@
                         <h2 class="card-title text-center mb-5">Your Friends</h2>
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Search friends" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" [(ngModel)]="searchTerm">
+                                <div class="form-group input-group">
+                                    <input type="text" class="form-control" placeholder="Search friends" [(ngModel)]="searchTerm">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary" (click)="searchFriends()">Search</button>
+                                    </div>
                                     <div class="dropdown-menu" *ngIf="filteredFriends.length > 0">
                                         <a class="dropdown-item" *ngFor="let friend of filteredFriends" [routerLink]="['/userprofile']" [queryParams]="{ email: friend.email }">{{ friend.name }}</a>
                                     </div>

@@ -86,4 +86,16 @@ export class FriendListComponent implements OnInit {
             friend.name.toLowerCase().includes(this.searchTerm.toLowerCase())
         );
     }
+
+    // Search friends based on the entered search term
+    searchFriends() {
+        console.log("Searching friends for: " + this.searchTerm);
+
+        const filteredFriends = this.friends.filter(friend =>
+            friend.name.toLowerCase().includes(this.searchTerm.toLowerCase())
+        );
+
+        // Assign the filtered friends to the friends' list
+        this.friends = filteredFriends;
+    }
 }
