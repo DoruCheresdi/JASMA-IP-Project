@@ -1,0 +1,37 @@
+<div class="container-fluid py-5 bg-light">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card-deck">
+                <div class="card border-0 shadow-lg">
+                    <div class="card-body p-5">
+                        <h2 class="card-title text-center mb-5">Your Friends</h2>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <ul class="list-group">
+                                    <li class="list-group-item friend-list-item" *ngFor="let friend of friends">
+                                        <div class="row align-items-center friend-card">
+                                            <div class="col-md-4">
+                                                <div class="text-center mb-4">
+                                                    <img *ngIf="friend.imageURL" alt="Friend Image" src="{{ friend.imageURL }}" class="img-thumbnail rounded-circle friend-image" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <p class="mb-1 friend-name">{{ friend.name }}</p>
+                                                <p class="mb-2 friend-info">Profile: {{ friend.email }}</p>
+                                                <button class="btn btn-danger btn-sm" (click)="removeFriend(friend)">Remove Friend</button>
+                                                <hr class="my-3">
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item" *ngIf="friends.length === 0">
+                                        <p class="mb-0">You currently have no friends.</p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

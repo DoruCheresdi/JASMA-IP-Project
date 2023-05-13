@@ -1,5 +1,6 @@
 import {Injectable, NgModule} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -21,6 +22,8 @@ import { UserSearchComponent } from './user-search/user-search.component';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { OtherUserProfileComponent } from './other-user-profile/other-user-profile.component';
 import {NgOptimizedImage} from "@angular/common";
+import {FriendListComponent} from "./user-friend-list/friend-list.component";
+
 
 @Injectable()
 export class WithCredentialsInterceptor implements HttpInterceptor {
@@ -60,10 +63,12 @@ export class XhrInterceptor implements HttpInterceptor {
     PostCardComponent,
     UserSearchComponent,
     NotificationsComponent,
+    FriendListComponent,
     OtherUserProfileComponent
   ],
     imports: [
         BrowserModule,
+        NgbModule,
         AppRoutingModule,
         HttpClientModule,
         FormsModule,

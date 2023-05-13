@@ -1,0 +1,67 @@
+.friend-card {
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.friend-card:hover {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.friend-card .friend-image {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 50%;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.friend-card .friend-info {
+    color: #888;
+    font-size: 0.9rem;
+}
+
+.friend-card .btn-danger {
+    font-size: 0.8rem;
+}
+
+.friend-card hr {
+    border-color: #eee;
+}
+
+.friend-card:last-child .hr-divider {
+    display: none;
+}
+
+.friend-card .list-group-item:last-child {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.friend-list-item {
+    padding-top: 20px;
+}
+
+.card-deck {
+    margin: 0 -15px;
+}
+
+.friend-card:hover {
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.friend-image {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 50%;
+    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+.friend-name {
+    font-weight: bold;
+}
+
+.friend-info {
+    color: #888;
+}
