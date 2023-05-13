@@ -1,0 +1,43 @@
+.card {
+    border-radius: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.card-text {
+    color: #555;
+}
+
+.container {
+    padding: 20px;
+}
+
+h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    background-color: #28282B;
+    color: #FFFFF4;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2), 0 10px 15px rgba(0, 0, 0, 0.15);
+    position: relative;
+    z-index: 1;
+}
+
+h2::before {
+    content: "";
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    width: calc(100% + 10px);
+    height: calc(100% + 10px);
+    background-color: #28282B;
+    z-index: -1;
+    border-radius: 10px;
+    filter: blur(8px);
+}
