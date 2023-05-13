@@ -1,3 +1,5 @@
+<!-- HTML Code -->
+
 <div class="container-fluid py-5 bg-light">
     <div class="row justify-content-center">
         <div class="col-lg-8">
@@ -11,21 +13,23 @@
                                     <li class="list-group-item friend-list-item" *ngFor="let friend of friends">
                                         <div class="row align-items-center friend-card">
                                             <div class="col-md-4">
-                                                <div class="text-center mb-4">
-                                                    <img *ngIf="friend.imageURL" alt="Friend Image" src="{{ friend.imageURL }}" class="img-thumbnail rounded-circle friend-image" />
+                                                <div class="user-image-container">
+                                                    <img *ngIf="friend.imageURL !== ''" alt="" src="{{friend.imageURL}}" class="img-thumbnail rounded-circle user-image" />
+                                                    <span *ngIf="friend.imageURL === ''" class="no-image-text">No image available</span>
                                                 </div>
                                             </div>
                                             <div class="col-md-8">
-                                                <p class="mb-1 friend-name">{{ friend.name }}</p>
-                                                <p class="mb-2 friend-info">Profile: {{ friend.email }}</p>
+                                                <a [routerLink]="['/userprofile']" [queryParams]="{ email: friend.email }" class="friend-name-link">{{ friend.name }}</a>
+                                                <div class="mb-3"></div> <!-- Add an empty div for spacing -->
                                                 <button class="btn btn-danger btn-sm" (click)="removeFriend(friend)">Remove Friend</button>
                                                 <hr class="my-3">
                                             </div>
                                         </div>
                                     </li>
-                                    <li class="list-group-item" *ngIf="friends.length === 0">
-                                        <p class="mb-0">You currently have no friends.</p>
-                                    </li>
+                                    <div class="list-group-item empty-friends-list" *ngIf="friends.length === 0">
+                                        <p class="mb-3">You currently have no friends.</p>
+                                        <a class="btn btn-danger btn-lg find-friends-button" routerLinkActive="active" routerLink="/usersearch">Find friends</a>
+                                    </div>
                                 </ul>
                             </div>
                         </div>
