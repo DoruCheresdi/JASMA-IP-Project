@@ -18,29 +18,53 @@ h2.text-center {
 /* Message List */
 .message-list {
     margin-bottom: 40px;
+    overflow: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #d4af37 #333;
+    background-color: transparent;
+}
+
+/* Customize scrollbar track */
+.message-list::-webkit-scrollbar {
+    width: 8px;
+    background-color: #333;
+}
+
+/* Customize scrollbar handle */
+.message-list::-webkit-scrollbar-thumb {
+    background-color: #d4af37;
+    border-radius: 4px;
+}
+
+/* Hover state for scrollbar handle */
+.message-list::-webkit-scrollbar-thumb:hover {
+    background-color: #c0c0c0;
 }
 
 /* Message Item */
 .message-item {
     margin-bottom: 20px;
-    background-color: #333;
+    background-color: transparent;
     border-radius: 8px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     transition: background-color 0.3s ease;
+    border: none; /* Remove border */
 }
 
 .message-item:hover {
-    background-color: #444;
+    background-color: rgba(236, 236, 236, 0.8); /* Add hover background color */
 }
 
 .card {
     border: none;
     border-radius: 8px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    background-color: transparent;
 }
 
 .card-body {
     padding: 20px;
+    background-color: transparent;
 }
 
 .card-title {
@@ -186,3 +210,17 @@ h2.text-center {
         max-width: 90%;
     }
 }
+
+.reply-icon {
+    background-image: url("../../assets/replyicon.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 30px;
+    height: 30px;
+    transition: background-image 0.3s ease-in-out;
+}
+
+.reply-icon:hover {
+    background-image: url("../../assets/replyiconhover.png");
+}
+
