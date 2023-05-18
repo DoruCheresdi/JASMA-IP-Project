@@ -22,6 +22,7 @@ import { NotificationsComponent } from './notifications/notifications.component'
 import { OtherUserProfileComponent } from './other-user-profile/other-user-profile.component';
 import {NgOptimizedImage} from "@angular/common";
 import {MessagesComponent} from "./messages/messages.component";
+import {FriendListComponent} from "./friend-list/friend-list.component";
 import {PrivateMessageComponent} from "./private-message/private-message.component";
 
 @Injectable()
@@ -64,6 +65,7 @@ export class XhrInterceptor implements HttpInterceptor {
     NotificationsComponent,
     OtherUserProfileComponent,
     MessagesComponent,
+    FriendListComponent,
     PrivateMessageComponent
   ],
     imports: [

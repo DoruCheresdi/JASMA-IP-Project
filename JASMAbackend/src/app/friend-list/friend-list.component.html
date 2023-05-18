@@ -1,0 +1,48 @@
+<div class="container-fluid py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card-deck">
+                <div class="card border-0 shadow-lg">
+                    <div class="card-body p-5">
+                        <h2 class="card-title text-center mb-5">Your Friends</h2>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group input-group">
+                                    <input type="text" class="form-control" placeholder="Search friends" [(ngModel)]="searchTerm">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary" (click)="searchFriends()">Search</button>
+                                    </div>
+                                    <div class="dropdown-menu" *ngIf="filteredFriends.length > 0">
+                                        <a class="dropdown-item" *ngFor="let friend of filteredFriends" [routerLink]="['/userprofile']" [queryParams]="{ email: friend.email }">{{ friend.name }}</a>
+                                    </div>
+                                </div>
+                                <ul class="list-group">
+                                    <li class="list-group-item friend-list-item" *ngFor="let friend of friends">
+                                        <div class="row align-items-center friend-card">
+                                            <div class="col-md-4">
+                                                <div class="user-image-container">
+                                                    <img *ngIf="friend.imageURL !== ''" alt="" src="{{friend.imageURL}}" class="img-thumbnail rounded-circle user-image" />
+                                                    <span *ngIf="friend.imageURL === ''" class="no-image-text">No image available</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <a [routerLink]="['/userprofile']" [queryParams]="{ email: friend.email }" class="friend-name-link">{{ friend.name }}</a>
+                                                <div class="mb-3"></div> <!-- Add an empty div for spacing -->
+                                                <button class="btn btn-danger btn-sm" (click)="removeFriend(friend)">Remove Friend</button>
+                                                <hr class="my-3">
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <div class="list-group-item empty-friends-list" *ngIf="friends.length === 0">
+                                        <p class="mb-3">You currently have no friends.</p>
+                                        <a class="btn btn-danger btn-lg find-friends-button" routerLinkActive="active" routerLink="/usersearch">Find friends</a>
+                                    </div>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
