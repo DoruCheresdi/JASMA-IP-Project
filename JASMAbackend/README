@@ -65,6 +65,7 @@ Wait until you receive at least one review to merge.
 
 For questions and problems contact Hex. <3
 
+
 Not working:
 
 1. Displaying the profile picture in the list of friends
@@ -72,3 +73,7 @@ Not working:
 3. The number of comments does not change
 4. Remove friends button on the friends list page
 5. The list of friends is not a pop-up, it is a separate page
+
+Just the look of the page:
+1. Message list
+2. Private conversation
