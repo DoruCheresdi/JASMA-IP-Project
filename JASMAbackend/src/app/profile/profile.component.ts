@@ -13,10 +13,9 @@ import {User} from "../entities/user";
 })
 export class ProfileComponent implements OnInit {
 
-    userDescription: string = "Buna buna."; // default description
+    userDescription: string = "No description"; // default description
     isEditingDescription: boolean = false; // flag to indicate if user is editing the description
 
-    // https://blog.angular-university.io/angular-file-upload/
     fileName = '';
 
     user: UserDTO = new UserDTO();
