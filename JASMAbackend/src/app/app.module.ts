@@ -22,6 +22,7 @@ import { NotificationsComponent } from './notifications/notifications.component'
 import { OtherUserProfileComponent } from './other-user-profile/other-user-profile.component';
 import {NgOptimizedImage} from "@angular/common";
 import {MessagesComponent} from "./messages/messages.component";
+import {PrivateMessageComponent} from "./private-message/private-message.component";
 
 @Injectable()
 export class WithCredentialsInterceptor implements HttpInterceptor {
@@ -62,7 +63,8 @@ export class XhrInterceptor implements HttpInterceptor {
     UserSearchComponent,
     NotificationsComponent,
     OtherUserProfileComponent,
-    MessagesComponent
+    MessagesComponent,
+    PrivateMessageComponent
   ],
     imports: [
         BrowserModule,
