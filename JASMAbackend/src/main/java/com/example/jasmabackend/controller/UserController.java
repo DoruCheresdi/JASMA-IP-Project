@@ -3,6 +3,8 @@ package com.example.jasmabackend.controller;
 import com.example.jasmabackend.entities.authority.Authority;
 import com.example.jasmabackend.entities.friendRequest.FriendRequest;
 import com.example.jasmabackend.entities.friendship.Friendship;
+import com.example.jasmabackend.entities.like.Like;
+import com.example.jasmabackend.entities.post.Post;
 import com.example.jasmabackend.entities.user.User;
 import com.example.jasmabackend.entities.user.UserDTO;
 import com.example.jasmabackend.exceptions.UserEmailNotUniqueException;
@@ -13,6 +15,7 @@ import com.example.jasmabackend.service.user.UserService;
 import com.example.jasmabackend.utils.FileUploadUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.StringUtils;
@@ -163,5 +166,19 @@ public class UserController {
         }).toList();
 
         return userDTOS;
+    }
+
+    @PostMapping("/devapi/user/description")
+    public ResponseEntity changeDescription(@RequestBody String newDescription, Authentication authentication) {
+
+        // get user that made the request:
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        User user = userRepository.findByEmail(userDetails.getUsername()).get();
+
+
+        user.setDescription(newDescription);
+        userRepository.save(user);
+
+        return ResponseEntity.ok(HttpStatus.OK);
     }
 }
