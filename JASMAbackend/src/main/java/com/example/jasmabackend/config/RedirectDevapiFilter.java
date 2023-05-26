@@ -35,7 +35,7 @@ public class RedirectDevapiFilter extends OncePerRequestFilter {
         boolean notFiltering =  path.equals("/") || path.equals("/error")
             || path.startsWith("/devapi")
             || path.endsWith(".html") || path.endsWith(".js") || path.endsWith(".css") || path.endsWith(".ico")
-            || path.endsWith(".png") || path.endsWith(".jpeg");
+            || path.endsWith(".png") || path.endsWith(".jpeg") || path.endsWith(".jpg");
         System.out.println("Request Handled by backend: " + notFiltering);
         return notFiltering;
     }

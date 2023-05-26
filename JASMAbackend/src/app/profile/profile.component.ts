@@ -77,7 +77,11 @@ export class ProfileComponent implements OnInit {
     saveDescription() {
         // Code to save the user's updated description to the backend goes here.
         // For now, we'll just update the userDescription variable with the new value.
-        this.isEditingDescription = false; // hide the edit form
+        this.http.post("/devapi/user/description", this.userDescription).subscribe(
+            () => {
+                this.isEditingDescription = false; // hide the edit form
+            }
+        )
     }
 
     getUserEmail() {
