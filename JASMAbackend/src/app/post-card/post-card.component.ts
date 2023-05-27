@@ -30,6 +30,7 @@ export class PostCardComponent implements OnInit {
         this.http.get<FeedComment[]>("/devapi/comments_post", {params: params}).subscribe(
             (comments: FeedComment[]) => {
                 this.feedPost.comments = comments;
+                this.feedPost.numberComments = comments.length;
             }
         )
     }
