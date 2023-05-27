@@ -31,9 +31,9 @@ public class Post {
 
     private String description;
 
-    private String imageUrl;
+    private String imageName;
 
-    private String videoUrl;
+    private String videoName;
 
     private Timestamp createdAt;
 
