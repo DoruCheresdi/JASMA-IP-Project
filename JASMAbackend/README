@@ -77,3 +77,8 @@ Not working:
 Just the look of the page:
 1. Message list
 2. Private conversation
+
+
+To be done:
+1. De facut request la fiecare 1 secunda pentru mesaje
+2. De sortat mesajele dupa timestamp (si de pus timestamp-ul langa mesaj)
