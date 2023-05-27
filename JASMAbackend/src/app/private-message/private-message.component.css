@@ -113,7 +113,7 @@ h2.text-center {
 .chat-input-bar button {
     margin-left: 10px;
     padding: 8px 12px;
-    background-color: #f3d24b;
+    background-color: #5465FF;
     color: #232323;
     border: none;
     border-radius: 4px;
@@ -123,7 +123,7 @@ h2.text-center {
 }
 
 .chat-input-bar button:hover {
-    background-color: #f3c12b;
+    background-color: #5465FF;
 }
 
 /* Friend Info */

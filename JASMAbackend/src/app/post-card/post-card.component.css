@@ -52,11 +52,11 @@
 .card-footer form input[type="text"]:focus {
     outline: none;
     box-shadow: none;
-    border-color: #4dabf7;
+    border-color: #788BFF;
 }
 
 .card-footer form button[type="submit"] {
-    background-color: #B8860B;
+    background-color: #3423A6;
     border: none;
     color: #FFFFF4;
     border-radius: 19px;
@@ -74,7 +74,7 @@
     left: -50%;
     width: 200%;
     height: 200%;
-    background: linear-gradient(45deg, #D4AF37 0%, #B8860B 100%);
+    background: linear-gradient(45deg, #5465FF 0%, #3423A6 100%);
     transform: rotate(45deg) scale(0);
     transition: transform 0.3s ease;
 }
@@ -111,7 +111,7 @@
 }
 
 .btn-group button:hover {
-    background-color: #B8860B;
+    background-color: #3423A6;
     color: #FFFFF4;
     cursor: pointer;
 }

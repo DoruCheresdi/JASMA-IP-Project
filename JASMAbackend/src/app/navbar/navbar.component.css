@@ -7,10 +7,11 @@
 
 .navbar-nav > li {
     margin: 0 10px;
-    border-bottom: 1px solid #36454F;
+    border-bottom: 1px solid #0F110C;
 }
 
 .custom-navbar {
-    background-color: #E5E4E2;
-    border-bottom: 1px solid #36454F;
+    /*background-color: #E5E4E2;*/
+    background-color: #F6F2FF;
+    border-bottom: 1px solid #0F110C;
 }

@@ -52,15 +52,15 @@
 
 .btn-primary {
     /* Primary button style */
-    background-color: #B8860B;
-    border-color: #D4AF37;
+    background-color: #3423A6;
+    border-color: #5465FF;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .btn-primary:hover {
     /* Primary button style on hover */
-    background-color: #D4AF37;
-    border-color: #B8860B;
+    background-color: #5465FF;
+    border-color: #3423A6;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 }
 
@@ -108,15 +108,15 @@
 
 .upload-btn {
     /* Upload button style */
-    background-color: #D4AF37;
-    border-color: #B8860B;
+    background-color: #5465FF;
+    border-color: #3423A6;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .upload-btn:hover {
     /* Upload button style on hover */
-    background-color: #B8860B;
-    border-color: #D4AF37;
+    background-color: #3423A6;
+    border-color: #5465FF;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 }
 

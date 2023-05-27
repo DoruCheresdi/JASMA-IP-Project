@@ -20,7 +20,7 @@ h2.text-center {
     margin-bottom: 40px;
     overflow: auto;
     scrollbar-width: thin;
-    scrollbar-color: #d4af37 #333;
+    scrollbar-color: #788BFF #333;
     background-color: transparent;
 }
 
@@ -32,7 +32,7 @@ h2.text-center {
 
 /* Customize scrollbar handle */
 .message-list::-webkit-scrollbar-thumb {
-    background-color: #d4af37;
+    background-color: #788BFF;
     border-radius: 4px;
 }
 
@@ -53,6 +53,7 @@ h2.text-center {
 
 .message-item:hover {
     background-color: rgba(236, 236, 236, 0.8); /* Add hover background color */
+    background-color: #FDECEF;
 }
 
 .card {
@@ -82,9 +83,9 @@ h2.text-center {
 
 .btn-primary {
     background-color: transparent;
-    color: #d4af37;
+    color: #788BFF;
     border-radius: 20px;
-    border: 2px solid #d4af37;
+    border: 2px solid #788BFF;
     padding: 10px 16px;
     font-size: 16px;
     font-weight: bold;
@@ -97,7 +98,7 @@ h2.text-center {
 }
 
 .btn-primary:hover {
-    background-color: rgba(212, 175, 55, 0.1);
+    background-color: #9BB1FF;
 }
 
 /* Pagination */
@@ -113,7 +114,7 @@ h2.text-center {
 }
 
 .page-link {
-    color: #d4af37;
+    color: #788BFF;
     border-radius: 4px;
     transition: background-color 0.3s ease;
 }
@@ -123,8 +124,8 @@ h2.text-center {
 }
 
 .page-item.active .page-link {
-    background-color: #d4af37;
-    border-color: #d4af37;
+    background-color: #788BFF;
+    border-color: #788BFF;
 }
 
 /* Compose Button */
@@ -139,7 +140,7 @@ h2.text-center {
     color: #c0c0c0;
     background-color: #333;
     border-radius: 30px;
-    border: 2px solid #d4af37;
+    border: 2px solid #788BFF;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
     text-transform: uppercase;
