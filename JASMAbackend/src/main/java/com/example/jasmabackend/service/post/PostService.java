@@ -34,12 +34,20 @@ public class PostService {
         postRepository.delete(post);
     }
 
+    public String getPostImagePath(Post post) {
+        return "post-photos/" + post.getTitle() + "/" + post.getImageName();
+    }
+
+    public String getPostVideoPath(Post post) {
+        return "post-videos/" + post.getTitle() + "/" + post.getVideoName();
+    }
+
     public PostFeedDTO createPostDTO(Post post, User currentUser) {
         PostFeedDTO dto = new PostFeedDTO();
         dto.setTitle(post.getTitle());
         dto.setDescription(post.getDescription());
-        dto.setImageUrl(post.getImageUrl());
-        dto.setVideoUrl(post.getVideoUrl());
+        dto.setImageUrl(getPostImagePath(post));
+        dto.setVideoUrl(getPostVideoPath(post));
         dto.setSinceCreatedString(UtilsMisc.getSinceCreatedString(post.getCreatedAt()));
         dto.setAuthorEmail(post.getUser().getEmail());
 
