@@ -1,10 +1,13 @@
 body {
-    background-color: #E5E4E2;
+    background-color: #F6F2FF;
+    /*background-color: #ADA7C9;*/
 }
 
 .custom-app-feed {
-    background-color: #FFFFF4;
-    border: 5px solid #71797E;
+    /*background-color: #FFFFF4;*/
+    background-color: #F6F2FF;
+    /*border: 5px solid #71797E;*/
+    border: 5px solid #0F110C;
     border-radius: 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 0 10px rgba(0, 0, 0, 0.1);
 }
@@ -13,7 +16,8 @@ body {
     border: 5px solid #28282B;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5), 0 2px 8px rgba(0, 0, 0, 0.1);
-    background-color: #FFFFF4;
+    /*background-color: #FFFFF4;*/
+    background-color: #F6F2FF;
 }
 
 .card-title {
@@ -22,6 +26,7 @@ body {
     text-transform: uppercase;
     margin-bottom: 1rem;
     color: #28282B;
+    /*color: #ADA7C9;*/
 }
 
 .btn {
@@ -31,14 +36,14 @@ body {
 }
 
 .btn-info {
-    background-color: #B8860B;
-    border-color: #D4AF37;
+    background-color: #3423A6;
+    border-color: #5465FF;
     transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .btn-info:hover {
-    background-color: #D4AF37;
-    border-color: #B8860B;
+    background-color: #5465FF;
+    border-color: #3423A6;
 }
 
 .container {
