@@ -35,6 +35,7 @@ export class ProfileComponent implements OnInit {
                 // don't show the user themselves in the list, use a filter:
                 this.user = userDTO;
                 this.imageURL = this.user.imageURL;
+                this.userDescription = this.user.description;
             }
         );
     }
