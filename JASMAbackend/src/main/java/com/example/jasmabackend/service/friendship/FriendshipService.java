@@ -18,4 +18,14 @@ public class FriendshipService {
             return true;
         return false;
     }
+
+    public void removeFriends(User user1, User user2) {
+        // remove the friendship made up of the 2 friends:
+        friendshipRepository.findAll().forEach(friendship -> {
+            if ((friendship.getReceiver().equals(user1) && friendship.getSender().equals(user2))
+            || (friendship.getReceiver().equals(user2) && friendship.getSender().equals(user1))) {
+                friendshipRepository.delete(friendship);
+            }
+        });
+    }
 }
