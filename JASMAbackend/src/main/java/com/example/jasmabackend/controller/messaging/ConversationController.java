@@ -1,7 +1,11 @@
 package com.example.jasmabackend.controller.messaging;
 
+import com.example.jasmabackend.entities.comment.CommentDTO;
 import com.example.jasmabackend.entities.like.Like;
+import com.example.jasmabackend.entities.post.Post;
 import com.example.jasmabackend.entities.user.User;
+import com.example.jasmabackend.entities.userMessage.ConversationDTO;
+import com.example.jasmabackend.entities.userMessage.UserMessageDTO;
 import com.example.jasmabackend.repositories.UserMessageRepository;
 import com.example.jasmabackend.repositories.UserRepository;
 import com.example.jasmabackend.service.messaging.UserMessageService;
@@ -10,10 +14,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -70,5 +73,35 @@ public class ConversationController {
         userMessageService.createMessage(loggedUser, receiver, content);
 
         return ResponseEntity.ok(HttpStatus.OK);
+    }
+
+
+    /**
+     * All messages between user1 and user2 in UserMessageDTO list form
+     * Get request, parameters in url not in body
+     * @param user1Email
+     * @param user2Email
+     * @return
+     */
+    @GetMapping("/devapi/messages")
+    public List<UserMessageDTO> getMessagesForUsers(@RequestParam String user1Email, @RequestParam String user2Email) {
+
+        return userMessageService.getMessageDtosForUsers(user1Email, user2Email);
+    }
+
+
+    /**
+     * Conversations start when a first message is sent, this can be done with startConversation
+     * endpoint above or simply by sending a message
+     * @return
+     */
+    @GetMapping("/devapi/conversations")
+    public List<ConversationDTO> getConversationDTOsForUser(Authentication authentication) {
+        // get user that made the request:
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        User loggedUser = userRepository.findByEmail(userDetails.getUsername()).get();
+
+
+        return userMessageService.getConversationDtosForUser(loggedUser);
     }
 }

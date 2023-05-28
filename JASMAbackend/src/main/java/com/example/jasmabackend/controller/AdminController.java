@@ -40,14 +40,14 @@ public class AdminController {
 
 
     @GetMapping("/devapi/is_admin")
-    public boolean isAdmin(@RequestParam String email, Authentication authentication) {
+    public boolean isAdmin(Authentication authentication) {
         // get user that made the request:
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         User loggedUser = userRepository.findByEmail(userDetails.getUsername()).get();
 
-        User user = userRepository.findByEmail(email).get();
+//        User user = userRepository.findByEmail(email).get();
 
         Authority adminAuth = authorityRepository.findByName("ROLE_ADMIN").get();
-        return user.getAuthorities().contains(adminAuth);
+        return loggedUser.getAuthorities().contains(adminAuth);
     }
 }
