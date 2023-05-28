@@ -16,10 +16,10 @@ public class Friendship {
     private Long id;
 
     @JsonIgnore
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.LAZY)
     private User sender;
 
     @JsonIgnore
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.LAZY)
     private User receiver;
 }

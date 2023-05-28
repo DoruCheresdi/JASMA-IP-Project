@@ -134,7 +134,9 @@ public class FriendshipController {
     public void viewFriends() {
         // Call the viewFriends() function to show the pop-up
         // Note: This function doesn't return a response to the client, since it's a pop-up
-        viewFriends();
+
+        // Comment this out since it causes the thread to stack overflow
+//        viewFriends();
     }
 
     @PostMapping("/devapi/friends/remove")
