@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/JASMA-IP-Project.iml" filepath="$PROJECT_DIR$/.idea/JASMA-IP-Project.iml" />
-      <module fileurl="file://$PROJECT_DIR$/JASMAbackend/JASMAbackend.iml" filepath="$PROJECT_DIR$/JASMAbackend/JASMAbackend.iml" />
     </modules>
   </component>
 </project>

@@ -1,5 +1,6 @@
 package com.example.jasmabackend.service.user;
 
+import com.example.jasmabackend.entities.token.PasswordResetToken;
 import com.example.jasmabackend.entities.user.User;
 import com.example.jasmabackend.entities.user.UserDTO;
 import com.example.jasmabackend.exceptions.UserEmailNotUniqueException;
@@ -50,4 +51,5 @@ public class UserService {
 
         return dto;
     }
+
 }

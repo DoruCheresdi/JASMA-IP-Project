@@ -1,8 +1,7 @@
 package com.example.jasmabackend.controller;
 
 import com.example.jasmabackend.entities.authority.Authority;
-import com.example.jasmabackend.entities.friendRequest.FriendRequest;
-import com.example.jasmabackend.entities.friendship.Friendship;
+import com.example.jasmabackend.entities.token.PasswordResetToken;
 import com.example.jasmabackend.entities.user.User;
 import com.example.jasmabackend.entities.user.UserDTO;
 import com.example.jasmabackend.exceptions.UserEmailNotUniqueException;
@@ -10,18 +9,20 @@ import com.example.jasmabackend.repositories.*;
 import com.example.jasmabackend.service.friendship.FriendshipService;
 import com.example.jasmabackend.service.post.PostService;
 import com.example.jasmabackend.service.user.UserService;
-import com.example.jasmabackend.utils.FileUploadUtil;
+import com.example.jasmabackend.service.email.EmailService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.view.RedirectView;
 
-import java.io.IOException;
+import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.*;
 
 @RestController
@@ -45,6 +46,12 @@ public class UserController {
     private final FriendshipRepository friendshipRepository;
 
     private final FriendshipService friendshipService;
+
+    @Autowired
+    private EmailService emailService;
+
+    @Autowired
+    private PasswordResetTokenRepository passwordResetTokenRepository;
 
     @RequestMapping("/devapi/authenticated")
     public Principal user(Principal user) {
@@ -70,7 +77,8 @@ public class UserController {
     }
 
     @PostMapping("/devapi/changepassword")
-    public void changePassword(@RequestBody Map<String, String> json) {
+    public ResponseEntity<String> changePassword(@RequestBody Map<String, String> json,
+         HttpServletRequest request) {
 
         String newPassword = json.get("newPassword");
         String userEmail = json.get("userEmail");
@@ -80,6 +88,42 @@ public class UserController {
         userService.encodePassword(user);
 
         userRepository.save(user);
+
+        // Generați și salvați tokenul
+        PasswordResetToken passwordResetToken = new PasswordResetToken();
+        passwordResetToken.setUser(user);
+        passwordResetToken.generateToken();
+        // Setați o expirare pentru token: 30 de minute
+        long currentTimeInMillis = new Date().getTime();
+        long expiryTimeInMillis = currentTimeInMillis + (30 * 60 * 1000);
+        Date expiryDate = new Date(expiryTimeInMillis);
+        passwordResetToken.setExpiryDate(expiryDate);
+        passwordResetTokenRepository.save(passwordResetToken);
+
+        // Trimiteți email-ul de verificare
+        String resetPasswordUrl = "http://localhost:8080/changepassword?token=" + passwordResetToken.getToken();
+        String subject = "Verificati schimbarea parolei";
+        String message = "Accesati urmatorul link pentru a verifica si finaliza schimbarea parolei: " + resetPasswordUrl;
+        emailService.sendEmail(user.getEmail(), subject, message);
+        String referer = request.getHeader("Referer");
+        String redirectUrl = referer + "?email=" + userEmail + "&password=" + newPassword;
+
+        return ResponseEntity.ok("Procesul de schimbare a parolei a fost inițiat." +
+            "Vă rugăm să verificați adresa de email pentru instrucțiuni suplimentare.");
+    }
+
+    @GetMapping("/changepassword")
+    public String verifyPasswordResetToken(@RequestParam("token") String token) {
+        PasswordResetToken passwordResetToken = passwordResetTokenRepository.findByToken(token);
+        Date date = passwordResetToken.getExpirationDateTime();
+        Instant instant = date.toInstant();
+        ZoneId zoneId = ZoneId.systemDefault();
+        LocalDateTime expirationDateTime = LocalDateTime.ofInstant(instant, zoneId);
+        if (expirationDateTime.isBefore(LocalDateTime.now())) {
+            throw new IllegalArgumentException("Token has expired");
+        }
+
+        return "http://localhost:8080/feed";
     }
 
     @PostMapping("/devapi/deleteuser")
