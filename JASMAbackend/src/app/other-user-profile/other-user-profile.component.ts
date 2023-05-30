@@ -101,4 +101,11 @@ export class OtherUserProfileComponent implements OnInit {
             }
         )
     }
+
+    startConversation() {
+        this.http.post("/devapi/conversation", this.userEmail).subscribe(
+            () => {
+            }
+        )
+    }
 }
