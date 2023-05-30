@@ -22,6 +22,8 @@
                             <a *ngIf="!user.hasSentFriendRequest && !user.hasReceivedFriendRequest && !user.friend" class="btn btn-primary my-2" (click)="sendFriendRequest()">Send request for friendship</a>
                             <a *ngIf="user.hasSentFriendRequest && !user.friend" class="btn btn-primary my-2" (click)="acceptFriendRequest()">Accept request for friendship</a>
                             <a *ngIf="user.hasSentFriendRequest && !user.friend" class="btn btn-primary my-2" (click)="refuseFriendRequest()">Refuse request for friendship</a>
+                            <a *ngIf="!isAdmin && auth.isAdmin" class="btn btn-primary my-2" (click)="makeAdmin()">Make admin</a>
+                            <a *ngIf="auth.isAdmin" class="btn btn-primary my-2" (click)="deleteUser()">Delete user(Admin)</a>
                             <a *ngIf="user.friend" class="btn btn-primary my-2" (click)="deleteFriend()">Remove friend</a>
                             <hr>
                             <h3 class="card-subtitle mb-3">User Posts</h3>

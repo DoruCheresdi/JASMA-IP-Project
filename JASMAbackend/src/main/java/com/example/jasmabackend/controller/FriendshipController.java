@@ -8,6 +8,7 @@ import com.example.jasmabackend.repositories.FriendshipRepository;
 import com.example.jasmabackend.repositories.UserRepository;
 import com.example.jasmabackend.service.friendship.FriendshipService;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.Hibernate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -120,9 +122,9 @@ public class FriendshipController {
         List<Friendship> friendships = friendshipRepository.findAll();
         List<User> friendsList = new ArrayList<>();
         friendships.forEach(friendship -> {
-            if (friendship.getSender().equals(user)) {
+            if (friendship.getSender().getEmail().equals(user.getEmail())) {
                 friendsList.add(friendship.getReceiver());
-            } else if (friendship.getReceiver().equals(user)) {
+            } else if (friendship.getReceiver().getEmail().equals(user.getEmail())) {
                 friendsList.add(friendship.getSender());
             }
         });
