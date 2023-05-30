@@ -11,4 +11,7 @@ export class FeedPost {
     isSharedByCurrentUser = '';
     comments: FeedComment[] = [];
     numberComments = 0;
+    imageUrl: string = "";
+    videoUrl: string = "";
+
 }

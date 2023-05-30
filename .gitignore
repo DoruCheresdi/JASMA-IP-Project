@@ -2,3 +2,5 @@ JASMAbackend/.angular
 JASMAbackend/node
 JASMAbackend/node_modules
 user-photos/**
+post-photos/**
+post-videos/**
