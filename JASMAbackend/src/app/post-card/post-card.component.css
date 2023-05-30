@@ -119,3 +119,45 @@
 .btn-group button:hover i {
     color: #FFFFF4;
 }
+
+.upload-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.upload-btn {
+    background-color: #D4AF37; /* Metallic Gold color */
+    color: #000000; /* Metallic Black color */
+    border-color: #28282B; /* Metallic Gold color */
+    padding: 5px 10px; /* Adjust padding as needed */
+    cursor: pointer;
+}
+
+.upload-btn:hover {
+    background-color: #C0A060; /* Darker shade of Metallic Gold color */
+    border-color: #28282B; /* Darker shade of Metallic Gold color */
+}
+
+
+.upload-image input[type="file"],
+.upload-video input[type="file"] {
+    display: none;
+}
+
+.upload-image span,
+.upload-video span {
+    margin-left: 10px; /* Adjust margin as needed */
+}
+
+.upload-image::before {
+    content: "\f03e"; /* FontAwesome image icon */
+    font-family: "FontAwesome";
+    margin-right: 5px; /* Adjust margin as needed */
+}
+
+.upload-video::before {
+    content: "\f144"; /* FontAwesome video icon */
+    font-family: "FontAwesome";
+    margin-right: 5px; /* Adjust margin as needed */
+}

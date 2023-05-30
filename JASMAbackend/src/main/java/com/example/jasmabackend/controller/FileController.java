@@ -49,7 +49,7 @@ public class FileController {
 
     @PostMapping("/devapi/post/process_img_edit")
     public ResponseEntity savePhotoToPost(@RequestParam("postimage") MultipartFile multipartFile,
-                                          @RequestBody String postTitle) throws IOException {
+                                          String postTitle) throws IOException {
         String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
 
         // save image name to database:
@@ -74,7 +74,7 @@ public class FileController {
      */
     @PostMapping("/devapi/post/process_video_edit")
     public ResponseEntity saveVideoToPost(@RequestParam("postvideo") MultipartFile multipartFile,
-                                          @RequestBody String postTitle) throws IOException {
+                                          String postTitle) throws IOException {
         String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
 
         // save image name to database:

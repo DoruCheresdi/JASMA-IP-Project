@@ -20,7 +20,7 @@ export class ProfileComponent implements OnInit {
 
     user: UserDTO = new UserDTO();
 
-    imageURL: string = ""
+    imageURL: string = "";
 
     constructor(private http: HttpClient, public fb: FormBuilder,
                 private auth: AuthenticateService) {

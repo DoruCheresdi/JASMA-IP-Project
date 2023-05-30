@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { AuthenticateService } from '../services/authenticate.service';
 import { FeedPost } from '../entities/feed-post';
 import { FeedComment } from '../entities/feed-comment';
+import {UserDTO} from "../entities/user-dto";
+import {Observable} from "rxjs";
 
 @Component({
     selector: 'app-post-card',
@@ -14,6 +16,10 @@ export class PostCardComponent implements OnInit {
 
     @Input() feedPost: FeedPost = new FeedPost();
     comment: string = '';
+    imageURL: string = "";
+    imageName = '';
+    videoName  = '';
+    imageUrl: string = "";
 
     constructor(
         private http: HttpClient,
@@ -87,5 +93,52 @@ export class PostCardComponent implements OnInit {
             // remove the post from this component's list so it is no longer shown:
             this.feedPost = new FeedPost();
         });
+    }
+
+    onPostImageSelected(event: any) {
+        console.log("saving file");
+        const file = event.target.files[0];
+        if (file) {
+            this.feedPost.imageName = "post-photos/" + this.feedPost.title + "/" + file.name;
+            const formData = new FormData();
+            formData.append("postimage", file);
+            formData.append("postTitle", this.feedPost.title);
+
+            this.http.post("/devapi/post/process_img_edit", formData).subscribe(
+                (response) => {
+                    console.log("File uploaded successfully!", response);
+                    // Optionally perform any additional actions after successful upload
+                },
+                (error) => {
+                    console.error("File upload failed:", error);
+                    // Handle the error case, display an error message, etc.
+                }
+            );
+        }
+        // Refresh page
+        // location.reload();
+    }
+    onPostVideoSelected(event: any) {
+        console.log("saving file");
+        const file = event.target.files[0];
+        if (file) {
+            this.feedPost.videoName = "post-videos/" + this.feedPost.title + "/" + file.name;
+            const formData = new FormData();
+            formData.append("postvideo", file);
+            formData.append("postTitle", this.feedPost.title);
+
+            this.http.post("/devapi/post/process_video_edit", formData).subscribe(
+                (response) => {
+                    console.log("File uploaded successfully!", response);
+                    // Optionally perform any additional actions after successful upload
+                },
+                (error) => {
+                    console.error("File upload failed:", error);
+                    // Handle the error case, display an error message, etc.
+                }
+            );
+        }
+        // Refresh page
+        // location.reload();
     }
 }
