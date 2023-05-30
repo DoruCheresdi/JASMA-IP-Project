@@ -69,10 +69,7 @@ For questions and problems contact Hex. <3
 Not working:
 
 1. Displaying the profile picture in the list of friends
-2. Editing the description is not persistent @backend
-3. The number of comments is not persistent @backend
-4. Remove friends button on the friends list page
-5. The list of friends is not a pop-up, it is a separate page
+4. The list of friends is not a pop-up, it is a separate page
 
 Just the look of the page:
 1. Message list

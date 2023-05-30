@@ -80,6 +80,13 @@ export class OtherUserProfileComponent implements OnInit {
         });
     }
 
+    deleteFriend() {
+        this.http.post("devapi/friends/remove", this.userEmail).subscribe((response) => {
+            this.user.hasSentFriendRequest = false;
+            this.user.friend = false;
+        });
+    }
+
     makeAdmin() {
         this.http.post("devapi/make_admin", this.userEmail).subscribe((response) => {
             this.isAdmin = true;
