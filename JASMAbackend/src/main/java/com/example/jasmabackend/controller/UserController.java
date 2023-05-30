@@ -49,6 +49,8 @@ public class UserController {
 
     private final FriendshipService friendshipService;
 
+    private final UserMessageRepository userMessageRepository;
+
     @RequestMapping("/devapi/authenticated")
     public Principal user(Principal user) {
 
@@ -118,6 +120,11 @@ public class UserController {
         user.getComments().forEach(comment -> {
             commentRepository.delete(comment);
         });
+
+        // delete messages:
+        userMessageRepository.findAll().stream()
+            .filter(userMessage -> userMessage.getReceiver().getEmail().equals(user.getEmail())
+                || userMessage.getSender().getEmail().equals(user.getEmail())).forEach(userMessage -> userMessageRepository.delete(userMessage));
 
         userRepository.delete(user);
     }
