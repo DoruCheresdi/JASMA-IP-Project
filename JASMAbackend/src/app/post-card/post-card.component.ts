@@ -16,10 +16,8 @@ export class PostCardComponent implements OnInit {
 
     @Input() feedPost: FeedPost = new FeedPost();
     comment: string = '';
-    imageURL: string = "";
-    imageName = '';
-    videoName  = '';
     imageUrl: string = "";
+    videoUrl: string = "";
 
     constructor(
         private http: HttpClient,
@@ -37,13 +35,19 @@ export class PostCardComponent implements OnInit {
             (comments: FeedComment[]) => {
                 this.feedPost.comments = comments;
             }
-        );
-        this.http.get<FeedPost[]>("/devapi/feed_post", {params: params}).subscribe(
-            (feedPost: FeedPost[]) => {
-                this.imageName = this.feedPost.imageName;
-                this.videoName = this.feedPost.videoName;
-            }
-        );
+// <<<<<<< Fixed-images-not-showing
+        )
+
+        console.log(this.feedPost.imageUrl);
+// =======
+//         );
+//         this.http.get<FeedPost[]>("/devapi/feed_post", {params: params}).subscribe(
+//             (feedPost: FeedPost[]) => {
+//                 this.imageName = this.feedPost.imageName;
+//                 this.videoName = this.feedPost.videoName;
+//             }
+//         );
+// >>>>>>> Images-Videos-Frontend
     }
 
     isLikedByCurrentUser() {
@@ -105,7 +109,7 @@ export class PostCardComponent implements OnInit {
         console.log("saving file");
         const file = event.target.files[0];
         if (file) {
-            this.feedPost.imageName = "post-photos/" + this.feedPost.title + "/" + file.name;
+            this.feedPost.imageUrl = "post-photos/" + this.feedPost.title + "/" + file.name;
             const formData = new FormData();
             formData.append("postimage", file);
             formData.append("postTitle", this.feedPost.title);
@@ -128,7 +132,7 @@ export class PostCardComponent implements OnInit {
         console.log("saving file");
         const file = event.target.files[0];
         if (file) {
-            this.feedPost.videoName = "post-videos/" + this.feedPost.title + "/" + file.name;
+            this.feedPost.videoUrl = "post-videos/" + this.feedPost.title + "/" + file.name;
             const formData = new FormData();
             formData.append("postvideo", file);
             formData.append("postTitle", this.feedPost.title);
