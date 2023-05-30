@@ -5,6 +5,7 @@ import {HttpClient, HttpParams} from "@angular/common/http";
 import {UserDTO} from "../entities/user-dto";
 import {FeedPost} from "../entities/feed-post";
 import {AuthenticateService} from "../services/authenticate.service";
+import {UserMessageDTO} from "../entities/user-message-dto";
 
 @Component({
     selector: 'app-other-user-profile',
@@ -25,6 +26,8 @@ export class OtherUserProfileComponent implements OnInit {
     userPosts: FeedPost[] = [];
 
     isAdmin = false;
+
+    hasStartedConversation = true;
 
     ngOnInit() {
         this.route.queryParams.subscribe(params => {
@@ -56,6 +59,21 @@ export class OtherUserProfileComponent implements OnInit {
         this.http.get<FeedPost[]>("/devapi/posts_user_detailed", {params: params}).subscribe(
             (userPosts: FeedPost[]) => {
                 this.userPosts = userPosts;
+            }
+        )
+
+
+        const paramsMessage = new HttpParams()
+            .set('user1Email', this.userEmail)
+            .set('user2Email', this.auth.email);
+        // check if they have started a convo:
+        this.http.get<UserMessageDTO[]>("/devapi/messages", {params: paramsMessage}).subscribe(
+            (userMessageDTOS: UserMessageDTO[]) => {
+                if (userMessageDTOS.length > 0) {
+                    this.hasStartedConversation = true;
+                } else {
+                    this.hasStartedConversation = false;
+                }
             }
         )
     }
@@ -105,6 +123,7 @@ export class OtherUserProfileComponent implements OnInit {
     startConversation() {
         this.http.post("/devapi/conversation", this.userEmail).subscribe(
             () => {
+                this.hasStartedConversation = true;
             }
         )
     }

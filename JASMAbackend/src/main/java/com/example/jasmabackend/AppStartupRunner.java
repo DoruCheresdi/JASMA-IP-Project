@@ -44,12 +44,14 @@ public class AppStartupRunner implements ApplicationRunner {
                 authorities.add(authority);
                 admin.setAuthorities(authorities);
                 authority.getUsers().add(admin);
+                authorityRepository.save(authority);
             } else {
                 Authority adminAuth = new Authority("ROLE_ADMIN");
                 Set<Authority> authorities = admin.getAuthorities();
                 authorities.add(adminAuth);
                 admin.setAuthorities(authorities);
                 adminAuth.getUsers().add(admin);
+                authorityRepository.save(adminAuth);
             }
 
             userRepository.save(admin);
@@ -69,6 +71,7 @@ public class AppStartupRunner implements ApplicationRunner {
                     authorities.add(adminAuth);
                     admin.setAuthorities(authorities);
                     adminAuth.getUsers().add(admin);
+                    authorityRepository.save(adminAuth);
                 }
                 userRepository.save(admin);
             }
