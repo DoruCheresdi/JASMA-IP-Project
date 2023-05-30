@@ -35,9 +35,19 @@ export class PostCardComponent implements OnInit {
             (comments: FeedComment[]) => {
                 this.feedPost.comments = comments;
             }
+// <<<<<<< Fixed-images-not-showing
         )
 
         console.log(this.feedPost.imageUrl);
+// =======
+//         );
+//         this.http.get<FeedPost[]>("/devapi/feed_post", {params: params}).subscribe(
+//             (feedPost: FeedPost[]) => {
+//                 this.imageName = this.feedPost.imageName;
+//                 this.videoName = this.feedPost.videoName;
+//             }
+//         );
+// >>>>>>> Images-Videos-Frontend
     }
 
     isLikedByCurrentUser() {
