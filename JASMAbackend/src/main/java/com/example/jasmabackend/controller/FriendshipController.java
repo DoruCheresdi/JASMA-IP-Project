@@ -6,7 +6,9 @@ import com.example.jasmabackend.entities.user.User;
 import com.example.jasmabackend.repositories.FriendRequestRepository;
 import com.example.jasmabackend.repositories.FriendshipRepository;
 import com.example.jasmabackend.repositories.UserRepository;
+import com.example.jasmabackend.service.friendship.FriendshipService;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.Hibernate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,6 +31,8 @@ public class FriendshipController {
     private final FriendRequestRepository friendRequestRepository;
 
     private final FriendshipRepository friendshipRepository;
+
+    private final FriendshipService friendshipService;
 
     @PostMapping("/devapi/friendRequest")
     public ResponseEntity addFriendRequest(@RequestBody String receiverEmail, Authentication authentication) {
@@ -117,9 +122,9 @@ public class FriendshipController {
         List<Friendship> friendships = friendshipRepository.findAll();
         List<User> friendsList = new ArrayList<>();
         friendships.forEach(friendship -> {
-            if (friendship.getSender().equals(user)) {
+            if (friendship.getSender().getEmail().equals(user.getEmail())) {
                 friendsList.add(friendship.getReceiver());
-            } else if (friendship.getReceiver().equals(user)) {
+            } else if (friendship.getReceiver().getEmail().equals(user.getEmail())) {
                 friendsList.add(friendship.getSender());
             }
         });
@@ -131,6 +136,22 @@ public class FriendshipController {
     public void viewFriends() {
         // Call the viewFriends() function to show the pop-up
         // Note: This function doesn't return a response to the client, since it's a pop-up
-        viewFriends();
+
+        // Comment this out since it causes the thread to stack overflow
+//        viewFriends();
+    }
+
+    @PostMapping("/devapi/friends/remove")
+    public ResponseEntity removeFriend(@RequestBody String friendEmail, Authentication authentication) {
+        // get user that made the request:
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        User loggedUser = userRepository.findByEmail(userDetails.getUsername()).get();
+
+        User friend = userRepository.findByEmail(friendEmail).get();
+
+        // delete friendship:
+        friendshipService.removeFriends(loggedUser, friend);
+
+        return ResponseEntity.ok(HttpStatus.OK);
     }
 }

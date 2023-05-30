@@ -2,6 +2,10 @@ package com.example.jasmabackend.controller;
 
 import com.example.jasmabackend.entities.authority.Authority;
 import com.example.jasmabackend.entities.token.PasswordResetToken;
+import com.example.jasmabackend.entities.friendRequest.FriendRequest;
+import com.example.jasmabackend.entities.friendship.Friendship;
+import com.example.jasmabackend.entities.like.Like;
+import com.example.jasmabackend.entities.post.Post;
 import com.example.jasmabackend.entities.user.User;
 import com.example.jasmabackend.entities.user.UserDTO;
 import com.example.jasmabackend.exceptions.UserEmailNotUniqueException;
@@ -47,11 +51,10 @@ public class UserController {
 
     private final FriendshipService friendshipService;
 
-    @Autowired
-    private EmailService emailService;
+    private final EmailService emailService;
 
-    @Autowired
-    private PasswordResetTokenRepository passwordResetTokenRepository;
+    private final PasswordResetTokenRepository passwordResetTokenRepository;
+    private final UserMessageRepository userMessageRepository;
 
     @RequestMapping("/devapi/authenticated")
     public Principal user(Principal user) {
@@ -160,6 +163,11 @@ public class UserController {
             commentRepository.delete(comment);
         });
 
+        // delete messages:
+        userMessageRepository.findAll().stream()
+            .filter(userMessage -> userMessage.getReceiver().getEmail().equals(user.getEmail())
+                || userMessage.getSender().getEmail().equals(user.getEmail())).forEach(userMessage -> userMessageRepository.delete(userMessage));
+
         userRepository.delete(user);
     }
 
@@ -207,5 +215,19 @@ public class UserController {
         }).toList();
 
         return userDTOS;
+    }
+
+    @PostMapping("/devapi/user/description")
+    public ResponseEntity changeDescription(@RequestBody String newDescription, Authentication authentication) {
+
+        // get user that made the request:
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        User user = userRepository.findByEmail(userDetails.getUsername()).get();
+
+
+        user.setDescription(newDescription);
+        userRepository.save(user);
+
+        return ResponseEntity.ok(HttpStatus.OK);
     }
 }

@@ -44,6 +44,7 @@ public class UserService {
         UserDTO dto = new UserDTO();
         dto.setName(user.getName());
         dto.setEmail(user.getEmail());
+        dto.setDescription(user.getDescription());
         dto.setFriend(friendshipService.areFriends(user, loggedUser));
         dto.setHasSentFriendRequest(friendRequestRepository.findFriendRequestBySenderAndReceiver(user, loggedUser).isPresent());
         dto.setHasReceivedFriendRequest(friendRequestRepository.findFriendRequestBySenderAndReceiver(loggedUser, user).isPresent());

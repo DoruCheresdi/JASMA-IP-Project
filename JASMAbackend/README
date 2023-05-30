@@ -46,7 +46,7 @@ _________________________________
 First make sure that the application is running.
 
 1. download bootstrap from https://getbootstrap.com/docs/4.0/getting-started/download/
-2. install bootstrap using the command "npm install bootstrap" in the terminal
+2. install bootstrap using the command "./npm install bootstrap" in the terminal
 
 We will work in JASMAbackend/src/app. Each directory contains at least
 4 files (html, css, ts and spec).
@@ -65,10 +65,17 @@ Wait until you receive at least one review to merge.
 
 For questions and problems contact Hex. <3
 
+
 Not working:
 
 1. Displaying the profile picture in the list of friends
-2. Editing the description is not persistent
-3. The number of comments does not change
-4. Remove friends button on the friends list page
-5. The list of friends is not a pop-up, it is a separate page
+4. The list of friends is not a pop-up, it is a separate page
+
+Just the look of the page:
+1. Message list
+2. Private conversation
+
+
+To be done:
+1. De facut request la fiecare 1 secunda pentru mesaje
+2. De sortat mesajele dupa timestamp (si de pus timestamp-ul langa mesaj)

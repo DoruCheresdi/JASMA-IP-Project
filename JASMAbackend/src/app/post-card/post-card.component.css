@@ -52,11 +52,11 @@
 .card-footer form input[type="text"]:focus {
     outline: none;
     box-shadow: none;
-    border-color: #4dabf7;
+    border-color: #788BFF;
 }
 
 .card-footer form button[type="submit"] {
-    background-color: #B8860B;
+    background-color: #3423A6;
     border: none;
     color: #FFFFF4;
     border-radius: 19px;
@@ -74,7 +74,7 @@
     left: -50%;
     width: 200%;
     height: 200%;
-    background: linear-gradient(45deg, #D4AF37 0%, #B8860B 100%);
+    background: linear-gradient(45deg, #5465FF 0%, #3423A6 100%);
     transform: rotate(45deg) scale(0);
     transition: transform 0.3s ease;
 }
@@ -111,11 +111,53 @@
 }
 
 .btn-group button:hover {
-    background-color: #B8860B;
+    background-color: #3423A6;
     color: #FFFFF4;
     cursor: pointer;
 }
 
 .btn-group button:hover i {
     color: #FFFFF4;
+}
+
+.upload-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.upload-btn {
+    background-color: #D4AF37; /* Metallic Gold color */
+    color: #000000; /* Metallic Black color */
+    border-color: #28282B; /* Metallic Gold color */
+    padding: 5px 10px; /* Adjust padding as needed */
+    cursor: pointer;
+}
+
+.upload-btn:hover {
+    background-color: #C0A060; /* Darker shade of Metallic Gold color */
+    border-color: #28282B; /* Darker shade of Metallic Gold color */
+}
+
+
+.upload-image input[type="file"],
+.upload-video input[type="file"] {
+    display: none;
+}
+
+.upload-image span,
+.upload-video span {
+    margin-left: 10px; /* Adjust margin as needed */
+}
+
+.upload-image::before {
+    content: "\f03e"; /* FontAwesome image icon */
+    font-family: "FontAwesome";
+    margin-right: 5px; /* Adjust margin as needed */
+}
+
+.upload-video::before {
+    content: "\f144"; /* FontAwesome video icon */
+    font-family: "FontAwesome";
+    margin-right: 5px; /* Adjust margin as needed */
 }

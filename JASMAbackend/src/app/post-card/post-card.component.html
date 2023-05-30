@@ -8,6 +8,17 @@
                 <p class="card-text mb-1"><small class="text-muted">By {{ feedPost.authorEmail }}</small></p>
                 <!-- Post description -->
                 <p class="card-text">{{ feedPost.description }}</p>
+                <div *ngIf="feedPost.imageUrl">
+                    <!-- Display image -->
+                    <img src="{{feedPost.imageUrl}}" alt="Uploaded Image" class="img-fluid">
+                </div>
+                <div *ngIf="feedPost.videoUrl">
+                    <!-- Display video -->
+                    <video controls class="img-fluid">
+                        <source src="{{feedPost.videoUrl}}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
                 <!-- Time since post creation -->
                 <p class="card-text"><small class="text-muted">{{ feedPost.sinceCreatedString }}</small></p>
                 <div class="d-flex justify-content-between align-items-center">
@@ -32,6 +43,23 @@
                 <!-- Display comments -->
                 <div *ngFor="let comment of feedPost.comments" class="mb-3">
                     <p><strong>{{comment.authorEmail}}:</strong> {{comment.text}}</p>
+                </div>
+                <div class="upload-container" *ngIf="auth.email === feedPost.authorEmail">
+                    <!-- Upload file button for image -->
+                    <label class="btn btn-primary btn-sm upload-btn upload-image">
+                        <input type="file" style="display:none" (change)="onPostImageSelected($event)">
+                        Upload Image
+                    </label>
+                    <span>{{ imageUrl }}</span>
+                </div>
+
+                <div class="upload-container" *ngIf="auth.email === feedPost.authorEmail">
+                    <!-- Upload file button for video -->
+                    <label class="btn btn-primary btn-sm upload-btn upload-video">
+                        <input type="file" style="display:none" (change)="onPostVideoSelected($event)">
+                        Upload Video
+                    </label>
+                    <span>{{ videoUrl }}</span>
                 </div>
             </div>
             <div class="card-footer">

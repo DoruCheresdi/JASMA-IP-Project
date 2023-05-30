@@ -13,15 +13,14 @@ import {User} from "../entities/user";
 })
 export class ProfileComponent implements OnInit {
 
-    userDescription: string = "Buna buna."; // default description
+    userDescription: string = "No description"; // default description
     isEditingDescription: boolean = false; // flag to indicate if user is editing the description
 
-    // https://blog.angular-university.io/angular-file-upload/
     fileName = '';
 
     user: UserDTO = new UserDTO();
 
-    imageURL: string = ""
+    imageURL: string = "";
 
     constructor(private http: HttpClient, public fb: FormBuilder,
                 private auth: AuthenticateService) {
@@ -36,6 +35,7 @@ export class ProfileComponent implements OnInit {
                 // don't show the user themselves in the list, use a filter:
                 this.user = userDTO;
                 this.imageURL = this.user.imageURL;
+                this.userDescription = this.user.description;
             }
         );
     }
@@ -78,7 +78,11 @@ export class ProfileComponent implements OnInit {
     saveDescription() {
         // Code to save the user's updated description to the backend goes here.
         // For now, we'll just update the userDescription variable with the new value.
-        this.isEditingDescription = false; // hide the edit form
+        this.http.post("/devapi/user/description", this.userDescription).subscribe(
+            () => {
+                this.isEditingDescription = false; // hide the edit form
+            }
+        )
     }
 
     getUserEmail() {

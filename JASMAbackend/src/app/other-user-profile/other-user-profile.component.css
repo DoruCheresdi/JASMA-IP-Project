@@ -59,14 +59,14 @@
 }
 
 .btn-primary {
-    background-color: #007bff;
-    border-color: #007bff;
+    background-color: #9BB1FF;
+    border-color: #9BB1FF;
     color: #fff;
 }
 
 .btn-primary:hover {
-    background-color: #0069d9;
-    border-color: #0062cc;
+    background-color: #9BB1FF;
+    border-color: #9BB1FF;
 }
 
 .py-2 {

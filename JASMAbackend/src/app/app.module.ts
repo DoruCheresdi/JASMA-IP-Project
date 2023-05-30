@@ -23,6 +23,7 @@ import { OtherUserProfileComponent } from './other-user-profile/other-user-profi
 import {NgOptimizedImage} from "@angular/common";
 import {MessagesComponent} from "./messages/messages.component";
 import {FriendListComponent} from "./friend-list/friend-list.component";
+import {PrivateMessageComponent} from "./private-message/private-message.component";
 
 @Injectable()
 export class WithCredentialsInterceptor implements HttpInterceptor {
@@ -65,6 +66,7 @@ export class XhrInterceptor implements HttpInterceptor {
     OtherUserProfileComponent,
     MessagesComponent,
     FriendListComponent,
+    PrivateMessageComponent
   ],
     imports: [
         BrowserModule,

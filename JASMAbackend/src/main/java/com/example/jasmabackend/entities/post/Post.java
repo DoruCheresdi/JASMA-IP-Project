@@ -31,9 +31,9 @@ public class Post {
 
     private String description;
 
-    private String imageUrl;
+    private String imageName;
 
-    private String videoUrl;
+    private String videoName;
 
     private Timestamp createdAt;
 
@@ -44,13 +44,13 @@ public class Post {
 
     @ToString.Exclude
     @JsonIgnore
-    @OneToMany(mappedBy = "post", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "post", fetch = FetchType.LAZY)
     @Fetch(value = FetchMode.SUBSELECT)
     private List<Like> likes = new ArrayList<>();
 
     @ToString.Exclude
     @JsonIgnore
-    @OneToMany(mappedBy = "post", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "post", fetch = FetchType.LAZY)
     @Fetch(value = FetchMode.SUBSELECT)
     private List<Share> shares = new ArrayList<>();
 
