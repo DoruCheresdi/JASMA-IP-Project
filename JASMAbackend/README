@@ -46,7 +46,7 @@ _________________________________
 First make sure that the application is running.
 
 1. download bootstrap from https://getbootstrap.com/docs/4.0/getting-started/download/
-2. install bootstrap using the command "npm install bootstrap" in the terminal
+2. install bootstrap using the command "./npm install bootstrap" in the terminal
 
 We will work in JASMAbackend/src/app. Each directory contains at least
 4 files (html, css, ts and spec).
