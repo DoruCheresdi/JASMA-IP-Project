@@ -38,7 +38,7 @@ public class EmailService {
             e.printStackTrace();
             // Returnați un mesaj de eroare către utilizator
             throw new EmailSendingException("A apărut o eroare la trimiterea email-ului." +
-                "Vă rugăm să încercați din nou mai târziu.");
+                "Va rugam sa incercati din nou mai tarziu.");
         }
         javaMailSender.send(message);
     }

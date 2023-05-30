@@ -53,6 +53,9 @@ public class UserController {
     @Autowired
     private PasswordResetTokenRepository passwordResetTokenRepository;
 
+    @Autowired
+    private PasswordResetTokenRepository confirmationTokenRepository;
+
     @RequestMapping("/devapi/authenticated")
     public Principal user(Principal user) {
 
@@ -62,8 +65,44 @@ public class UserController {
     @RequestMapping(value = "/devapi/register", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
     public User registerUser(@RequestBody User user) throws UserEmailNotUniqueException {
+        if (userRepository.findByEmail(user.getEmail()).isPresent()) {
+            throw new UserEmailNotUniqueException(user.getEmail());
+        }
 
-        return userService.registerUser(user);
+        // Salvează utilizatorul în baza de date
+        User registeredUser = userService.registerUser(user);
+
+        // Generați și salvați tokenul de confirmare
+        PasswordResetToken confirmationToken = new PasswordResetToken();
+        confirmationToken.setUser(registeredUser);
+        confirmationToken.generateToken();
+        confirmationTokenRepository.save(confirmationToken);
+
+        // Trimiteți e-mail-ul de confirmare
+        String confirmationUrl = "http://localhost:8080/register?token=" + confirmationToken.getToken();
+        String subject = "Confirmare înregistrare";
+        String message = "Accesati urmatorul link pentru a confirma inregistrarea: " + confirmationUrl;
+        emailService.sendEmail(user.getEmail(), subject, message);
+
+        return registeredUser;
+    }
+
+    @GetMapping("/devapi/register")
+    public String confirmRegistration(@RequestParam("token") String token) {
+        PasswordResetToken confirmationToken  = confirmationTokenRepository.findByToken(token);
+        Date date = confirmationToken .getExpirationDateTime();
+        Instant instant = date.toInstant();
+        ZoneId zoneId = ZoneId.systemDefault();
+        LocalDateTime expirationDateTime = LocalDateTime.ofInstant(instant, zoneId);
+        if (expirationDateTime.isBefore(LocalDateTime.now())) {
+            throw new IllegalArgumentException("Token has expired");
+        }
+
+        User user = confirmationToken.getUser();
+        userRepository.save(user);
+        confirmationTokenRepository.delete(confirmationToken);
+
+        return "http://localhost:8080/feed";
     }
 
     @GetMapping("/devapi/users")
@@ -122,6 +161,7 @@ public class UserController {
         if (expirationDateTime.isBefore(LocalDateTime.now())) {
             throw new IllegalArgumentException("Token has expired");
         }
+        passwordResetTokenRepository.delete(passwordResetToken);
 
         return "http://localhost:8080/feed";
     }
