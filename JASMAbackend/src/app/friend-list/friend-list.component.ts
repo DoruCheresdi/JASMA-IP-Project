@@ -29,9 +29,10 @@ export class FriendListComponent implements OnInit {
     searchTerm: string = ""; // Add a property for the search term
 
     ngOnInit() {
+        this.userEmail = this.auth.email;
         // Get the query parameters from the route
         this.route.queryParams.subscribe(params => {
-            this.userEmail = params["email"];
+            // this.userEmail = params["email"];
             this.getUserData();
             this.getFriends(); // Call the method to fetch friends' data
         });
@@ -73,10 +74,17 @@ export class FriendListComponent implements OnInit {
     }
 
     removeFriend(friend: UserDTO) {
-        this.http.post("/devapi/friendRequest/reject", friend).subscribe((response) => {
+        this.http.post("devapi/friends/remove", friend.email).subscribe((response) => {
             this.user.hasSentFriendRequest = false;
             this.user.friend = false;
             this.getFriends(); // Refresh the friends' data after removing a friend
+        });
+    }
+
+    removeFriendRequest(friend: UserDTO) {
+        this.http.post("/devapi/friendRequest/reject", friend).subscribe((response) => {
+            this.user.hasSentFriendRequest = false;
+            this.user.friend = false;
         });
     }
 
