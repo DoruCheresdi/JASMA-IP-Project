@@ -8,14 +8,14 @@
                 <p class="card-text mb-1"><small class="text-muted">By {{ feedPost.authorEmail }}</small></p>
                 <!-- Post description -->
                 <p class="card-text">{{ feedPost.description }}</p>
-                <div *ngIf="feedPost.imageName">
+                <div *ngIf="feedPost.imageUrl">
                     <!-- Display image -->
-                    <img src="{{feedPost.imageName}}" alt="Uploaded Image" class="img-fluid">
+                    <img src="{{feedPost.imageUrl}}" alt="Uploaded Image" class="img-fluid">
                 </div>
-                <div *ngIf="feedPost.videoName">
+                <div *ngIf="feedPost.videoUrl">
                     <!-- Display video -->
                     <video controls class="img-fluid">
-                        <source src="{{feedPost.videoName}}" type="video/mp4">
+                        <source src="{{feedPost.videoUrl}}" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
                 </div>
@@ -50,7 +50,7 @@
                         <input type="file" style="display:none" (change)="onPostImageSelected($event)">
                         Upload Image
                     </label>
-                    <span>{{ imageName }}</span>
+                    <span>{{ imageUrl }}</span>
                 </div>
 
                 <div class="upload-container" *ngIf="auth.email === feedPost.authorEmail">
@@ -59,7 +59,7 @@
                         <input type="file" style="display:none" (change)="onPostVideoSelected($event)">
                         Upload Video
                     </label>
-                    <span>{{ videoName }}</span>
+                    <span>{{ videoUrl }}</span>
                 </div>
             </div>
             <div class="card-footer">
