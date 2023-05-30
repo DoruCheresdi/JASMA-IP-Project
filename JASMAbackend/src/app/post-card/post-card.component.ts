@@ -37,7 +37,13 @@ export class PostCardComponent implements OnInit {
             (comments: FeedComment[]) => {
                 this.feedPost.comments = comments;
             }
-        )
+        );
+        this.http.get<FeedPost[]>("/devapi/feed_post", {params: params}).subscribe(
+            (feedPost: FeedPost[]) => {
+                this.imageName = this.feedPost.imageName;
+                this.videoName = this.feedPost.videoName;
+            }
+        );
     }
 
     isLikedByCurrentUser() {
