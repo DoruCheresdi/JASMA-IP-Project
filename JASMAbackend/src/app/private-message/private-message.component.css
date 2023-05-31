@@ -1,136 +1,20 @@
 .container {
-    max-width: 800px;
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 20px; /* Add padding for spacing */
-    background-color: #f8f8f8; /* Add a background color */
-    border-radius: 10px; /* Add border radius */
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Add shadow */
+    padding: 20px;
+    background-color: transparent; /* Updated background color */
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-family: Arial, sans-serif;
 }
 
-h2.text-center {
-    font-size: 24px;
-    font-weight: bold;
-    margin-top: 30px;
-    margin-bottom: 40px;
-    text-transform: uppercase;
-    color: #333;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+.text-center {
+    text-align: center;
 }
 
-.message-list {
-    margin-bottom: 40px;
-    display: flex;
-    flex-direction: column;
-}
-
-.message-item {
-    margin-bottom: 20px;
-    display: flex;
-    justify-content: flex-start;
-    align-items: flex-start; /* Align messages to the top */
-}
-
-.message-item:nth-child(even) {
-    justify-content: flex-end;
-}
-
-.card {
-    border: #232323;
-    border-radius: 10px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-    background-color: transparent;
-    width: 70%;
-    max-width: 400px;
-    padding: 10px;
-}
-
-.card-body {
-    padding: 0;
-}
-
-.card-title {
-    font-size: 16px;
-    font-weight: bold;
-    margin-bottom: 5px;
-    color: #232323;
-}
-
-.card-text.message-text-to-friend {
-    font-size: 14px;
-    margin-bottom: 0;
-    color: #232323;
-    background-color: transparent;
-    border-radius: 10px;
-    padding: 8px;
-}
-
-.card-text.message-text-to-me {
-    font-size: 14px;
-    margin-bottom: 0;
-    color: #232323;
-    background: transparent;
-    border-radius: 10px;
-    padding: 8px;
-}
-
-.message-item:nth-child(even) .card {
-    align-self: flex-end;
-}
-
-.message-item:nth-child(even) .card-body {
-    margin-left: 0;
-    margin-right: 20px;
-}
-
-.message-item:nth-child(even) .card-text.message-text-to-friend {
-    background-color: transparent; /* Use metallic gold color */
-}
-
-.message-item:nth-child(even) .card-text.message-text-to-me {
-    background-color: transparent; /* Use metallic black color */
-}
-
-.chat-input-bar {
-    display: flex;
-    align-items: center;
-    margin-top: 20px;
-    background-color: #232323;
-    padding: 10px;
-    border-radius: 10px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-}
-
-.chat-input-bar input[type="text"] {
-    flex-grow: 1;
-    padding: 8px;
-    border: none;
-    border-radius: 4px;
-    font-size: 14px;
-    background-color: #3e3e3e;
-    color: #fff;
-}
-
-.chat-input-bar button {
-    margin-left: 10px;
-    padding: 8px 12px;
-    background-color: #5465FF;
-    color: #232323;
-    border: none;
-    border-radius: 4px;
-    font-size: 14px;
-    cursor: pointer;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-}
-
-.chat-input-bar button:hover {
-    background-color: #5465FF;
-}
-
-/* Friend Info */
 .friend-info {
     display: flex;
     align-items: center;
-    justify-content: center;
     margin-bottom: 20px;
 }
 
@@ -143,14 +27,97 @@ h2.text-center {
 
 .friend-name {
     font-size: 18px;
-    font-weight: bold;
-    color: #333;
+    margin: 0;
 }
 
-/* Message Picture */
+.message-list {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.message-item {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: flex-start;
+}
+
+.card-to-friend {
+    background-color: #dcf8c6;
+    padding: 10px;
+    border-radius: 5px;
+    margin-right: auto;
+}
+
+.card-body-to-friend {
+    margin-right: 10px;
+}
+
+.card-title-to-friend {
+    font-size: 14px;
+    margin: 0;
+    font-weight: bold;
+}
+
+.message-text-to-friend {
+    margin: 0;
+}
+
 .message-picture {
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     margin-right: 10px;
+}
+
+.card-to-me {
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    margin-left: auto;
+}
+
+.card-body-to-me {
+    margin-left: 10px;
+}
+
+.card-title-to-me {
+    font-size: 14px;
+    margin: 0;
+    font-weight: bold;
+}
+
+.message-text-to-me {
+    margin: 0;
+}
+
+.chat-input-bar {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.chat-input-bar input[type="text"] {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.chat-input-bar button {
+    padding: 8px 20px;
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.chat-input-bar button:hover {
+    background-color: #45a049;
+}
+
+.message-list::-webkit-scrollbar {
+    width: 0;
 }
