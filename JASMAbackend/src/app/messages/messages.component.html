@@ -25,7 +25,7 @@
                                 <p class="card-text">{{conv.createdAtString}}</p>
                             </div>
                             <div class="">
-                                <a class="nav-link active" routerLinkActive="active" routerLink="/privatemessage?email={{conv.email}}">
+                                <a class="nav-link active" routerLinkActive="active" [routerLink]="['/privatemessage/']" [queryParams]="{ email: conv.email}">
                                     <div class="reply-icon"></div>
                                 </a>
                             </div>

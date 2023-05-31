@@ -25,7 +25,7 @@
                             <a *ngIf="!isAdmin && auth.isAdmin" class="btn btn-primary my-2" (click)="makeAdmin()">Make admin</a>
                             <a *ngIf="auth.isAdmin" class="btn btn-primary my-2" (click)="deleteUser()">Delete user(Admin)</a>
                             <a *ngIf="user.friend" class="btn btn-primary my-2" (click)="deleteFriend()">Remove friend</a>
-                            <a *ngIf="!hasStartedConversation" class="btn btn-primary my-2" (click)="startConversation()">Start conversation</a>
+                            <a *ngIf="user.friend && !hasStartedConversation" class="btn btn-primary my-2" (click)="startConversation()">Start conversation</a>
                             <hr>
                             <h3 class="card-subtitle mb-3">User Posts</h3>
                             <div class="py-2" *ngFor="let post of userPosts">

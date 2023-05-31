@@ -8,54 +8,44 @@
     </div>
 
     <div class="message-list">
-        <div class="message-item">
-            <img src="../../assets/profileicon.png" alt="Friend Picture" class="message-picture">
-            <div class="card">
+<!--        <div class="message-item" *ngFor="let mess of messages">-->
+<!--            <img src="../../assets/profileicon.png" alt="Friend Picture" class="message-picture">-->
+<!--            <div class="card">-->
+<!--                <div class="card-body" *ngIf="mess.receiverEmail === auth.email">-->
+<!--                    <h5 class="card-title">Friend</h5>-->
+<!--                    <p class="card-text message-text-to-me">This is a private message from your friend.</p>-->
+<!--                    <p class="card-text message-text-to-me">{{mess.content}}</p>-->
+<!--                    <p class="card-text message-text-to-me">{{mess.createdAtString}}</p>-->
+<!--                </div>-->
+<!--                <div class="card-body" *ngIf="mess.senderEmail === auth.email">-->
+<!--                    <h5 class="card-title">Me</h5>-->
+<!--                    <p class="card-text message-text-to-friend">This is your private message.</p>-->
+<!--                    <p class="card-text message-text-to-friend">{{mess.content}}</p>-->
+<!--                    <p class="card-text message-text-to-friend">{{mess.createdAtString}}</p>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+
+        <div class="message-item" *ngFor="let mess of messages">
+            <div class="card"
+                 *ngIf="mess.senderEmail === auth.email">
+                <div class="card-body">
+                    <h5 class="card-title">Me</h5>
+                    <p class="card-text message-text-to-friend">You wrote this.</p>
+                    <p class="card-text message-text-to-friend">{{mess.content}}</p>
+                    <p class="card-text message-text-to-friend">{{mess.createdAtString}}</p>
+                </div>
+            </div>
+
+            <img src="../../assets/profileicon.png" alt="Friend Picture" class="message-picture"
+                 *ngIf="mess.receiverEmail === auth.email">
+            <div class="card"
+                 *ngIf="mess.receiverEmail === auth.email">
                 <div class="card-body">
                     <h5 class="card-title">Friend</h5>
                     <p class="card-text message-text-to-me">This is a private message from your friend.</p>
-                </div>
-            </div>
-        </div>
-        <div class="message-item">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Me</h5>
-                    <p class="card-text message-text-to-friend">This is your private message.</p>
-                </div>
-            </div>
-        </div>
-        <div class="message-item">
-            <img src="../../assets/profileicon.png" alt="Friend Picture" class="message-picture">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Friend</h5>
-                    <p class="card-text message-text-to-me">This is a private message from your friend.</p>
-                </div>
-            </div>
-        </div>
-        <div class="message-item">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Me</h5>
-                    <p class="card-text message-text-to-friend">This is your private message.</p>
-                </div>
-            </div>
-        </div>
-        <div class="message-item">
-            <img src="../../assets/profileicon.png" alt="Friend Picture" class="message-picture">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Friend</h5>
-                    <p class="card-text message-text-to-me">This is a private message from your friend.</p>
-                </div>
-            </div>
-        </div>
-        <div class="message-item">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Me</h5>
-                    <p class="card-text message-text-to-friend">This is your private message.</p>
+                    <p class="card-text message-text-to-me">{{mess.content}}</p>
+                    <p class="card-text message-text-to-me">{{mess.createdAtString}}</p>
                 </div>
             </div>
         </div>
@@ -63,8 +53,8 @@
 
     <!-- Chat Input Bar -->
     <div class="chat-input-bar">
-        <input type="text" placeholder="Type your message" />
-        <button>Send</button>
+        <input type="text" placeholder="Type your message" [(ngModel)]="newMessage"/>
+        <button (click)="sendMessage()">Send</button>
     </div>
 
 </div>
