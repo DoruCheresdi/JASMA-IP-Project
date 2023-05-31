@@ -10,13 +10,12 @@
                 <p class="card-text">{{ feedPost.description }}</p>
                 <div *ngIf="feedPost.imageUrl">
                     <!-- Display image -->
-                    <img src="{{feedPost.imageUrl}}" alt="Uploaded Image" class="img-fluid">
+                    <img src="{{feedPost.imageUrl}}" alt="" class="img-fluid">
                 </div>
-                <div *ngIf="feedPost.videoUrl">
+                <div *ngIf="feedPost.videoUrl && !feedPost.videoUrl.endsWith('null')">
                     <!-- Display video -->
                     <video controls class="img-fluid">
                         <source src="{{feedPost.videoUrl}}" type="video/mp4">
-                        Your browser does not support the video tag.
                     </video>
                 </div>
                 <!-- Time since post creation -->
