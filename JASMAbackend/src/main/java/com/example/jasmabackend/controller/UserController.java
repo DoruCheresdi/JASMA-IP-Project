@@ -194,6 +194,10 @@ public class UserController {
             }
         });
 
+        passwordResetTokenRepository.findAll().forEach(token -> {
+            passwordResetTokenRepository.delete(token);
+        });
+
         user.getPosts().forEach(post -> {
                 postService.deletePost(post);
             }
