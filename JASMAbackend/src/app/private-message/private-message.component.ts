@@ -32,7 +32,7 @@ export class PrivateMessageComponent implements OnDestroy, OnInit{
 
             // @ts-ignore
             // this.intervalId = setInterval(this.getMessages, 1000);
-            setInterval(()=> { this.getMessages() }, 3 * 1000);
+            this.intervalId = setInterval(()=> { this.getMessages() }, 3 * 1000);
                 // interval(500)
                 //     .pipe(takeWhile(() => !stop))
                 //     .subscribe(() => {
