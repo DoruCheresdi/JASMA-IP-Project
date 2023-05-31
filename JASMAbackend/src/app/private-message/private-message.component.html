@@ -8,44 +8,24 @@
     </div>
 
     <div class="message-list">
-<!--        <div class="message-item" *ngFor="let mess of messages">-->
-<!--            <img src="../../assets/profileicon.png" alt="Friend Picture" class="message-picture">-->
-<!--            <div class="card">-->
-<!--                <div class="card-body" *ngIf="mess.receiverEmail === auth.email">-->
-<!--                    <h5 class="card-title">Friend</h5>-->
-<!--                    <p class="card-text message-text-to-me">This is a private message from your friend.</p>-->
-<!--                    <p class="card-text message-text-to-me">{{mess.content}}</p>-->
-<!--                    <p class="card-text message-text-to-me">{{mess.createdAtString}}</p>-->
-<!--                </div>-->
-<!--                <div class="card-body" *ngIf="mess.senderEmail === auth.email">-->
-<!--                    <h5 class="card-title">Me</h5>-->
-<!--                    <p class="card-text message-text-to-friend">This is your private message.</p>-->
-<!--                    <p class="card-text message-text-to-friend">{{mess.content}}</p>-->
-<!--                    <p class="card-text message-text-to-friend">{{mess.createdAtString}}</p>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-
         <div class="message-item" *ngFor="let mess of messages">
-            <div class="card"
-                 *ngIf="mess.senderEmail === auth.email">
-                <div class="card-body">
-                    <h5 class="card-title">Me</h5>
-                    <p class="card-text message-text-to-friend">You wrote this.</p>
-                    <p class="card-text message-text-to-friend">{{mess.content}}</p>
-                    <p class="card-text message-text-to-friend">{{mess.createdAtString}}</p>
+            <div class="card-to-me" *ngIf="mess.senderEmail === auth.email">
+                <div class="card-body-to-friend">
+                    <h5 class="card-title-to-friend">Me</h5>
+                    <p class="card-text-to-friend message-text-to-friend">You wrote this.</p>
+                    <p class="card-text-to-friend message-text-to-friend">{{mess.content}}</p>
+                    <p class="card-text-to-friend message-text-to-friend">{{mess.createdAtString}}</p>
                 </div>
             </div>
 
             <img src="../../assets/profileicon.png" alt="Friend Picture" class="message-picture"
                  *ngIf="mess.receiverEmail === auth.email">
-            <div class="card"
-                 *ngIf="mess.receiverEmail === auth.email">
-                <div class="card-body">
-                    <h5 class="card-title">Friend</h5>
-                    <p class="card-text message-text-to-me">This is a private message from your friend.</p>
-                    <p class="card-text message-text-to-me">{{mess.content}}</p>
-                    <p class="card-text message-text-to-me">{{mess.createdAtString}}</p>
+            <div class="card-to-friend" *ngIf="mess.receiverEmail === auth.email">
+                <div class="card-body-to-me">
+                    <h5 class="card-title-to-me">Friend</h5>
+                    <p class="card-text-to-me message-text-to-me">This is a private message from your friend.</p>
+                    <p class="card-text-to-m message-text-to-me">{{mess.content}}</p>
+                    <p class="card-text-to-m message-text-to-me">{{mess.createdAtString}}</p>
                 </div>
             </div>
         </div>
